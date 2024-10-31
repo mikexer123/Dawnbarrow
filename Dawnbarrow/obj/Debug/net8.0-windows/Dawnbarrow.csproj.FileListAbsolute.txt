@@ -1,0 +1,16 @@
+C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\bin\Debug\net8.0-windows\Dawnbarrow.exe
+C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\bin\Debug\net8.0-windows\Dawnbarrow.deps.json
+C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\bin\Debug\net8.0-windows\Dawnbarrow.runtimeconfig.json
+C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\bin\Debug\net8.0-windows\Dawnbarrow.dll
+C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\bin\Debug\net8.0-windows\Dawnbarrow.pdb
+C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\obj\Debug\net8.0-windows\Dawnbarrow.Dawnbarrow.resources
+C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\obj\Debug\net8.0-windows\Dawnbarrow.csproj.GenerateResource.cache
+C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\obj\Debug\net8.0-windows\Dawnbarrow.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\obj\Debug\net8.0-windows\Dawnbarrow.AssemblyInfoInputs.cache
+C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\obj\Debug\net8.0-windows\Dawnbarrow.AssemblyInfo.cs
+C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\obj\Debug\net8.0-windows\Dawnbarrow.csproj.CoreCompileInputs.cache
+C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\obj\Debug\net8.0-windows\Dawnbarrow.dll
+C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\obj\Debug\net8.0-windows\refint\Dawnbarrow.dll
+C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\obj\Debug\net8.0-windows\Dawnbarrow.pdb
+C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\obj\Debug\net8.0-windows\Dawnbarrow.genruntimeconfig.cache
+C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\obj\Debug\net8.0-windows\ref\Dawnbarrow.dll
