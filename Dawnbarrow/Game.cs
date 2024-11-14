@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.Eventing.Reader;
 using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,6 @@ namespace Dawnbarrow
     {
         private int currentRoomIndex;
         private (int x, int y) currRoomCoordinates;
-        string[] Monsters = { "rat", "ghoul", "skeleton", "zombie", "spider", "snake", "red ant", "liger", "kappa", "goblin", "dragon", "chimera", "hydra", "cerberus", "giant" };
         string[] roomDescriptions =
         {
             //1 INDICES 0
@@ -55,22 +55,22 @@ namespace Dawnbarrow
             "alrighty",
             //20 INDICES 19
             "friends,",
-            //21 INDICES 21
+            //21 INDICES 20
             "gangganggang",
-            //22 INDICES 22
+            //22 INDICES 21
             "howdy",
-            //23 INDICES 23
+            //23 INDICES 22
             "boyohboy",
-            //24 INDICES 24
+            //24 INDICES 23
             "friends",
-            //25 INDICES
+            //25 INDICES 24
             "help me jafa"
 
         };
         string idmeadow1 = "Having just awoken, you find yourself in a strange meadow nestled in what seems to be a vibrant forest, with mild amounts of decaying architecture, certainly thousands of years old. There exists an exorbitant amount of small pests in the area. The smell of wildlife is all around you, but it's oddly comforting to be in such an area. There is a man standing near a sign, and a forest north of him. There seems to be nothing to the east, nothing to the west, and only a small rat in the southern direction. Your options are clear, you can head North, and engage with this stranger or you can head to the South, to investigate this rat.";
         string idmeadow2 = "The man before you seems happy to see you";
         string idmeadow3 = "You return to the strange meadow, and the man that was once here is gone, and the decaying architecture seems to want to be put out of it's misery";
-        
+
         string idratfight = "You have encountered a rat! He look's kind of small though, I'm sure you can take him";
         string idghoulfight = "You have encountered a Ghoul! Something tells me touching him will never get the smell out of your clothes.";
         string idskeletonfight = "You have encountered a skeleton! There is legitimately nothing to be afraid of";
@@ -79,10 +79,12 @@ namespace Dawnbarrow
         {
             currRoomCoordinates = (x, y);
         }
-        
+
         public void setcurrentRoomIndex(int x, int y)
         {
-           currentRoomIndex = (x - 1) + (y - 1) * 5;
+            //  currentRoomIndex = (x * y) - 1;
+            // currentRoomIndex = (x - 1) + (y - 1) * 5;
+
         }
         public (int x, int y) getCurrentRoom()
         {
@@ -96,31 +98,46 @@ namespace Dawnbarrow
         {
             return Direction;
         }
+        public string getMap()
+        {
+            int x = currRoomCoordinates.x;
+            int y = currRoomCoordinates.y;
+            string output = "";
+            string dot = "**";
+            string dash = "||";
+
+            for (int i = 0; i < currRoomCoordinates.x; i++)
+            {
+                output += dot;
+            }
+            for (int i = 0; i < currRoomCoordinates.y; i++)
+            {
+                output += dash;
+            }
+            return output;
+        }
         public string Output()
         {
-           return roomDescriptions[currentRoomIndex];
-        }
-        //public string Output()
-        //{ 
-        //    string currentString = idmeadow1;
+            int x = currRoomCoordinates.x;
+            int y = currRoomCoordinates.y;
 
-        //    if (currRoomCoordinates == (3, 3) )
-        //    {
-        //        currentString = idmeadow1;
-        //    }
-        //    if (currRoomCoordinates == (3, 4) )
-        //    {
-        //        currentString = idmeadow2;
-        //    }
-        //    return currentString;
-        //}
-        public string checkInput(string input, int currRoom)
+            int numColumns = 5;
+            currentRoomIndex = (x - 1) + (y - 1) * numColumns;
+
+            if ((currentRoomIndex >= 0) && (currentRoomIndex < roomDescriptions.Length))
+            {
+                return roomDescriptions[currentRoomIndex];
+            }
+            else return "You are in a strange, unmapped location, how did you get here?";
+            
+        }
+        public string checkInput(string input, int currRoomx, int currRoomy)
         {
 
             string response = "";
             if ((input == "look around") || (input == "Look around") || (input == "see around") || (input == "search") || (input == "inspect surroundings"))
             {
-                response = roomDescriptions[currentRoomIndex];
+                response = Output();
             }
             if ((input == "south") || (input == "South") || (input == "SOUTH") || (input == "s") || (input == "S")) 
             {

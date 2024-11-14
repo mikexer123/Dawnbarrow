@@ -10,15 +10,15 @@ namespace Dawnbarrow
         Game game = new Game();
         Room room = new Room();
         Player Player = new Player();
-
-
+        
+       
         public Dawnbarrow()
         {
             InitializeComponent();
             typingTimer = new System.Windows.Forms.Timer();
             typingTimer.Interval = 2; //typing speed
             typingTimer.Tick += TypingTimerTick;
-
+            
         }
         private void StartTyping(string text, bool append = false)
         {
@@ -57,50 +57,50 @@ namespace Dawnbarrow
 
         private void submit_button_Click(object sender, EventArgs e)
         {
-
             string PlayerInput = InputBox.Text.Trim();
-            (int x, int y) nextroom = room.GetNextRoomIndex(PlayerInput);
-            (int x, int y) currentRoom = (room.getCurrentRoomCoordinates().x, room.getCurrentRoomCoordinates().y);
-            game.setcurrentRoomIndex(currentRoom.x,currentRoom.y);
-            //empty command
-            if (string.IsNullOrEmpty(PlayerInput) )
+            string outputText = "";
+
+            if (string.IsNullOrEmpty(PlayerInput))
             {
-                StartTyping(" \n Please enter a command", false);
+                outputText = "\nPlease enter a command";
+                StartTyping(outputText, false);
                 return;
             }
 
-            string PlayerIO = $"\n >You typed  {PlayerInput}  \n";
+            string playerAction = $"\n You typed :{PlayerInput}";
             string gameResponse = game.checkInput(PlayerInput);
-            string friend = game.getcurrentRoomIndex().ToString() + " " + nextroom.ToString();
-            label1.Text = room.getCurrentRoomCoordinates().ToString();
-            string newOutput = PlayerIO + gameResponse;
-            
-            if (string.IsNullOrEmpty(gameResponse)) //unrecognized command
-            {
-                newOutput += "I didn't understand your command";
-            }
 
-            StartTyping(newOutput + " " + friend, false);
-            room.setCurrentRoom(room.getCurrentRoomCoordinates().x, room.getCurrentRoomCoordinates().y);
+            (int x, int y) nextroomCoordinates = room.GetNextRoomIndex(PlayerInput);
+             
+
+            {
+                if (room.CanGo(PlayerInput.ToLower()))
+                {
+
+                    room.setCurrentRoom(nextroomCoordinates.x, nextroomCoordinates.y);
+                    game.setCurrentRoom(nextroomCoordinates.x, nextroomCoordinates.y);
+                    string roomDescription = game.Output();
+
+                    outputText = $"{playerAction} \n {gameResponse}";
+                    outputText += $"\n {roomDescription}";
+
+                }
+                else if (room.CanGo(PlayerInput.ToLower()) == false)
+                { outputText = $"The path to the coords {nextroomCoordinates} is blocked off";
+                  StartTyping(outputText, false);
+                        
+                }
+               
+                }
+               
+
+            StartTyping(outputText, false);
+            label1.Text = room.getCurrentRoomCoordinates().ToString();
+            
             InputBox.Clear();
             
+         
 
-            
-
-            //if (room.CanGo(PlayerInput))
-            //{
-            //    room.setCurrentRoom(nextroom.x, nextroom.y);
-            //    game.setCurrentRoom(nextroom.x, nextroom.y);
-            //    string roomDescription = game.Output();
-            //    StartTyping($"{roomDescription} \n You move {PlayerInput} to coordinates {nextroom}", false);
-            //}
-            //else
-            //{
-            //    StartTyping($"The path to the coords {nextroom} is blocked off", false);
-            //    room.getCurrentRoomCoordinates();
-            //    game.getCurrentRoom();
-            //}
-            
         }
 
         private void ConsoleOut_TextChanged(object sender, EventArgs e)
@@ -117,5 +117,6 @@ namespace Dawnbarrow
         {
 
         }
+
     }
 }

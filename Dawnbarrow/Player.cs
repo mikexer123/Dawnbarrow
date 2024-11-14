@@ -18,6 +18,6 @@ namespace Dawnbarrow
         string ChestEquipped = "nothing";
         string LegsEquipped = "nothing";
         string WeaponEquipped = "nothing";
-        int maxInventory = 30;
+        int[] maxInventory = {1-20};
     }
 }

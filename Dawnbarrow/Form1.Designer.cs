@@ -47,7 +47,7 @@
             ConsoleOut.Name = "ConsoleOut";
             ConsoleOut.Size = new Size(947, 143);
             ConsoleOut.TabIndex = 0;
-            ConsoleOut.Text = resources.GetString("ConsoleOut.Text");
+            ConsoleOut.Text = "";
             ConsoleOut.TextChanged += ConsoleOut_TextChanged;
             // 
             // InputBox
@@ -120,5 +120,7 @@
         private Button submit_button;
         private PictureBox Background;
         private Label label1;
+        
     }
+
 }
