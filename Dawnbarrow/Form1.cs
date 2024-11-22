@@ -1,5 +1,6 @@
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 namespace Dawnbarrow
 {
     public partial class Dawnbarrow : Form
@@ -10,15 +11,23 @@ namespace Dawnbarrow
         Game game = new Game();
         Room room = new Room();
         Player Player = new Player();
-        
-       
-        public Dawnbarrow()
+        Item item = new Item();
+        public List<string> titemlist = new List<string>() { "Leather Helmet +1", "Iron Helmet +2", "Topaz Helmet +3", "Saviors Helmet +4", "Leather Chestplate +1", "Iron Chestplate +2", "Topaz Chestplate +3", "Saviors Chestplate +4", "Leather Leggings +1", "Iron Leggings +2", "Topaz Leggings +3", "Saviors Leggings +4", "Iron Sword +1", "Fire Sword +2", "Topaz Sword +3", "Saviors Sword +4", "Ladder", "Pickaxe", "Boss Key", "Talking Cat", "Friendship Bracelet" };
+         
+
+    public Dawnbarrow()
         {
             InitializeComponent();
             typingTimer = new System.Windows.Forms.Timer();
             typingTimer.Interval = 2; //typing speed
             typingTimer.Tick += TypingTimerTick;
-            
+            for (int i = 0; i < titemlist.Count; i++)
+            {
+
+                int itemid = titemlist.IndexOf(titemlist[i]) + 1;
+
+            }
+
         }
         private void StartTyping(string text, bool append = false)
         {
