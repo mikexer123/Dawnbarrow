@@ -26,7 +26,7 @@ namespace Dawnbarrow
             //5 INDICES 4
             "nice",
             //6 INDICES 5
-            "what is up gangster",
+            "\"Welcome to Dawnbarrow, there are a few things I wish to explain, at any given time, you can navigate in four cardinal directions: North, South, East, and West,\"A disembodied voice exclaims almost passive aggressively in a booming voice \"If for any reason you get lost or need help, don't hesitate to type the help command for more insight as to what you can do! Also refer to the location identifier in the top left hand corner of your screen for information about your surroundings, pay very close attention, as this identifier may disclose hidden information.\"  \nYou don't understand what the heck he is talking about, but you choose to just go with it. Why the creator of this game chose to nestle the tutorial into the very first room in his game world is beyond you. Anyhow, as you take in your surroundings, you notice that to the east is a heavy jungle, and to the north is more forest with plenty of trees. For some reason, the north path feels safer. \"The north path is safer for SURE!\" The disembodied voice screams one last time before his voice fades out of registry.",
             //7 INDICES 6
             "wile",
             //8 INDICES 7
@@ -36,7 +36,7 @@ namespace Dawnbarrow
             //10 INDICES 9
             ":)",
             //11 INDICES 10
-            "show me",
+            "You walk into the forest, and it's evident to you that you're in the most peaceful area of DawnBarrow, the sunshine pokes through the trees beautifully and around you there are small critters that are minding their own business. Your attention fixates on a group of small rats that seem to appear endlessly almost out of thin air. It's worth mentioning that they aren't bothering anyone, certainly not you, but there is a looming feeling emanating from you that you should end their life without warning or reason...Should you choose to do so type \"fight rat\". Otherwise: to the east is a river, which seems to be the pointing in the direction of the centermost part of the land, and to the North is more forest. If you were feeling bold, you would probably take the path of the river, and if you were feeling like a sissy little crybaby, you would likely resume venturing north because grinding xp is necessary for longevity in these kinds of games I guess.",
             //12 INDICES 11
             "niceu",
             //13 INDICES 12
@@ -71,7 +71,7 @@ namespace Dawnbarrow
         string idmeadow2 = "The man before you seems happy to see you";
         string idmeadow3 = "You return to the strange meadow, and the man that was once here is gone, and the decaying architecture seems to want to be put out of it's misery";
 
-        string idratfight = "You have encountered a rat! He look's kind of small though, I'm sure you can take him";
+        string idratfight = "You have encountered a rat! He look's kind of small though, I'm sure you can take him, realistically if you die here, you were never meant to play this game";
         string idghoulfight = "You have encountered a Ghoul! Something tells me touching him will never get the smell out of your clothes.";
         string idskeletonfight = "You have encountered a skeleton! There is legitimately nothing to be afraid of";
         string iddragonfight = "You have encountered a ferocious dragon, his teeth are the size of your arms! It would take almost no effort for him to devour you whole";

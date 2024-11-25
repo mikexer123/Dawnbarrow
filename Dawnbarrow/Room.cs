@@ -37,6 +37,7 @@ namespace Dawnbarrow
                 CanGoWest = west;
                 CanGoEast = east;
             }
+           
         }
         public Room()
         {
@@ -69,6 +70,163 @@ namespace Dawnbarrow
                 new Roomdata(5,1, true, false, false, true),
              };
             currRoomCoordinates = (1, 1);
+        }
+        public string Biome(int x, int y)
+        {
+            //1,1
+            if ((x == 1) && (y == 1))
+            {
+                return "Forest";
+            }
+            else
+            //1,2
+            if ((x == 1) && (y == 2))
+            {
+                return "Forest";
+            }
+            else
+            //1,3
+            if ((x == 1) && (y == 3))
+            {
+                return "Forest";
+            }
+            else
+            //1,4
+            if ((x == 1) && (y == 4))
+            {
+                return "Forest";
+            }
+            else
+            //1,5
+            if ((x == 1) && (y == 5))
+            {
+                return "Forest";
+            }
+            else
+            //2,1
+            if ((x == 2) && (y == 1))
+            {
+                return "Jungle";
+            }
+            else
+            //2,2
+            if ((x == 2) && (y == 2))
+            {
+                return "Jungle";
+            }
+            else
+            //2,3
+            if ((x == 2) && (y == 3))
+            {
+                return "River";
+            }
+            else
+            //2,4
+            if ((x == 2) && (y == 4))
+            {
+                return "Grassland";
+            }
+            else
+            //2,5
+            if ((x == 2) && (y == 5))
+            {
+                return "Grassland";
+            }
+            else
+            //3,1
+            if ((x == 3) && (y == 1))
+            {
+                return "Jungle";
+            }
+            else
+            //3,2
+            if ((x == 3) && (y == 2))
+            {
+                return "Jungle*";
+            }
+            else
+            //3,3
+            if ((x == 3) && (y == 3))
+            {
+                return "River";
+            }
+            else
+            //3,4
+            if ((x == 3) && (y == 4))
+            {
+                return "Grassland*";
+            }
+            else
+            //3,5
+                if ((x == 3) && (y == 5))
+            {
+                return "Grassland";
+            }
+            else
+            //4,1
+                if ((x == 4) && (y == 1))
+            {
+                return "Ocean";
+            }
+            else
+            //4,2
+                if ((x == 4) && (y == 2))
+            {
+                return "Ocean";
+            }
+            else
+            //4,3
+                if ((x == 4) && (y == 3))
+            {
+                return "River";
+            }
+            else
+            //4,4
+                if ((x == 4) && (y == 4))
+            {
+                return "Den";
+            }
+            else
+            //4,5
+                if ((x == 4) && (y == 5))
+            {
+                return "Den";
+            }
+            else
+            //5,1
+            if ((x == 5) && (y == 1))
+            {
+                return "Ocean*";
+            }
+            else
+            //5,2
+            if ((x == 5) && (y == 2))
+            {
+                return "Coward*";
+            }
+            //5,3
+            else
+                if ((x == 5) && (y == 3))
+            {
+                return "Mountain Pass";
+            }
+            else
+            //5,4
+                if ((x == 3) && (y == 2))
+            {
+                return "Final*";
+            }
+            else
+            //5,5
+                if ((x == 3) && (y == 2))
+            {
+                return "Den*";
+            }
+            else
+
+
+                return "Unknown location";
+
         }
         public (int x, int y) GetCurrentRoom() => currRoomCoordinates;
         public (int x, int y) GetNextRoomIndex(int currentIndex, string direction)
@@ -106,6 +264,11 @@ namespace Dawnbarrow
         public (int x, int y) getCurrentRoomCoordinates()
         {
             return currRoomCoordinates;
+        }
+        public void randomEncounter()
+        {
+            (int x, int y) pos = getCurrentRoomCoordinates();
+            
         }
         public void setCurrentRoom(int x, int y)
         {
