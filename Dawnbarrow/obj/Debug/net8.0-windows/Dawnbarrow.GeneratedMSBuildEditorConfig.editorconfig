@@ -14,6 +14,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Dawnbarrow
-build_property.ProjectDir = C:\Users\mikex\source\repos\TuckerDawnBarrow\Dawnbarrow\
+build_property.ProjectDir = C:\Users\mikex\Source\Repos\Dawnbarrow\Dawnbarrow\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

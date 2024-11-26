@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mikex\\source\\repos\\TuckerDawnBarrow\\Dawnbarrow\\Dawnbarrow.csproj",
+      "projectUniqueName": "C:\\Users\\mikex\\Source\\Repos\\Dawnbarrow\\Dawnbarrow\\Dawnbarrow.csproj",
       "projectName": "Dawnbarrow",
-      "projectPath": "C:\\Users\\mikex\\source\\repos\\TuckerDawnBarrow\\Dawnbarrow\\Dawnbarrow.csproj",
+      "projectPath": "C:\\Users\\mikex\\Source\\Repos\\Dawnbarrow\\Dawnbarrow\\Dawnbarrow.csproj",
       "packagesPath": "C:\\Users\\mikex\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mikex\\source\\repos\\TuckerDawnBarrow\\Dawnbarrow\\obj\\",
+      "outputPath": "C:\\Users\\mikex\\Source\\Repos\\Dawnbarrow\\Dawnbarrow\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mikex\\AppData\\Roaming\\NuGet\\NuGet.Config",
