@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Dawnbarrow")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4754b860ac958ec3c8cb2f1e1de8b435dc0460e8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b9f38c3188a0c1523b53084957471176d5bce983")]
 [assembly: System.Reflection.AssemblyProductAttribute("Dawnbarrow")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Dawnbarrow")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

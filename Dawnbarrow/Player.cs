@@ -9,17 +9,18 @@ namespace Dawnbarrow
 {
     internal class Player
     {
-        string playerName = "";
-        string Gender = "";
-        int lvl = 1;
-        int maxhealth = 10;
-        int currentHealth = 10;
-        int armor = 0;
-        int dmg = 1;
-        string HeadEquipped = "nothing";
-        string ChestEquipped = "nothing";
-        string LegsEquipped = "nothing";
-        string WeaponEquipped = "nothing";
+       public string playerName = "";
+       public string Gender = "";
+       public int lvl = 1;
+       public int maxhealth = 10;
+       public int currentHealth = 10;
+       public int armor = 1;
+       public int dmg = 1;
+       public string HeadEquipped = "nothing";
+       public string ChestEquipped = "nothing";
+       public string LegsEquipped = "nothing";
+       public string WeaponEquipped = "nothing";
+       public bool isFighting = false;
         int[] maxInventory = {1-20};
 
         public string storeName(string input)
@@ -34,25 +35,31 @@ namespace Dawnbarrow
         }
         private int rangeCalc(int n, int n2)
         {
-            if (n < 0 || n2 > 0)
             {
-                return 1;
+
+                if (n > n2)
+                {
+                    throw new ArgumentException("The first parameter (min) must be less than or equal to the second parameter (max).");
+                }
+
+                Random random = new Random();
+                return random.Next(n, n2 + 1);
             }
-            int result = 1;
-            for (int i = 1; i <= n2; i++)
-            {
-                result = (result * (n - 1 + 1)) / i;
-            }
-            return result;
         }
         public string playerInfo()
         {
-            string output = "PlayerName: " + playerName + "\n" + "Gender: " + Gender + "\n" + "Equipped Helmet:" + HeadEquipped + "\n" + "Equipped Chest" + HeadEquipped + "\n" + "Equipped Legs:" + LegsEquipped + "\n" + "Equipped Sword:" + WeaponEquipped + "\n" + "Player Hitpoints:" + currentHealth + "/" + maxhealth + "\n" + "currentDamage:" + playerDmg() + "\n";
+            string output = "PlayerName: " + playerName + "\n" + "Gender: " + Gender + "\n" + "Equipped Helmet:" + HeadEquipped + "\n" + "Equipped Chest" + HeadEquipped + "\n" + "Equipped Legs:" + LegsEquipped + "\n" + "Equipped Sword:" + WeaponEquipped + "\n" + "Player Hitpoints:" + currentHealth + "/" + maxhealth + "\n" + "currentDamage:" + playerDmg(2) + "\n";
             return output;
         }
         public int playerDmg(int enemyArmor)
         {
+           
             int playerdmg = rangeCalc(1, dmg) / enemyArmor;
+
+            if (WeaponEquipped == "iron sword +1")
+            {
+                playerdmg += 1;
+            }
             return playerdmg;
         }
         public string playerTurn(string monster)

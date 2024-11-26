@@ -150,22 +150,32 @@ namespace Dawnbarrow
             if ((input == "fight") || (input == "kill" || (input == "murder") || (input == "mordor")))
             {
                 response = "You begin fighting\n" + enemy.MonsterInfo();
+                Player.isFighting = true;
             }
             if ((input == "check self" || input == "inspect self" || input == "stats" || input == "whoami"))
             {
                 response = Player.playerInfo();
             }
-
+            if (((input == "hit") || input == "slash" || input == "bap" || input == "fuckemup") && Player.isFighting == true) 
+            {
+                response = Combat();
+            }
+            if (((input == "hit") || input == "slash" || input == "bap" || input == "fuckemup") && Player.isFighting == false)
+            {
+                response = $"There is nothing to {input}";
+            }
             return response;
         }
         public string Combat()
         {
-            string mike = "";
-            for (int i = 0; i < 1; i++)
-            {
+            string output = "";
+            
+                output += Player.playerTurn(enemy.currentEnemy) + "\n";
+                enemy.enemyCHP -= Player.playerDmg(enemy.enemyArmor);
+                output += enemy.MonsterTurn() + "\n";
+                Player.currentHealth -= enemy.MonsterDmg(Player.armor);
 
-            }
-            return mike;
+            return output;
         }
         private void ConsoleOut_TextChanged(object sender, EventArgs e)
         {
