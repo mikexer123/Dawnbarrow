@@ -212,13 +212,13 @@ namespace Dawnbarrow
             }
             else
             //5,4
-                if ((x == 3) && (y == 2))
+                if ((x == 5) && (y == 4))
             {
                 return "Final*";
             }
             else
             //5,5
-                if ((x == 3) && (y == 2))
+                if ((x == 5) && (y == 5))
             {
                 return "Den*";
             }
@@ -228,6 +228,7 @@ namespace Dawnbarrow
                 return "Unknown location";
 
         }
+
         public (int x, int y) GetCurrentRoom() => currRoomCoordinates;
         public (int x, int y) GetNextRoomIndex(int currentIndex, string direction)
         {

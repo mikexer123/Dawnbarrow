@@ -11,9 +11,9 @@ namespace Dawnbarrow
 {
     internal class Game
     {
-        private int currentRoomIndex;
-        private (int x, int y) currRoomCoordinates;
-        string[] roomDescriptions =
+        public int currentRoomIndex;
+        public (int x, int y) currRoomCoordinates;
+        public string[] roomDescriptions =
         {
             //1 INDICES 0
             "Having just awoken, you find yourself in a strange meadow nestled in what seems to be a vibrant forest, with mild amounts of decaying architecture, certainly thousands of years old. There exists an exorbitant amount of small pests in the area. The smell of wildlife is all around you, but it's oddly comforting to be in such an area. There is a man standing near a sign, and a forest north of him. There seems to be nothing to the east, nothing to the west, and only a small rat in the southern direction. Your options are clear, you can head North, and engage with this stranger or you can head to the South, to investigate this rat.",
@@ -65,16 +65,15 @@ namespace Dawnbarrow
             "friends",
             //25 INDICES 24
             "help me jafa"
-
         };
-        string idmeadow1 = "Having just awoken, you find yourself in a strange meadow nestled in what seems to be a vibrant forest, with mild amounts of decaying architecture, certainly thousands of years old. There exists an exorbitant amount of small pests in the area. The smell of wildlife is all around you, but it's oddly comforting to be in such an area. There is a man standing near a sign, and a forest north of him. There seems to be nothing to the east, nothing to the west, and only a small rat in the southern direction. Your options are clear, you can head North, and engage with this stranger or you can head to the South, to investigate this rat.";
-        string idmeadow2 = "The man before you seems happy to see you";
-        string idmeadow3 = "You return to the strange meadow, and the man that was once here is gone, and the decaying architecture seems to want to be put out of it's misery";
+        //string idmeadow1 = "Having just awoken, you find yourself in a strange meadow nestled in what seems to be a vibrant forest, with mild amounts of decaying architecture, certainly thousands of years old. There exists an exorbitant amount of small pests in the area. The smell of wildlife is all around you, but it's oddly comforting to be in such an area. There is a man standing near a sign, and a forest north of him. There seems to be nothing to the east, nothing to the west, and only a small rat in the southern direction. Your options are clear, you can head North, and engage with this stranger or you can head to the South, to investigate this rat.";
+        //string idmeadow2 = "The man before you seems happy to see you";
+        //string idmeadow3 = "You return to the strange meadow, and the man that was once here is gone, and the decaying architecture seems to want to be put out of it's misery";
 
-        string idratfight = "You have encountered a rat! He look's kind of small though, I'm sure you can take him, realistically if you die here, you were never meant to play this game";
-        string idghoulfight = "You have encountered a Ghoul! Something tells me touching him will never get the smell out of your clothes.";
-        string idskeletonfight = "You have encountered a skeleton! There is legitimately nothing to be afraid of";
-        string iddragonfight = "You have encountered a ferocious dragon, his teeth are the size of your arms! It would take almost no effort for him to devour you whole";
+        //string idratfight = "You have encountered a rat! He look's kind of small though, I'm sure you can take him, realistically if you die here, you were never meant to play this game";
+        //string idghoulfight = "You have encountered a Ghoul! Something tells me touching him will never get the smell out of your clothes.";
+        //string idskeletonfight = "You have encountered a skeleton! There is legitimately nothing to be afraid of";
+        //string iddragonfight = "You have encountered a ferocious dragon, his teeth are the size of your arms! It would take almost no effort for him to devour you whole";
         public void setCurrentRoom(int x, int y)
         {
             currRoomCoordinates = (x, y);
@@ -180,6 +179,10 @@ namespace Dawnbarrow
             if ((input == "west") || (input == "West") || (input == "WEST") || (input == "w") || (input == "W"))
             {
                 response = "You start heading West";
+            }
+            if ((input == "fight") || (input == "kill" || (input == "murder") || (input == "")))
+            {
+                response = "You begin fighting";
             }
 
             return response;

@@ -32,11 +32,11 @@
             ConsoleOut = new RichTextBox();
             InputBox = new TextBox();
             submit_button = new Button();
-            Background = new PictureBox();
             label1 = new Label();
             pictureBox1 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)Background).BeginInit();
+            Background = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Background).BeginInit();
             SuspendLayout();
             // 
             // ConsoleOut
@@ -57,7 +57,7 @@
             InputBox.Location = new Point(12, 579);
             InputBox.Margin = new Padding(3, 2, 3, 2);
             InputBox.Name = "InputBox";
-            InputBox.Size = new Size(947, 19);
+            InputBox.Size = new Size(947, 22);
             InputBox.TabIndex = 1;
             InputBox.Text = "Click To Type Here";
             InputBox.MouseClick += InputBox_MouseClick;
@@ -75,24 +75,13 @@
             submit_button.UseVisualStyleBackColor = true;
             submit_button.Click += submit_button_Click;
             // 
-            // Background
-            // 
-            Background.BackColor = Color.LavenderBlush;
-            Background.Image = (Image)resources.GetObject("Background.Image");
-            Background.Location = new Point(-563, -14);
-            Background.Margin = new Padding(3, 2, 3, 2);
-            Background.Name = "Background";
-            Background.Size = new Size(1522, 442);
-            Background.TabIndex = 3;
-            Background.TabStop = false;
-            // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Sitka Banner", 14.2499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(9, 7);
             label1.Name = "label1";
-            label1.Size = new Size(164, 28);
+            label1.Size = new Size(212, 35);
             label1.TabIndex = 4;
             label1.Text = "CurrentCoordinates";
             label1.Click += label1_Click;
@@ -106,9 +95,21 @@
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
             // 
+            // Background
+            // 
+            Background.AccessibleName = "Background";
+            Background.BackColor = Color.LavenderBlush;
+            Background.Image = (Image)resources.GetObject("Background.Image");
+            Background.Location = new Point(-563, -14);
+            Background.Margin = new Padding(3, 2, 3, 2);
+            Background.Name = "Background";
+            Background.Size = new Size(1522, 442);
+            Background.TabIndex = 3;
+            Background.TabStop = false;
+            // 
             // Dawnbarrow
             // 
-            AutoScaleDimensions = new SizeF(6F, 12F);
+            AutoScaleDimensions = new SizeF(8F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
             ClientSize = new Size(1082, 601);
@@ -124,8 +125,8 @@
             Name = "Dawnbarrow";
             Text = "Dawnbarrow";
             Load += Dawnbarrow_Load;
-            ((System.ComponentModel.ISupportInitialize)Background).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Background).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -135,9 +136,9 @@
         private RichTextBox ConsoleOut;
         private TextBox InputBox;
         private Button submit_button;
-        private PictureBox Background;
         private Label label1;
         private PictureBox pictureBox1;
+        private PictureBox Background;
     }
 
 }

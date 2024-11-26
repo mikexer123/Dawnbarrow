@@ -19,5 +19,16 @@ namespace Dawnbarrow
         string LegsEquipped = "nothing";
         string WeaponEquipped = "nothing";
         int[] maxInventory = {1-20};
+
+        private string storeName(string input)
+        {
+            playerName = input;
+            return playerName;
+        }
+        private string storeGender(string input)
+        {
+            Gender = input;
+            return Gender;
+        }
     }
 }
