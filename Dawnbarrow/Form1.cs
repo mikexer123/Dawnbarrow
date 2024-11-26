@@ -5,6 +5,7 @@ using System.Drawing;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 using System.Windows.Forms.VisualStyles;
 using System.ComponentModel.Design;
+using System.Diagnostics.CodeAnalysis;
 namespace Dawnbarrow
 {
     public partial class Dawnbarrow : Form
@@ -150,10 +151,22 @@ namespace Dawnbarrow
             {
                 response = "You begin fighting\n" + enemy.MonsterInfo();
             }
+            if ((input == "check self" || input == "inspect self" || input == "stats" || input == "whoami"))
+            {
+                response = Player.playerInfo();
+            }
 
             return response;
         }
- 
+        public string Combat()
+        {
+            string mike = "";
+            for (int i = 0; i < 1; i++)
+            {
+
+            }
+            return mike;
+        }
         private void ConsoleOut_TextChanged(object sender, EventArgs e)
         {
 
