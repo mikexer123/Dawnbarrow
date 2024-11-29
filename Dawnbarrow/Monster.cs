@@ -59,11 +59,11 @@ namespace Dawnbarrow
             //1,4
             if ((x == 1) && (y == 4))
             {
-                enemyHP = rangeCalc(1,5);
+                enemyHP = rangeCalc(1,8);
                 enemyCHP = 10;
                 enemyArmor = 1;
                 enemyDamage = 1;
-                currentEnemy = "rat";
+                currentEnemy = "Large Spider";
                 enemyxpgiven = rangeCalc(1, 5);
             }
             else

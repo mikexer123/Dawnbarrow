@@ -1,0 +1,23 @@
+______                     _                                  
+|  _  \                   | |                                 
+| | | |__ ___      ___ __ | |__   __ _ _ __ _ __ _____      __
+| | | / _` \ \ /\ / / '_ \| '_ \ / _` | '__| '__/ _ \ \ /\ / /
+| |/ / (_| |\ V  V /| | | | |_) | (_| | |  | | | (_) \ V  V / 
+|___/ \__,_| \_/\_/ |_| |_|_.__/ \__,_|_|  |_|  \___/ \_/\_/  
+                                                              
+A game by Mike Lanier and Prasiddha Pokhrel
+
+
+Hello adventurer, and welcome to the Dawnbarrow help file!
+
+Introduction:
+
+Monsters have invaded the mythical land of Dawnbarrow. You are a lone hero
+with no recollection of what happened before the events of this game.
+There's a voice calling you to venture out into the lands, and slay the
+dragon who has been causing the sky to rain blood.
+
+It's up to you and you alone to gain experience amongst the hordes of 
+dark creatures in the land
+
+

@@ -23,7 +23,7 @@ namespace Dawnbarrow
        public bool isFighting = false;
        public double xptonextlevel = 5;
        public double currentxp = 0;
-        public string experience(int enemyxpgiven)
+        public string experience(int enemyxpgiven) //this method is for calculating experience and HOPEFULLY solving leveling completely.
         {
             string output;
 
@@ -73,30 +73,30 @@ namespace Dawnbarrow
         public int playerDmg(int enemyArmor)
         {
            
-            int playerdmg = rangeCalc(1, dmg) / enemyArmor;
-
+            int playerdmg = rangeCalc(1, 3) / enemyArmor;
+            if (WeaponEquipped == "Nothing")
+            {
+                playerdmg = rangeCalc(1, 5);
+            }   
+            else
             if (WeaponEquipped == "Iron Sword +1")
             {
-                playerdmg = 2;
+                playerdmg = rangeCalc(3, 6);
             }
             else
-            if (WeaponEquipped == "Fire Sword +1")
+            if (WeaponEquipped == "Fire Sword +2")
             {
-                playerdmg = 3;
+                playerdmg = rangeCalc(4, 8);
             }
             else
-            if (WeaponEquipped == "Topaz Sword")
+            if (WeaponEquipped == "Topaz Sword +3")
             {
-                playerdmg = 4;
+                playerdmg = rangeCalc(5, 10);
             }
             else
-            if (WeaponEquipped == "Savior's Sword")
+            if (WeaponEquipped == "Savior Sword +4")
             {
-                playerdmg = 5;
-            }
-            else
-            {
-                playerdmg = 1;
+                playerdmg = rangeCalc(6, 15);
             }
             return playerdmg;
         }

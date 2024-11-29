@@ -19,8 +19,8 @@ namespace Dawnbarrow
         Item Item = new Item();
         Enemy enemy = new Enemy();
         public List<string> titemlist = new List<string>() { "Leather Helmet +1", "Iron Helmet +2", "Topaz Helmet +3", "Saviors Helmet +4", "Leather Chestplate +1", "Iron Chestplate +2", "Topaz Chestplate +3", "Saviors Chestplate +4", "Leather Leggings +1", "Iron Leggings +2", "Topaz Leggings +3", "Saviors Leggings +4", "Iron Sword +1", "Fire Sword +2", "Topaz Sword +3", "Saviors Sword +4", "Ladder", "Pickaxe", "Boss Key", "Talking Cat", "Friendship Bracelet" };
-        
-        
+
+
 
         public Dawnbarrow()
         {
@@ -84,14 +84,14 @@ namespace Dawnbarrow
                 return;
             }
 
-            string playerAction = $"\n You typed :{PlayerInput}";
+            string playerAction = $"\n You typed: {PlayerInput}";
             string gameResponse = checkInput(PlayerInput);
 
             (int x, int y) nextroomCoordinates = room.GetNextRoomIndex(PlayerInput);
 
 
             {
-                if ((room.CanGo(PlayerInput.ToLower()) && (PlayerInput == "north" || PlayerInput == "south" || PlayerInput == "east" || PlayerInput == "west")))
+                if ((room.CanGo(PlayerInput.ToLower()) && (PlayerInput == "north" || PlayerInput == "south" || PlayerInput == "east" || PlayerInput == "west" || PlayerInput == "North" || PlayerInput == "South" || PlayerInput == "East" || PlayerInput == "West")))
                 {
 
                     room.setCurrentRoom(nextroomCoordinates.x, nextroomCoordinates.y);
@@ -102,11 +102,11 @@ namespace Dawnbarrow
                     outputText += $"\n {roomDescription}";
 
                 }
-                else if ( (room.CanGo(PlayerInput.ToLower()) == false) && (PlayerInput == "north" || PlayerInput == "south" || PlayerInput == "east" || PlayerInput == "west") )
+                else if ((room.CanGo(PlayerInput.ToLower()) == false) && (PlayerInput == "north" || PlayerInput == "south" || PlayerInput == "east" || PlayerInput == "west" || PlayerInput == "North" || PlayerInput == "South" || PlayerInput == "East" || PlayerInput == "West"))
                 {
                     outputText = $"The path to the coords {nextroomCoordinates} is blocked off";
                     StartTyping(outputText, false);
-                    
+
                 }
                 else
                 {
@@ -115,7 +115,7 @@ namespace Dawnbarrow
 
             }
 
-            
+
             StartTyping(outputText, false);
             string whereami = room.Biome(room.getCurrentRoomCoordinates().x, room.getCurrentRoomCoordinates().y);
             label1.Text = whereami + room.getCurrentRoomCoordinates().ToString();
@@ -132,18 +132,26 @@ namespace Dawnbarrow
             string response = "";
             if ((input == "look around") || (input == "Look around") || (input == "see around") || (input == "search") || (input == "inspect surroundings"))
             {
-                response = game.roomDescriptions[game.currentRoomIndex];
+                response = game.roomsubtext[game.currentRoomIndex];
             }
-            if (input.Contains("gender"))
+            else
+            if (input.Contains("gender") || input.Contains("Gender"))
             {
-                input.Remove(0, 5);
+                input = input.Remove(0, 7);
                 Player.storeGender(input);
-                
+                response = $"Your gender is {Player.Gender}\n";
+
             }
-            if (input.Contains("name"))
+            else
+            if ( input.Contains("name") || input.Contains("Name") )
             {
-                input.Remove(0 , 3);
+                input = input.Remove(0, 5);
                 Player.storeName(input);
+                response = $"Your name is {Player.playerName}\n";
+                if (Player.playerName == "Mike" || Player.playerName == "Prasiddha" || Player.playerName == "Mike Lanier" || Player.playerName == "prasiddha" || Player.playerName == "Prasiddha Pokhrel" || Player.playerName == "prasiddha pokhrel")
+                {
+                    response += "You share a name with one of the developers! Isn't that exciting?";
+                }
             }
             else
             if ((input == "south") || (input == "South") || (input == "SOUTH") || (input == "s") || (input == "S"))
@@ -202,14 +210,19 @@ namespace Dawnbarrow
                 response = "You have to write something!";
             }
             else
+            if (input == "die")
+            {
+                response = "I bet you thought I'd say you can't die huh?";
+            }
+            else
             {
                 response = $"You can't {input}";
             }
             return response;
         }
 
-           
-        
+
+
         public string Combat()
         {
             string output = "";
@@ -233,11 +246,11 @@ namespace Dawnbarrow
                 output += "The player has" + Player.currentHealth + "/" + Player.maxhealth + "Hit Points Remaining \n";
             }
 
-            if (Player.currentHealth <= 0) 
-            { 
-                output += "You have 0 health remaining, you cannot continue, the evil forces of Dawnbarrow grow stronger. Please exit the game and start again."; 
+            if (Player.currentHealth <= 0)
+            {
+                output += "You have 0 health remaining, you cannot continue, the evil forces of Dawnbarrow grow stronger. Please exit the game and start again.";
             }
-            
+
 
             return output;
         }
@@ -266,9 +279,16 @@ namespace Dawnbarrow
             { InputBox.Text = ""; }
         }
         public void updatelabels()
-        {
+        { //every label in the game except currcoordinates lol
             PlayerHP.Text = $"CurrHP: {Player.currentHealth} / TotHP: {Player.maxhealth}";
             XP.Text = $"CurrXP: {Player.currentxp} / Xp2nex: {Player.xptonextlevel}";
+            ArAt.Text = $"Armor: {Player.armor} /  Attack: {Player.dmg}";
+            NGL.Text = $"{Player.playerName} / {Player.Gender} / Lvl: {Player.lvl}";
+        }
+
+        private void ArAt_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
