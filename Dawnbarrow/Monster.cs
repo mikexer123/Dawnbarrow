@@ -17,7 +17,7 @@ namespace Dawnbarrow
         public int enemyArmor = 1; // Enemy Armor
         public int enemyDamage = 1; // Enemy Damage to player on every hit
         public string currentEnemy = ""; //The enemy string value tied to the currentRoom
-
+        public int enemyxpgiven = 1;
 
         public void enemySpawn(int x, int y)
         {
@@ -26,41 +26,45 @@ namespace Dawnbarrow
 
             if ((x == 1) && (y == 1))
             {
-                enemyHP = rangeCalc(1, 10);
+                enemyHP = rangeCalc(1, 3);
                 enemyCHP = enemyHP;
                 enemyArmor = rangeCalc(1, 3); //method that chooses 1,3 (I learned that isn't built inherently in C# so I had to make one :)
                 enemyDamage = rangeCalc(1, 3);
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //1,2
             if ((x == 1) && (y == 2))
             {
-                enemyHP = rangeCalc(1, 10);
+                enemyHP = rangeCalc(1, 3);
                 enemyCHP = enemyHP;
-                enemyArmor = rangeCalc(1, 3); 
-                enemyDamage = rangeCalc(1, 3); 
+                enemyArmor = rangeCalc(1, 2); 
+                enemyDamage = rangeCalc(1, 2); 
                 currentEnemy = "skeleton";
+                enemyxpgiven = rangeCalc(1, 10);
             }
             else
             //1,3
             if ((x == 1) && (y == 3))
             {
-                enemyHP = rangeCalc(1, 10);
+                enemyHP = rangeCalc(1, 5);
                 enemyCHP = enemyHP;
                 enemyArmor = rangeCalc(1, 3);
                 enemyDamage = rangeCalc(1, 3);
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //1,4
             if ((x == 1) && (y == 4))
             {
-                enemyHP = 10;
+                enemyHP = rangeCalc(1,5);
                 enemyCHP = 10;
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //1,5
@@ -71,6 +75,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //2,1
@@ -81,6 +86,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //2,2
@@ -91,6 +97,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //2,3
@@ -101,6 +108,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //2,4
@@ -111,6 +119,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //2,5
@@ -121,6 +130,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //3,1
@@ -131,6 +141,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //3,2
@@ -141,6 +152,7 @@ namespace Dawnbarrow
                 enemyArmor = 3;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //3,3
@@ -151,6 +163,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //3,4
@@ -161,6 +174,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //3,5
@@ -171,6 +185,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 10);
             }
             else
             //4,1
@@ -181,6 +196,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //4,2
@@ -191,6 +207,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //4,3
@@ -201,6 +218,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //4,4
@@ -211,6 +229,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //4,5
@@ -221,6 +240,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //5,1
@@ -231,6 +251,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //5,2
@@ -241,6 +262,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             //5,3
             else
@@ -251,6 +273,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //5,4
@@ -261,6 +284,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             //5,5
@@ -271,6 +295,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
+                enemyxpgiven = rangeCalc(1, 5);
             }
             else
             // if the player somehow got out of bounds and fought an enemy, they will see a debug enemy listed below :)
@@ -280,6 +305,7 @@ namespace Dawnbarrow
                 enemyArmor = 2;
                 enemyDamage = 2;
                 currentEnemy = "YOU SHOULD NOT BE HERE";
+                enemyxpgiven = rangeCalc(1, 5);
             }
 
         }
@@ -322,9 +348,9 @@ namespace Dawnbarrow
            int monsterdmg = rangeCalc(1, enemyDamage) / PlayerArmor;
            return monsterdmg;
         }
-        public string MonsterTurn()
+        public string MonsterTurn(int PlayerArmor)
         {
-            string output = $"Enemy {currentEnemy} hits you for {MonsterDmg}";
+            string output = $"Enemy {currentEnemy} hits you for {MonsterDmg(PlayerArmor)}";
             return output;
         }
     }

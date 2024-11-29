@@ -11,9 +11,9 @@ namespace Dawnbarrow
     {
        public string playerName = "";
        public string Gender = "";
-       public int lvl = 1;
-       public int maxhealth = 10;
-       public int currentHealth = 10;
+       public double lvl = 1;
+       public double maxhealth = 10;
+       public double currentHealth = 10;
        public int armor = 1;
        public int dmg = 1;
        public string HeadEquipped = "nothing";
@@ -21,8 +21,27 @@ namespace Dawnbarrow
        public string LegsEquipped = "nothing";
        public string WeaponEquipped = "nothing";
        public bool isFighting = false;
-        int[] maxInventory = {1-20};
+       public double xptonextlevel = 5;
+       public double currentxp = 0;
+        public string experience(int enemyxpgiven)
+        {
+            string output;
 
+            output = $"You gained {enemyxpgiven} experience points \n";
+            currentxp += enemyxpgiven;
+            output += $"current xp:{currentxp} //// total xp to next level{xptonextlevel} \n";
+            if ( currentxp >= xptonextlevel )
+            {
+                lvl++;
+                output += $"You leveled up! \n Your new level is {lvl} \n";
+                xptonextlevel = xptonextlevel * 1.25;
+                maxhealth = maxhealth * 1.25;
+                currentHealth = maxhealth;
+            }
+            
+            return output;
+        }
+       
         public string storeName(string input)
         {
             playerName = input;
@@ -56,17 +75,36 @@ namespace Dawnbarrow
            
             int playerdmg = rangeCalc(1, dmg) / enemyArmor;
 
-            if (WeaponEquipped == "iron sword +1")
+            if (WeaponEquipped == "Iron Sword +1")
             {
-                playerdmg += 1;
+                playerdmg = 2;
+            }
+            else
+            if (WeaponEquipped == "Fire Sword +1")
+            {
+                playerdmg = 3;
+            }
+            else
+            if (WeaponEquipped == "Topaz Sword")
+            {
+                playerdmg = 4;
+            }
+            else
+            if (WeaponEquipped == "Savior's Sword")
+            {
+                playerdmg = 5;
+            }
+            else
+            {
+                playerdmg = 1;
             }
             return playerdmg;
         }
-        public string playerTurn(string monster)
+        public string playerTurn(string monster, int armorval)
         {
             string enemy = monster;
 
-            string output = $"Player {playerName} hits {enemy} for {playerDmg}!";
+            string output = $"Player {playerName} hits {enemy} for {playerDmg(armorval)}!";
 
             return output;
         }

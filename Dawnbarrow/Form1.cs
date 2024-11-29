@@ -26,7 +26,7 @@ namespace Dawnbarrow
         {
             InitializeComponent();
             typingTimer = new System.Windows.Forms.Timer();
-            typingTimer.Interval = 20; //typing speed
+            typingTimer.Interval = 1; //typing speed
             typingTimer.Tick += TypingTimerTick;
             for (int i = 0; i < titemlist.Count; i++)
             {
@@ -73,6 +73,7 @@ namespace Dawnbarrow
 
         private void submit_button_Click(object sender, EventArgs e)
         {
+
             string PlayerInput = InputBox.Text.Trim();
             string outputText = "";
 
@@ -96,7 +97,7 @@ namespace Dawnbarrow
                     room.setCurrentRoom(nextroomCoordinates.x, nextroomCoordinates.y);
                     game.setCurrentRoom(nextroomCoordinates.x, nextroomCoordinates.y);
                     string roomDescription = game.Output();
-
+                    enemy.enemySpawn(room.getCurrentRoomCoordinates().x, room.getCurrentRoomCoordinates().y);
                     outputText = $"{playerAction} \n {gameResponse}";
                     outputText += $"\n {roomDescription}";
 
@@ -105,6 +106,7 @@ namespace Dawnbarrow
                 {
                     outputText = $"The path to the coords {nextroomCoordinates} is blocked off";
                     StartTyping(outputText, false);
+                    
                 }
                 else
                 {
@@ -113,12 +115,13 @@ namespace Dawnbarrow
 
             }
 
-
+            
             StartTyping(outputText, false);
             string whereami = room.Biome(room.getCurrentRoomCoordinates().x, room.getCurrentRoomCoordinates().y);
             label1.Text = whereami + room.getCurrentRoomCoordinates().ToString();
-            enemy.enemySpawn(room.getCurrentRoomCoordinates().x, room.getCurrentRoomCoordinates().y);
 
+
+            updatelabels();
             InputBox.Clear();
 
 
@@ -131,49 +134,110 @@ namespace Dawnbarrow
             {
                 response = game.roomDescriptions[game.currentRoomIndex];
             }
+            if (input.Contains("gender"))
+            {
+                input.Remove(0, 5);
+                Player.storeGender(input);
+                
+            }
+            if (input.Contains("name"))
+            {
+                input.Remove(0 , 3);
+                Player.storeName(input);
+            }
+            else
             if ((input == "south") || (input == "South") || (input == "SOUTH") || (input == "s") || (input == "S"))
             {
                 response = "You start heading South";
             }
+            else
             if ((input == "north") || (input == "North") || (input == "NORTH") || (input == "n") || (input == "N"))
             {
                 response = "You start heading North!";
             }
+            else
             if ((input == "east") || (input == "East") || (input == "EAST") || (input == "e") || (input == "E"))
             {
                 response = "You start heading East";
             }
+            else
             if ((input == "west") || (input == "West") || (input == "WEST") || (input == "w") || (input == "W"))
             {
                 response = "You start heading West";
             }
-            if ((input == "fight") || (input == "kill" || (input == "murder") || (input == "mordor")))
+            else
+            if ((input == "fight") || (input == "kill" || (input == "murder") || (input == "mordor") || input.Contains("fight"))) //Begin Fighting
             {
                 response = "You begin fighting\n" + enemy.MonsterInfo();
                 Player.isFighting = true;
             }
-            if ((input == "check self" || input == "inspect self" || input == "stats" || input == "whoami"))
+            else
+            if ((input == "check self" || input == "inspect self" || input == "stats" || input == "whoami")) //Player Card
             {
                 response = Player.playerInfo();
             }
-            if (((input == "hit") || input == "slash" || input == "bap" || input == "fuckemup") && Player.isFighting == true) 
+            else
+            if (((input == "hit") || input == "slash" || input == "bap" || input == "fuckemup") && Player.isFighting == true) //typing hit while in combat
             {
                 response = Combat();
             }
-            if (((input == "hit") || input == "slash" || input == "bap" || input == "fuckemup") && Player.isFighting == false)
+            else
+            if (((input == "hit") || input == "slash" || input == "bap" || input == "fuckemup") && Player.isFighting == false) //typing hit while NOT in combat
             {
                 response = $"There is nothing to {input}";
             }
+            else
+            if (input.Contains("Who is the cutest cat on the planet?"))
+            {
+                response = "Fun fact, there is a tie between the two cutest cat's on the planet! One is named Jojo, the other is named Toulouse.";
+            }
+            else
+            if (input.Contains("Emmy"))
+            {
+                response = "What are you doing saying the game-creators name in this console?";
+            }
+            else
+            if ((input == "") || (input == " "))
+            {
+                response = "You have to write something!";
+            }
+            else
+            {
+                response = $"You can't {input}";
+            }
             return response;
         }
+
+           
+        
         public string Combat()
         {
             string output = "";
-            
-                output += Player.playerTurn(enemy.currentEnemy) + "\n";
-                enemy.enemyCHP -= Player.playerDmg(enemy.enemyArmor);
-                output += enemy.MonsterTurn() + "\n";
+
+            output += Player.playerTurn(enemy.currentEnemy, enemy.enemyArmor) + "\n";
+            enemy.enemyCHP -= Player.playerDmg(enemy.enemyArmor);
+            output += "The enemy has" + enemy.enemyCHP + "/" + enemy.enemyHP + "Hit Points Remaining \n";
+
+            if (enemy.enemyCHP <= 0)
+            {
+                enemy.enemyCHP = 0;
+                output += "You have sucessfully defeated the enemy!\n";
+                output += Player.experience(enemy.enemyxpgiven);
+                Player.isFighting = false;
+            }
+
+            if (enemy.enemyCHP != 0)
+            {
+                output += enemy.MonsterTurn(Player.armor) + "\n";
                 Player.currentHealth -= enemy.MonsterDmg(Player.armor);
+                output += "The player has" + Player.currentHealth + "/" + Player.maxhealth + "Hit Points Remaining \n";
+            }
+
+            if (Player.currentHealth <= 0) 
+            { 
+                output += "You have 0 health remaining, you cannot continue, the evil forces of Dawnbarrow grow stronger. Please exit the game and start again."; 
+            }
+            
 
             return output;
         }
@@ -200,6 +264,11 @@ namespace Dawnbarrow
         private void InputBox_MouseClick(object sender, MouseEventArgs e)
         {
             { InputBox.Text = ""; }
+        }
+        public void updatelabels()
+        {
+            PlayerHP.Text = $"CurrHP: {Player.currentHealth} / TotHP: {Player.maxhealth}";
+            XP.Text = $"CurrXP: {Player.currentxp} / Xp2nex: {Player.xptonextlevel}";
         }
     }
 }

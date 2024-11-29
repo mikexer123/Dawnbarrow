@@ -35,6 +35,8 @@
             label1 = new Label();
             pictureBox1 = new PictureBox();
             Background = new PictureBox();
+            PlayerHP = new Label();
+            XP = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Background).BeginInit();
             SuspendLayout();
@@ -78,6 +80,7 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = SystemColors.Highlight;
             label1.Font = new Font("Sitka Banner", 14.2499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(9, 7);
             label1.Name = "label1";
@@ -107,12 +110,34 @@
             Background.TabIndex = 3;
             Background.TabStop = false;
             // 
+            // PlayerHP
+            // 
+            PlayerHP.AutoSize = true;
+            PlayerHP.BackColor = Color.LightCoral;
+            PlayerHP.Location = new Point(12, 45);
+            PlayerHP.Name = "PlayerHP";
+            PlayerHP.Size = new Size(71, 15);
+            PlayerHP.TabIndex = 6;
+            PlayerHP.Text = "PlayerHP";
+            // 
+            // XP
+            // 
+            XP.AutoSize = true;
+            XP.BackColor = Color.LightCoral;
+            XP.Location = new Point(12, 70);
+            XP.Name = "XP";
+            XP.Size = new Size(87, 15);
+            XP.TabIndex = 7;
+            XP.Text = "Experience";
+            // 
             // Dawnbarrow
             // 
             AutoScaleDimensions = new SizeF(8F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.DimGray;
+            BackColor = Color.RosyBrown;
             ClientSize = new Size(1082, 601);
+            Controls.Add(XP);
+            Controls.Add(PlayerHP);
             Controls.Add(pictureBox1);
             Controls.Add(label1);
             Controls.Add(submit_button);
@@ -139,6 +164,8 @@
         private Label label1;
         private PictureBox pictureBox1;
         private PictureBox Background;
+        public Label PlayerHP;
+        public Label XP;
     }
 
 }
