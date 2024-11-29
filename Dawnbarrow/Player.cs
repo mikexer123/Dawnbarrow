@@ -30,11 +30,11 @@ namespace Dawnbarrow
             output = $"You gained {enemyxpgiven} experience points \n";
             currentxp += enemyxpgiven;
             output += $"current xp:{currentxp} //// total xp to next level{xptonextlevel} \n";
-            if ( currentxp >= xptonextlevel )
+            while ( currentxp >= xptonextlevel )
             {
                 lvl++;
                 output += $"You leveled up! \n Your new level is {lvl} \n";
-                xptonextlevel = xptonextlevel * 1.25;
+                xptonextlevel = xptonextlevel * 1.4;
                 maxhealth = maxhealth * 1.25;
                 currentHealth = maxhealth;
             }

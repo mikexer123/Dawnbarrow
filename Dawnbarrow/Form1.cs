@@ -84,7 +84,7 @@ namespace Dawnbarrow
                 return;
             }
 
-            string playerAction = $"\n You typed: {PlayerInput}";
+            string playerAction = $"\nYou typed: {PlayerInput}";
             string gameResponse = checkInput(PlayerInput);
 
             (int x, int y) nextroomCoordinates = room.GetNextRoomIndex(PlayerInput);
@@ -127,15 +127,15 @@ namespace Dawnbarrow
 
 
         }
-        public string checkInput(string input)
+        public string checkInput(string input) // where the magic happens
         {
             string response = "";
             if ((input == "look around") || (input == "Look around") || (input == "see around") || (input == "search") || (input == "inspect surroundings"))
             {
-                response = game.roomsubtext[game.currentRoomIndex];
+                response = game.roomsubtext[game.currentRoomIndex]; //This is not the same as roomdescriptions! (this is for finding quest items and consumables)
             }
             else
-            if (input.Contains("gender") || input.Contains("Gender"))
+            if (input.Contains("gender") || input.Contains("Gender")) //This is actually an entirely optional step in the game
             {
                 input = input.Remove(0, 7);
                 Player.storeGender(input);
@@ -143,15 +143,19 @@ namespace Dawnbarrow
 
             }
             else
-            if ( input.Contains("name") || input.Contains("Name") )
+            if ( input.Contains("name") || input.Contains("Name") ) // This is ALSO an entirely optional step in the game.
             {
                 input = input.Remove(0, 5);
                 Player.storeName(input);
                 response = $"Your name is {Player.playerName}\n";
                 if (Player.playerName == "Mike" || Player.playerName == "Prasiddha" || Player.playerName == "Mike Lanier" || Player.playerName == "prasiddha" || Player.playerName == "Prasiddha Pokhrel" || Player.playerName == "prasiddha pokhrel")
                 {
-                    response += "You share a name with one of the developers! Isn't that exciting?";
+                    response += "You share a name with one of the developers! Isn't that exciting? \n";
                 }
+                if ((Player.playerName == "Emmy") || (Player.playerName == "Emilia") || (Player.playerName == "emmy"))
+                {
+                    response += "You share a name with one of the developers girlfriend! If you're her, Mike says \"I love you Emmy, I hope you're not procrastinating!\" \n";
+                }    
             }
             else
             if ((input == "south") || (input == "South") || (input == "SOUTH") || (input == "s") || (input == "S"))
@@ -169,14 +173,14 @@ namespace Dawnbarrow
                 response = "You start heading East";
             }
             else
-            if ((input == "west") || (input == "West") || (input == "WEST") || (input == "w") || (input == "W"))
+            if ((input == "west") || (input == "West") || (input == "WEST") || (input == "w") || (input == "W")) // because i'm silly, some of these inputs don't work :) just upper and lower case.
             {
                 response = "You start heading West";
             }
             else
             if ((input == "fight") || (input == "kill" || (input == "murder") || (input == "mordor") || input.Contains("fight"))) //Begin Fighting
             {
-                response = "You begin fighting\n" + enemy.MonsterInfo();
+                response = "\n" + enemy.desc + "\n" + "You begin fighting\n" + enemy.MonsterInfo();
                 Player.isFighting = true;
             }
             else
@@ -202,7 +206,7 @@ namespace Dawnbarrow
             else
             if (input.Contains("Emmy"))
             {
-                response = "What are you doing saying the game-creators name in this console?";
+                response = "What are you doing saying the game-creators girlfriend's name in this console?";
             }
             else
             if ((input == "") || (input == " "))
@@ -213,6 +217,10 @@ namespace Dawnbarrow
             if (input == "die")
             {
                 response = "I bet you thought I'd say you can't die huh?";
+            }
+            if (input == "map")
+            {
+                response = game.getMap();
             }
             else
             {
