@@ -28,7 +28,7 @@ namespace Dawnbarrow
             {
                 enemyHP = rangeCalc(1, 3);
                 enemyCHP = enemyHP;
-                enemyArmor = rangeCalc(1, 3); //method that chooses 1,3 (I learned that isn't built inherently in C# so I had to make one :)
+                enemyArmor = rangeCalc(1, 2); //method that chooses 1,2 (I learned that isn't built inherently in C# so I had to make one :)
                 enemyDamage = rangeCalc(1, 3);
                 currentEnemy = "rat";
                 enemyxpgiven = rangeCalc(1, 5);
@@ -349,7 +349,7 @@ namespace Dawnbarrow
         }
         public int MonsterDmg(int PlayerArmor)
         {
-           int monsterdmg = rangeCalc(1, enemyDamage) / PlayerArmor;
+           int monsterdmg = rangeCalc(1, enemyDamage) - PlayerArmor;
            return monsterdmg;
         }
         public string MonsterTurn(int PlayerArmor)

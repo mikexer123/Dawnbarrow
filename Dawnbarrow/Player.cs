@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace Dawnbarrow
        public bool isFighting = false;
        public double xptonextlevel = 5;
        public double currentxp = 0;
+       private double signif = 1;
         public string experience(int enemyxpgiven) //this method is for calculating experience and HOPEFULLY solving leveling completely.
         {
             string output;
@@ -34,7 +36,8 @@ namespace Dawnbarrow
             {
                 lvl++;
                 output += $"You leveled up! \n Your new level is {lvl} \n";
-                xptonextlevel = xptonextlevel * 1.4;
+                signif += lvl;
+                xptonextlevel = xptonextlevel * 1.4 + (signif * 3);
                 maxhealth = maxhealth * 1.25;
                 currentHealth = maxhealth;
             }
@@ -73,30 +76,30 @@ namespace Dawnbarrow
         public int playerDmg(int enemyArmor)
         {
            
-            int playerdmg = rangeCalc(1, 3) / enemyArmor;
-            if (WeaponEquipped == "Nothing")
+            int playerdmg = rangeCalc (1, 7);
+            if (WeaponEquipped == "nothing")
             {
-                playerdmg = rangeCalc(1, 5);
+                playerdmg = rangeCalc(1, 7) - enemyArmor;
             }   
             else
             if (WeaponEquipped == "Iron Sword +1")
             {
-                playerdmg = rangeCalc(3, 6);
+                playerdmg = rangeCalc(3, 9) - enemyArmor;
             }
             else
             if (WeaponEquipped == "Fire Sword +2")
             {
-                playerdmg = rangeCalc(4, 8);
+                playerdmg = rangeCalc(4, 11) - enemyArmor;
             }
             else
             if (WeaponEquipped == "Topaz Sword +3")
             {
-                playerdmg = rangeCalc(5, 10);
+                playerdmg = rangeCalc(5, 13) - enemyArmor;
             }
             else
             if (WeaponEquipped == "Savior Sword +4")
             {
-                playerdmg = rangeCalc(6, 15);
+                playerdmg = rangeCalc(6, 15) - enemyArmor;
             }
             return playerdmg;
         }

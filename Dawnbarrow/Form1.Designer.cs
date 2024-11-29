@@ -36,12 +36,12 @@
             pictureBox1 = new PictureBox();
             PlayerHP = new Label();
             XP = new Label();
-            pictureBox2 = new PictureBox();
+            Background = new PictureBox();
             pictureBox3 = new PictureBox();
-            ArAt = new Label();
             NGL = new Label();
+            Equip = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Background).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
@@ -63,12 +63,12 @@
             // 
             // InputBox
             // 
-            InputBox.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            InputBox.Font = new Font("Consolas", 15F);
             InputBox.Location = new Point(12, 762);
             InputBox.Margin = new Padding(3, 2, 3, 2);
             InputBox.Multiline = true;
             InputBox.Name = "InputBox";
-            InputBox.Size = new Size(1322, 31);
+            InputBox.Size = new Size(1322, 39);
             InputBox.TabIndex = 1;
             InputBox.Text = "Click To Type Here";
             InputBox.MouseClick += InputBox_MouseClick;
@@ -93,9 +93,9 @@
             label1.Font = new Font("Sitka Banner", 14.2499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(9, 7);
             label1.Name = "label1";
-            label1.Size = new Size(212, 35);
+            label1.Size = new Size(130, 35);
             label1.TabIndex = 4;
-            label1.Text = "CurrentCoordinates";
+            label1.Text = "CurrCoords";
             label1.Click += label1_Click;
             // 
             // pictureBox1
@@ -112,7 +112,7 @@
             PlayerHP.AutoSize = true;
             PlayerHP.BackColor = Color.LightCoral;
             PlayerHP.Font = new Font("SimSun-ExtB", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            PlayerHP.Location = new Point(958, 225);
+            PlayerHP.Location = new Point(958, 122);
             PlayerHP.Name = "PlayerHP";
             PlayerHP.Size = new Size(124, 28);
             PlayerHP.TabIndex = 6;
@@ -123,19 +123,20 @@
             XP.AutoSize = true;
             XP.BackColor = Color.LightCoral;
             XP.Font = new Font("SimSun-ExtB", 16F);
-            XP.Location = new Point(958, 176);
+            XP.Location = new Point(958, 80);
             XP.Name = "XP";
             XP.Size = new Size(152, 27);
             XP.TabIndex = 7;
             XP.Text = "Experience";
             // 
-            // pictureBox2
+            // Background
             // 
-            pictureBox2.Location = new Point(0, 0);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(100, 50);
-            pictureBox2.TabIndex = 8;
-            pictureBox2.TabStop = false;
+            Background.Image = (Image)resources.GetObject("Background.Image");
+            Background.Location = new Point(0, 0);
+            Background.Name = "Background";
+            Background.Size = new Size(952, 298);
+            Background.TabIndex = 8;
+            Background.TabStop = false;
             // 
             // pictureBox3
             // 
@@ -145,28 +146,27 @@
             pictureBox3.TabIndex = 9;
             pictureBox3.TabStop = false;
             // 
-            // ArAt
-            // 
-            ArAt.AutoSize = true;
-            ArAt.BackColor = Color.LightCoral;
-            ArAt.Font = new Font("SimSun-ExtB", 16F);
-            ArAt.Location = new Point(958, 274);
-            ArAt.Name = "ArAt";
-            ArAt.Size = new Size(236, 27);
-            ArAt.TabIndex = 10;
-            ArAt.Text = "Armor and Attack";
-            ArAt.Click += ArAt_Click;
-            // 
             // NGL
             // 
             NGL.AutoSize = true;
             NGL.BackColor = Color.LightCoral;
             NGL.Font = new Font("SimSun-ExtB", 16F);
-            NGL.Location = new Point(958, 128);
+            NGL.Location = new Point(958, 39);
             NGL.Name = "NGL";
             NGL.Size = new Size(278, 27);
             NGL.TabIndex = 11;
             NGL.Text = "Name / Gender / Lvl";
+            // 
+            // Equip
+            // 
+            Equip.AutoSize = true;
+            Equip.BackColor = Color.LightCoral;
+            Equip.Font = new Font("SimSun-ExtB", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Equip.Location = new Point(958, 164);
+            Equip.Name = "Equip";
+            Equip.Size = new Size(236, 28);
+            Equip.TabIndex = 12;
+            Equip.Text = "Current Equipped";
             // 
             // Dawnbarrow
             // 
@@ -174,8 +174,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.RosyBrown;
             ClientSize = new Size(1484, 804);
+            Controls.Add(Equip);
             Controls.Add(NGL);
-            Controls.Add(ArAt);
             Controls.Add(XP);
             Controls.Add(PlayerHP);
             Controls.Add(pictureBox1);
@@ -183,7 +183,7 @@
             Controls.Add(submit_button);
             Controls.Add(InputBox);
             Controls.Add(ConsoleOut);
-            Controls.Add(pictureBox2);
+            Controls.Add(Background);
             Controls.Add(pictureBox3);
             Font = new Font("SimSun-ExtB", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -192,7 +192,7 @@
             Text = "Dawnbarrow";
             Load += Dawnbarrow_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Background).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -207,10 +207,10 @@
         private PictureBox pictureBox1;
         public Label PlayerHP;
         public Label XP;
-        private PictureBox pictureBox2;
+        private PictureBox Background;
         private PictureBox pictureBox3;
-        public Label ArAt;
         public Label NGL;
+        public Label Equip;
     }
 
 }

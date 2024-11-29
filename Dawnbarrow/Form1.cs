@@ -6,6 +6,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 using System.Windows.Forms.VisualStyles;
 using System.ComponentModel.Design;
 using System.Diagnostics.CodeAnalysis;
+using System.DirectoryServices;
 namespace Dawnbarrow
 {
     public partial class Dawnbarrow : Form
@@ -143,7 +144,7 @@ namespace Dawnbarrow
 
             }
             else
-            if ( input.Contains("name") || input.Contains("Name") ) // This is ALSO an entirely optional step in the game.
+            if (input.Contains("name") || input.Contains("Name")) // This is ALSO an entirely optional step in the game.
             {
                 input = input.Remove(0, 5);
                 Player.storeName(input);
@@ -155,7 +156,7 @@ namespace Dawnbarrow
                 if ((Player.playerName == "Emmy") || (Player.playerName == "Emilia") || (Player.playerName == "emmy"))
                 {
                     response += "You share a name with one of the developers girlfriend! If you're her, Mike says \"I love you Emmy, I hope you're not procrastinating!\" \n";
-                }    
+                }
             }
             else
             if ((input == "south") || (input == "South") || (input == "SOUTH") || (input == "s") || (input == "S"))
@@ -218,10 +219,115 @@ namespace Dawnbarrow
             {
                 response = "I bet you thought I'd say you can't die huh?";
             }
+            else
             if (input == "map")
             {
                 response = game.getMap();
             }
+            else
+            if (input.Contains("equip")) // Main equip command
+            {
+                if ((input.Contains("iron sword")) || input.Contains("Iron Sword")) // Iron Sword
+                {
+                    response = "You equip iron sword";
+                    Player.WeaponEquipped = "Iron Sword +1";
+                }
+                else
+                if ((input.Contains("fire sword")) || input.Contains("Fire Sword")) // Fire Sword
+                {
+                    response = "You equip fire sword";
+                    Player.WeaponEquipped = "Fire Sword +2";
+                }
+                else
+                if ((input.Contains("topaz sword")) || input.Contains("Topaz Sword")) // Topaz Sword
+                {
+                    response = "You equip topaz sword";
+                    Player.WeaponEquipped = "Topaz Sword +3";
+                }
+                else
+                if ((input.Contains("savior sword")) || input.Contains("Savior Sword")) // Savior Sword
+                {
+                    response = "You equip savior sword";
+                    Player.WeaponEquipped = "Savior Sword +4";
+                }
+                else
+                if ((input.Contains("Leather Leggings")) || input.Contains("leather leggings")) // Leather leggings
+                {
+                    response = "You equip Leather Leggings";
+                    Player.LegsEquipped = "Leather Leggings +1";
+                }
+                else
+                if ((input.Contains("Iron Leggings")) || input.Contains("iron leggings")) //Iron Leggings
+                {
+                    response = "You equip Iron Leggings";
+                    Player.LegsEquipped = "Iron Leggings +2";
+                }
+                else
+                if ((input.Contains("Topaz Leggings")) || input.Contains("topaz leggings")) // Topaz Leggings
+                {
+                    response = "You equip Topaz Leggings";
+                    Player.LegsEquipped = "Topaz Leggings +3";
+                }
+                else
+                if ((input.Contains("Savior Leggings")) || input.Contains("savior leggings")) // Savior Leggings
+                {
+                    response = "You equip Savior Leggings +4";
+                    Player.LegsEquipped = "Savior Sword +4";
+                }
+                else
+                if ((input.Contains("Leather Chestplate")) || input.Contains("leather chestplate")) // Leather Chestplate
+                {
+                    response = "You equip Leather Chestplate";
+                    Player.ChestEquipped = "Leather Chestplate +1";
+                }
+                else
+                if ((input.Contains("Iron Chestplate")) || input.Contains("iron chestplate")) //Iron Chestplate
+                {
+                    response = "You equip Iron Chestplate";
+                    Player.ChestEquipped = "Iron Chestplate +2";
+                }
+                else
+                if ((input.Contains("topaz chestplate")) || input.Contains("Topaz Chestplate")) //Topaz Chestplate
+                {
+                    response = "You equip Topaz Chestplate";
+                    Player.ChestEquipped = "Topaz Chestplate +3";
+                }
+                else
+                if ((input.Contains("savior chestplate")) || input.Contains("Savior Chestplate")) //Savior Chestplate
+                {
+                    response = "You equip Savior Chestplate";
+                    Player.ChestEquipped = "Savior Chestplate +4";
+                }
+                else
+                if ((input.Contains("Leather Helmet")) || input.Contains("leather helmet")) //Leather Chestplate
+                {
+                    response = "You equip Leather Helmet +1";
+                    Player.HeadEquipped = "Leather Helmet +1";
+                }
+                else
+                if ((input.Contains("Iron Helmet")) || input.Contains("iron helmet")) //Iron Helmet
+                {
+                    response = "You equip Iron Helmet +2";
+                    Player.HeadEquipped = "Iron Helmet +2";
+                }
+                else
+                if ((input.Contains("topaz helmet")) || input.Contains("Topaz Helmet")) //Topaz Helmet
+                {
+                    response = "You equip topaz sword";
+                    Player.HeadEquipped = "Topaz Sword +3";
+                }
+                else
+                if ((input.Contains("savior helmet")) || input.Contains("Savior Helmet")) // Savior Helmet
+                {
+                    response = "You equip savior sword";
+                    Player.HeadEquipped = "Savior Sword +4";
+                }
+                else
+                {
+                    input = input.Remove(0, 6);
+                    response = "You don't have a " + input + " to equip";
+                }
+            } // MAIN EQUIP COMMAND!
             else
             {
                 response = $"You can't {input}";
@@ -290,13 +396,15 @@ namespace Dawnbarrow
         { //every label in the game except currcoordinates lol
             PlayerHP.Text = $"CurrHP: {Player.currentHealth} / TotHP: {Player.maxhealth}";
             XP.Text = $"CurrXP: {Player.currentxp} / Xp2nex: {Player.xptonextlevel}";
-            ArAt.Text = $"Armor: {Player.armor} /  Attack: {Player.dmg}";
+            //ArAt.Text = $"Armor: {Player.armor} /  Attack: {Player.dmg}";
             NGL.Text = $"{Player.playerName} / {Player.Gender} / Lvl: {Player.lvl}";
+            Equip.Text = $"Currently Equipped:\n {Player.HeadEquipped},\n {Player.ChestEquipped},\n {Player.LegsEquipped},\n {Player.WeaponEquipped}";
         }
 
         private void ArAt_Click(object sender, EventArgs e)
         {
 
         }
+
     }
 }
