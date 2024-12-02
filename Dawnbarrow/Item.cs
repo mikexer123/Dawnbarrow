@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms.VisualStyles;
 namespace Dawnbarrow
-{
+{//Probably going to trash this whole file because I cannot figure out how to make an itemclass, and making a bool for EVERY item has worked so much better :)
     public enum ItemType
     {
         Weapon,
