@@ -1,4 +1,6 @@
-﻿namespace Dawnbarrow
+﻿using System.DirectoryServices.ActiveDirectory;
+
+namespace Dawnbarrow
 {
     partial class Dawnbarrow
     {
@@ -40,9 +42,19 @@
             pictureBox3 = new PictureBox();
             NGL = new Label();
             Equip = new Label();
+            Pickaxe = new PictureBox();
+            Ladder = new PictureBox();
+            TalkingCat = new PictureBox();
+            BossKey = new PictureBox();
+            FriendshipBracelet = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Background).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Pickaxe).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)Ladder).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)TalkingCat).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)BossKey).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)FriendshipBracelet).BeginInit();
             SuspendLayout();
             // 
             // ConsoleOut
@@ -132,7 +144,7 @@
             // 
             // Background
             // 
-            Background.Image = (Image)resources.GetObject("Background.Image");
+            Background.Image = Properties.Resources._11;
             Background.Location = new Point(0, 0);
             Background.Name = "Background";
             Background.Size = new Size(952, 298);
@@ -170,6 +182,51 @@
             Equip.TabIndex = 12;
             Equip.Text = "Current Equipped";
             // 
+            // Pickaxe
+            // 
+            Pickaxe.Image = Properties.Resources.EmptyQuest;
+            Pickaxe.Location = new Point(1370, 361);
+            Pickaxe.Name = "Pickaxe";
+            Pickaxe.Size = new Size(42, 38);
+            Pickaxe.TabIndex = 13;
+            Pickaxe.TabStop = false;
+            // 
+            // Ladder
+            // 
+            Ladder.Image = Properties.Resources.EmptyQuest;
+            Ladder.Location = new Point(1418, 361);
+            Ladder.Name = "Ladder";
+            Ladder.Size = new Size(42, 38);
+            Ladder.TabIndex = 14;
+            Ladder.TabStop = false;
+            // 
+            // TalkingCat
+            // 
+            TalkingCat.Image = Properties.Resources.EmptyQuest;
+            TalkingCat.Location = new Point(1370, 405);
+            TalkingCat.Name = "TalkingCat";
+            TalkingCat.Size = new Size(42, 38);
+            TalkingCat.TabIndex = 15;
+            TalkingCat.TabStop = false;
+            // 
+            // BossKey
+            // 
+            BossKey.Image = Properties.Resources.EmptyQuest;
+            BossKey.Location = new Point(1418, 405);
+            BossKey.Name = "BossKey";
+            BossKey.Size = new Size(42, 38);
+            BossKey.TabIndex = 16;
+            BossKey.TabStop = false;
+            // 
+            // FriendshipBracelet
+            // 
+            FriendshipBracelet.Image = Properties.Resources.EmptyQuest;
+            FriendshipBracelet.Location = new Point(1395, 449);
+            FriendshipBracelet.Name = "FriendshipBracelet";
+            FriendshipBracelet.Size = new Size(42, 38);
+            FriendshipBracelet.TabIndex = 17;
+            FriendshipBracelet.TabStop = false;
+            // 
             // Dawnbarrow
             // 
             AcceptButton = submit_button;
@@ -177,6 +234,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.RosyBrown;
             ClientSize = new Size(1484, 804);
+            Controls.Add(FriendshipBracelet);
+            Controls.Add(BossKey);
+            Controls.Add(TalkingCat);
+            Controls.Add(Ladder);
+            Controls.Add(Pickaxe);
             Controls.Add(Equip);
             Controls.Add(NGL);
             Controls.Add(XP);
@@ -197,6 +259,11 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)Background).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Pickaxe).EndInit();
+            ((System.ComponentModel.ISupportInitialize)Ladder).EndInit();
+            ((System.ComponentModel.ISupportInitialize)TalkingCat).EndInit();
+            ((System.ComponentModel.ISupportInitialize)BossKey).EndInit();
+            ((System.ComponentModel.ISupportInitialize)FriendshipBracelet).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -214,6 +281,11 @@
         private PictureBox pictureBox3;
         public Label NGL;
         public Label Equip;
+        private PictureBox Pickaxe;
+        private PictureBox Ladder;
+        private PictureBox TalkingCat;
+        private PictureBox BossKey;
+        private PictureBox FriendshipBracelet;
     }
 
 }

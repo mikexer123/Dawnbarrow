@@ -9,6 +9,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="bin\Inventory\TalkingCatOn.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Inventory\PickaxeOn.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Inventory\LadderOn.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Inventory\FriendshipBraceletOn.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Inventory\EmptyQuest.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Inventory\BosskeyON.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="bin\dawnbarrowimages\River.png" />
   </ItemGroup>
 

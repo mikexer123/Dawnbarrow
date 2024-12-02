@@ -126,6 +126,7 @@ namespace Dawnbarrow
             updatelabels();
             InputBox.Clear();
             Player.calculateArmor();
+            updateBackground();
 
 
 
@@ -133,7 +134,7 @@ namespace Dawnbarrow
         public string checkInput(string input) // where the magic happens
         {
             string response = "";
-            if ((input == "look around") || (input == "Look around") || (input == "see around") || (input == "search") || (input == "inspect surroundings"))
+            if ((input == "look around") || (input == "Look around") || (input == "see around") || (input == "search") || (input == "inspect surroundings") || (input == "Look Around"))
             {
                 response = game.roomsubtext[game.currentRoomIndex]; //This is not the same as roomdescriptions! (this is for finding quest items and consumables)
             }
@@ -150,8 +151,14 @@ namespace Dawnbarrow
                 input = input.Remove(0, 5);
                 Player.storeName(input);
                 response = $"Your name is {Player.playerName}\n";
+                if (Player.playerName == "Jon Scott")
+                {
+                    response = $"Your name is {Player.playerName}\n";
+                    response = "You're a little gay boy aren't you ? :)";
+                }
                 if (Player.playerName == "Mike" || Player.playerName == "Prasiddha" || Player.playerName == "Mike Lanier" || Player.playerName == "prasiddha" || Player.playerName == "Prasiddha Pokhrel" || Player.playerName == "prasiddha pokhrel")
                 {
+                    response = $"Your name is {Player.playerName}\n";
                     response += "You share a name with one of the developers! Isn't that exciting? \n";
                 }
                 if (Player.playerName == "Barbara Bancroft")
@@ -241,25 +248,25 @@ namespace Dawnbarrow
             {
                 if (((input.Contains("iron sword")) || input.Contains("Iron Sword")) && (Player.hasIronSword == true)) // Iron Sword
                 {
-                    response = "You equip iron sword";
+                    response = "You equip Iron sword";
                     Player.WeaponEquipped = "Iron Sword +1";
                 }
                 else
                 if (((input.Contains("fire sword")) || input.Contains("Fire Sword")) && (Player.hasFireSword == true)) // Fire Sword
                 {
-                    response = "You equip fire sword";
+                    response = "You equip Fire sword";
                     Player.WeaponEquipped = "Fire Sword +2";
                 }
                 else
                 if (((input.Contains("topaz sword")) || input.Contains("Topaz Sword")) && (Player.hasTopazSword == true)) // Topaz Sword
                 {
-                    response = "You equip topaz sword";
+                    response = "You equip Topaz sword";
                     Player.WeaponEquipped = "Topaz Sword +3";
                 }
                 else
                 if (((input.Contains("savior sword")) || input.Contains("Savior Sword")) && (Player.hasSaviorSword == true)) // Savior Sword
                 {
-                    response = "You equip savior sword";
+                    response = "You equip Savior sword";
                     Player.WeaponEquipped = "Savior Sword +4";
                 }
                 else
@@ -339,7 +346,7 @@ namespace Dawnbarrow
                     input = input.Remove(0, 6);
                     response = "You don't have a " + input + " to equip";
                 }
-            } // MAIN EQUIP COMMAND!
+            } 
             else
             if ((input.Contains("pick up") || input.Contains("Pick up") || input.Contains("Search Ground") || input.Contains("search ground")) && enemy.isdefeated == true)
             {
@@ -347,7 +354,7 @@ namespace Dawnbarrow
                 Player.giveItem(enemy.placedObject);
             }
             else
-            if (input.Contains("Display Commands") || input.Contains("display commands"))
+            if (input.Contains("Display Commands") || input.Contains("display commands") || input.Contains("show commands")) //display commands
             {
                 MessageBox.Show(" Look around ---> gain more information about your surroundings \n Gender (gender) ---> input your gender \n name (name) ---> Input your name \n " +
                     "Fight ---> Fight the current monster in the room \n Hit ---> Hit the current monster (must first be fighting) \n check self ---> learn more information about yourself \n" +
@@ -356,7 +363,7 @@ namespace Dawnbarrow
 
             }
             else
-            if (input.Contains("Display Hidden Commands") || input.Contains("display hidden commands"))
+            if (input.Contains("Display Hidden Commands") || input.Contains("display hidden commands") || input.Contains("show hidden commands"))
             {
                 MessageBox.Show("Who is the cutest cat on the planet? ---> Find out \n die ---> Find out if you can die! \n Cheat ---> Gives full savior kit (ur a terrible person)", "Dawnbarrow Hidden Commands (ur sneaky)");
             }
@@ -379,7 +386,7 @@ namespace Dawnbarrow
             else
             if (input.Contains("Cheat") || input.Contains("cheat"))
             {
-                response = $"You have cheated!!!";
+                response = $"You have cheated!!! You have all quest items and all four pieces of the savior set";
                 Player.cheat();
             }
             else
@@ -465,6 +472,54 @@ namespace Dawnbarrow
         private void Background_Click(object sender, EventArgs e)
         {
 
+        }
+        public void updateBackground()
+        {
+            if (room.Biome(room.getCurrentRoomCoordinates().x, room.getCurrentRoomCoordinates().y) == "Forest")
+            {
+                Background.Image = Properties.Resources.Forest1;
+            }
+            else
+            if (room.Biome(room.getCurrentRoomCoordinates().x, room.getCurrentRoomCoordinates().y) == "Jungle")
+            {
+                Background.Image = Properties.Resources._51;
+            }
+            else
+            if (room.Biome(room.getCurrentRoomCoordinates().x, room.getCurrentRoomCoordinates().y) == "Grassland")
+            {
+                Background.Image = Properties.Resources.grassland;
+            }
+            else
+            if (room.Biome(room.getCurrentRoomCoordinates().x, room.getCurrentRoomCoordinates().y) == "River")
+            {
+                Background.Image = Properties.Resources.River;
+            }
+            else
+            if (room.Biome(room.getCurrentRoomCoordinates().x, room.getCurrentRoomCoordinates().y) == "Mountain Pass")
+            {
+                Background.Image = Properties.Resources.Mountain_Pass___Ending;
+            }
+            
+            if (Player.hasFriendshipBracelet == true)
+            {
+                FriendshipBracelet.Image = Properties.Resources.FriendshipBraceletOn;
+            }
+            if (Player.hasPickaxe == true)
+            {
+                Pickaxe.Image = Properties.Resources.PickaxeOn;
+            }
+            if (Player.hasTalkingCat == true)
+            {
+                TalkingCat.Image = Properties.Resources.TalkingCatOn;
+            }
+            if (Player.hasLadder == true)
+            {
+                Ladder.Image = Properties.Resources.LadderOn;
+            }
+            if (Player.hasBossKey == true)
+            {
+                BossKey.Image = Properties.Resources.BosskeyON;
+            }
         }
     }
 }

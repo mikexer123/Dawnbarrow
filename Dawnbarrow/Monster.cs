@@ -30,7 +30,7 @@ namespace Dawnbarrow
         
         {
 
-            //1,1
+            //1,1 Forest
 
             if ((x == 1) && (y == 1))
             {
@@ -39,13 +39,13 @@ namespace Dawnbarrow
                 enemyCHP = enemyHP;
                 enemyArmor = rangeCalc(1, 2); //method that chooses 1,2 (I learned that isn't built inherently in C# so I had to make one :)
                 enemyDamage = rangeCalc(1, 3);
-                currentEnemy = "rat";
+                currentEnemy = "Rat";
                 enemyxpgiven = rangeCalc(5, 5);
                 desc = "\"You have encountered a rat! He look's kind of small though, I'm sure you can take him, realistically if you die here, you were never meant to play this game\"";
                 placedObject = "Iron Sword +1";
             }
             else
-            //1,2
+            //1,2 Forest
             if ((x == 1) && (y == 2))
             {
                 isdefeated = false;
@@ -53,13 +53,13 @@ namespace Dawnbarrow
                 enemyCHP = enemyHP;
                 enemyArmor = rangeCalc(1, 2); 
                 enemyDamage = rangeCalc(1, 2); 
-                currentEnemy = "skeleton";
+                currentEnemy = "Skeleton";
                 enemyxpgiven = rangeCalc(5, 10);
                 desc = "\"You have encountered a skeleton! He is a silly bag of bones, I think he's even falling apart. There isn't much he can do against a good old cardiovascular system\"";
                 placedObject = "Leather Helmet +1";
             }
             else
-            //1,3
+            //1,3 Forest
             if ((x == 1) && (y == 3))
             {
                 isdefeated = false;
@@ -67,13 +67,13 @@ namespace Dawnbarrow
                 enemyCHP = enemyHP;
                 enemyArmor = rangeCalc(1, 3);
                 enemyDamage = rangeCalc(1, 3);
-                currentEnemy = "rat";
+                currentEnemy = "Rat";
                 enemyxpgiven = rangeCalc(3, 20);
                 desc = "\"You have encountered a rat! He look's kind of small though, I'm sure you can take him, realistically if you die here, you were never meant to play this game\"";
                 placedObject = "Leather Chestplate +1";
             }
             else
-            //1,4
+            //1,4 Forest
             if ((x == 1) && (y == 4))
             {
                 isdefeated = false;
@@ -87,7 +87,7 @@ namespace Dawnbarrow
                 placedObject = "Leather Leggings +1";
             }
             else
-            //1,5
+            //1,5 Forest
             if ((x == 1) && (y == 5))
             {
                 isdefeated = false;
@@ -101,7 +101,7 @@ namespace Dawnbarrow
                 placedObject = "Iron Sword +1";
             }
             else
-            //2,1
+            //2,1 Jungle LADDER LOCATION 
             if ((x == 2) && (y == 1))
             {
                 isdefeated = false;
@@ -110,25 +110,26 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "Ghoul";
-                enemyxpgiven = rangeCalc(2, 25);
+                enemyxpgiven = rangeCalc(12, 25);
                 placedObject = "Ladder";
                 desc = "There is a ghoul here who has 4 peg legs for appendages, he doesn't seem threatening in the slightest but where did these pegs come from";
             }
             else
-            //2,2
+            //2,2 Jungle
             if ((x == 2) && (y == 2))
             {
                 isdefeated = false;
-                enemyHP = 10;
-                enemyCHP = 10;
-                enemyArmor = 1;
-                enemyDamage = 1;
+                enemyHP = 20;
+                enemyCHP = 20;
+                enemyArmor = 2;
+                enemyDamage = 5;
                 currentEnemy = "Snake";
                 desc = "This snake is no ordinary snake, he seems slimier than usual and has extra rows of fangs? I'm not sure the species, but I can tell you one thing, this creature looks like the love child of a snake and a florida man!";
-                enemyxpgiven = rangeCalc(1, 5);
+                enemyxpgiven = rangeCalc(10, 25);
+                placedObject = "Fire Sword +2";
             }
             else
-            //2,3
+            //2,3 River
             if ((x == 2) && (y == 3))
             {
                 isdefeated = false;
@@ -138,9 +139,11 @@ namespace Dawnbarrow
                 enemyDamage = 1;
                 currentEnemy = "rat";
                 enemyxpgiven = rangeCalc(1, 5);
+                
+
             }
             else
-            //2,4
+            //2,4 Grassland
             if ((x == 2) && (y == 4))
             {
                 isdefeated = false;
@@ -152,7 +155,7 @@ namespace Dawnbarrow
                 enemyxpgiven = rangeCalc(1, 5);
             }
             else
-            //2,5
+            //2,5 Grassland TALKING CAT
             if ((x == 2) && (y == 5))
             {
                 isdefeated = false;
@@ -202,7 +205,7 @@ namespace Dawnbarrow
                 enemyxpgiven = rangeCalc(1, 5);
             }
             else
-            //3,4
+            //3,4 Cerberus Savior Sword Location
             if ((x == 3) && (y == 4))
             {
                 isdefeated = false;
@@ -215,7 +218,7 @@ namespace Dawnbarrow
                 placedObject = "Savior Sword +4";
             }
             else
-            //3,5
+            //3,5 FRIENDSHIP BRACELET Location
                 if ((x == 3) && (y == 5))
             {
                 isdefeated = false;
@@ -224,7 +227,9 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "Giant Prarie Dog";
+                desc = "The menacing Prarie Dog has an irrational anger towards you for laughing at his brethren. There's something caught around his neck! His razor sharp fangs look deadly and are best dealt with using a blade of your own!";
                 enemyxpgiven = rangeCalc(1, 10);
+                placedObject = "Friendship Bracelet";
             }
             else
             //4,1

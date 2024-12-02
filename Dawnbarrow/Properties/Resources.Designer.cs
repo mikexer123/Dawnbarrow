@@ -63,29 +63,9 @@ namespace Dawnbarrow.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap _1 {
-            get {
-                object obj = ResourceManager.GetObject("1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         public static System.Drawing.Bitmap _11 {
             get {
                 object obj = ResourceManager.GetObject("11", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        public static System.Drawing.Bitmap _3 {
-            get {
-                object obj = ResourceManager.GetObject("3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,6 +143,26 @@ namespace Dawnbarrow.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap BosskeyON {
+            get {
+                object obj = ResourceManager.GetObject("BosskeyON", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap EmptyQuest {
+            get {
+                object obj = ResourceManager.GetObject("EmptyQuest", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Forest {
             get {
                 object obj = ResourceManager.GetObject("Forest", resourceCulture);
@@ -223,6 +223,16 @@ namespace Dawnbarrow.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap FriendshipBraceletOn {
+            get {
+                object obj = ResourceManager.GetObject("FriendshipBraceletOn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap grassland {
             get {
                 object obj = ResourceManager.GetObject("grassland", resourceCulture);
@@ -263,6 +273,16 @@ namespace Dawnbarrow.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap LadderOn {
+            get {
+                object obj = ResourceManager.GetObject("LadderOn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Mountain_Pass___Ending {
             get {
                 object obj = ResourceManager.GetObject("Mountain Pass - Ending", resourceCulture);
@@ -283,6 +303,16 @@ namespace Dawnbarrow.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap PickaxeOn {
+            get {
+                object obj = ResourceManager.GetObject("PickaxeOn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap River {
             get {
                 object obj = ResourceManager.GetObject("River", resourceCulture);
@@ -296,6 +326,16 @@ namespace Dawnbarrow.Properties {
         public static System.Drawing.Bitmap River1 {
             get {
                 object obj = ResourceManager.GetObject("River1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap TalkingCatOn {
+            get {
+                object obj = ResourceManager.GetObject("TalkingCatOn", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
