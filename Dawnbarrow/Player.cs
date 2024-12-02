@@ -25,6 +25,12 @@ namespace Dawnbarrow
        public double xptonextlevel = 5;
        public double currentxp = 0;
        private double signif = 1;
+       public string[] inventory = new string[20];
+       public bool hasLadder = false;
+       public bool hasPickaxe = false;
+       public bool hasBossKey = false;
+       public bool hasTalkingCat = false;
+       public bool hasFriendshipBracelet = false;
         public string experience(int enemyxpgiven) //this method is for calculating experience and HOPEFULLY solving leveling completely.
         {
             string output;

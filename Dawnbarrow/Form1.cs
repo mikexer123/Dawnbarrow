@@ -7,6 +7,8 @@ using System.Windows.Forms.VisualStyles;
 using System.ComponentModel.Design;
 using System.Diagnostics.CodeAnalysis;
 using System.DirectoryServices;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Microsoft.VisualBasic.FileIO;
 namespace Dawnbarrow
 {
     public partial class Dawnbarrow : Form
@@ -20,8 +22,8 @@ namespace Dawnbarrow
         Item Item = new Item();
         Enemy enemy = new Enemy();
         public List<string> titemlist = new List<string>() { "Leather Helmet +1", "Iron Helmet +2", "Topaz Helmet +3", "Saviors Helmet +4", "Leather Chestplate +1", "Iron Chestplate +2", "Topaz Chestplate +3", "Saviors Chestplate +4", "Leather Leggings +1", "Iron Leggings +2", "Topaz Leggings +3", "Saviors Leggings +4", "Iron Sword +1", "Fire Sword +2", "Topaz Sword +3", "Saviors Sword +4", "Ladder", "Pickaxe", "Boss Key", "Talking Cat", "Friendship Bracelet" };
-
-
+        public string[] itemname = { "Leather Helmet +1", "Iron Helmet +2", "Topaz Helmet +3", "Savior Helmet +4", "Leather Chestplate +1", "Iron Chestplate +2", "Topaz Chestplate +3", "Savior Chestplate +4", "Leather Leggings +1", "Iron Leggings +2", "Topaz Leggings +3", "Savior Leggings +4", "Iron Sword +1", "Fire Sword +2", "Topaz Sword +3", "Savior Sword +4", "Ladder", "Pickaxe", "Boss Key", "Talking Cat", "Friendship Bracelet", "Fire Bomb" };
+        int[] itemtype = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21 };
 
         public Dawnbarrow()
         {
@@ -71,9 +73,9 @@ namespace Dawnbarrow
                 typingTimer.Stop();
             }
         }
-
         private void submit_button_Click(object sender, EventArgs e)
         {
+
 
             string PlayerInput = InputBox.Text.Trim();
             string outputText = "";
@@ -120,7 +122,7 @@ namespace Dawnbarrow
             StartTyping(outputText, false);
             string whereami = room.Biome(room.getCurrentRoomCoordinates().x, room.getCurrentRoomCoordinates().y);
             label1.Text = whereami + room.getCurrentRoomCoordinates().ToString();
-
+            
 
             updatelabels();
             InputBox.Clear();
@@ -140,8 +142,15 @@ namespace Dawnbarrow
             {
                 input = input.Remove(0, 7);
                 Player.storeGender(input);
-                response = $"Your gender is {Player.Gender}\n";
 
+                if ((Player.Gender == "Female") || (Player.Gender == "Male") || (Player.Gender == "male") || (Player.Gender == " female") || (Player.Gender == " Female") || (Player.Gender == " Male") || (Player.Gender == " male") || (Player.Gender == "female"))
+                {
+                    response = $"Your gender is {Player.Gender}\n";
+                }
+                else
+                {
+                    response = $"\"{Player.Gender}\" is not a real gender but okay, since this is a pretend game, you can be whatever you want";
+                }
             }
             else
             if (input.Contains("name") || input.Contains("Name")) // This is ALSO an entirely optional step in the game.
@@ -272,7 +281,7 @@ namespace Dawnbarrow
                 if ((input.Contains("Savior Leggings")) || input.Contains("savior leggings")) // Savior Leggings
                 {
                     response = "You equip Savior Leggings +4";
-                    Player.LegsEquipped = "Savior Sword +4";
+                    Player.LegsEquipped = "Savior Leggings +4";
                 }
                 else
                 if ((input.Contains("Leather Chestplate")) || input.Contains("leather chestplate")) // Leather Chestplate
@@ -399,12 +408,14 @@ namespace Dawnbarrow
             //ArAt.Text = $"Armor: {Player.armor} /  Attack: {Player.dmg}";
             NGL.Text = $"{Player.playerName} / {Player.Gender} / Lvl: {Player.lvl}";
             Equip.Text = $"Currently Equipped:\n {Player.HeadEquipped},\n {Player.ChestEquipped},\n {Player.LegsEquipped},\n {Player.WeaponEquipped}";
+            bryant.Text = $"Item: {Item.itemvariable(itemname, 2)}";
         }
 
         private void ArAt_Click(object sender, EventArgs e)
         {
 
         }
+
 
     }
 }

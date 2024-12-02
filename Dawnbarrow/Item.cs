@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using System.Windows.Forms.VisualStyles;
 namespace Dawnbarrow
 {
     internal class Item
@@ -15,98 +16,144 @@ namespace Dawnbarrow
 
 
 
-        List<string> headArmor = new List<string>() { "Leather Helmet +1", "Iron Helmet +2", "Topaz Helmet +3", "Savior Helmet +4" };
-        List<string> chestArmor = new List<string>() { "Leather Chestplate +1", "Iron Chestplate +2", "Topaz Chestplate +3", "Savior Chestplate +4" };
-        List<string> legArmor = new List<string>() { "Leather Leggings +1", "Iron Leggings +2", "Topaz Leggings +3", "Savior Leggings +4" };
-        List<string> Weapon = new List<string>() { "Iron Sword +1", "Fire Sword +2", "Topaz Sword +3", "Savior Sword +4" };
-        List<string> questItem = new List<string>() { "Ladder", "Pickaxe", "Boss Key", "Talking Cat", "Friendship Bracelet" };
-        private List<Tools> items;
-
-
-        public struct Tools
-        {  // Tools refer to "Placed Tools"
-            public int itemid = 0;
-            public string toolName = "";
-            public string toolType = "";
-            public (int x, int y) roomLocation;
-            bool isQuestItem;
-            bool isWeapon;
-            bool isArmor;
-            bool isConsumable;
-
-            public Tools(int x, int y, string name, int type)
+        public string[] itemname = {"Leather Helmet +1", "Iron Helmet +2", "Topaz Helmet +3", "Savior Helmet +4", "Leather Chestplate +1", "Iron Chestplate +2", "Topaz Chestplate +3", "Savior Chestplate +4", "Leather Leggings +1", "Iron Leggings +2", "Topaz Leggings +3", "Savior Leggings +4", "Iron Sword +1", "Fire Sword +2", "Topaz Sword +3", "Savior Sword +4", "Ladder", "Pickaxe", "Boss Key", "Talking Cat", "Friendship Bracelet", "Fire Bomb" };
+      
+        public string itemvariable(string[] itemname, int itemtype)
+        {
+            string bryant = itemname[itemtype];
+            return bryant;
+        }
+        public string checkitem(int itemtype)
+        {
+            if (itemtype == 0)
+            { }
+            return "";
+        }
+        public int itemType(string[] itemname)
+        {
+          
+            for (int i = 0; i < itemname.Length; i++)
             {
-                int tvalue = type;
-                toolName = name;
-                
-
-                roomLocation = (x, y);
-                if (tvalue == 0)
+                if (itemname[i].Contains("Leather"))
                 {
-                    isQuestItem = true;
-                    toolType = "Quest Item";
-                }
-                else
-                if (tvalue == 1)
-                {
-                    isWeapon = true;
-                    toolType = "Weapon";
-                }
-                else
-                if (tvalue == 2)
-                {
-                    isArmor = true;
-                    toolType = "Armor";
-                }
-                else
-                if (tvalue == 3)
-                {
-                    isConsumable = true;
-                    toolType = "Consumable";
-                }
-                else
-                {
-                    isArmor = false;
-                    isConsumable = false;
-                    isQuestItem = false;
-                    isWeapon = false;
-                    toolType = "This item doesn't exist";
+                    return 0;
                 }
             }
-            } // End of item struct
-        public Item() // Constructor for the Item Object that populates each room with an item
-        {
-            List<Tools> items = new List<Tools> {
-                new Tools(1, 2, "Leather Helmet +1", 2),
-                new Tools(1, 3, "Leather Chestplate +1", 2),
-                new Tools(1, 4, "Leather Leggings +1", 2),
-                new Tools(1, 5, "Iron Sword +1", 1),
-                new Tools(2, 1, "Iron Leggings +2", 2),
-                new Tools(2, 2, "Iron Leggings +2", 2),
-                new Tools(2, 3, "Iron Leggings +2", 2),
-                new Tools(2, 4, "Iron Leggings +2", 2),
-                new Tools(2, 5, "Iron Leggings +2", 2),
-                new Tools(3, 1, "Iron Leggings +2", 2),
-                new Tools(3, 2, "Iron Leggings +2", 2),
-                new Tools(3, 3, "Iron Leggings +2", 2),
-                new Tools(3, 4, "Iron Leggings +2", 2),
-                new Tools(3, 5, "Iron Leggings +2", 2),
-                new Tools(4, 1, "Iron Leggings +2", 2),
-                new Tools(4, 2, "Iron Leggings +2", 2),
-                new Tools(4, 3, "Iron Leggings +2", 2),
-                new Tools(4, 4, "Iron Leggings +2", 2),
-                new Tools(4, 5, "Iron Leggings +2", 2),
-                new Tools(5, 1, "Iron Leggings +2", 2),
-                new Tools(5, 2, "Iron Leggings +2", 2),
-                new Tools(5, 3, "Iron Leggings +2", 2),
-                new Tools(5, 4, "Iron Leggings +2", 2),
-                new Tools(5, 5, "Iron Leggings +2", 2),
-
-                };
-
-
+            return 0;
         }
+        public string currentRoomItem(int x, int y)
+        {
+            int numColumns = 5;
+            int currentRoomIndex = (x - 1) + (y - 1) * numColumns;
+            if ((currentRoomIndex >= 0) && (currentRoomIndex < itemname.Length))
+            {
+                return itemname[currentRoomIndex];
+            }
+            else return "This item does not exist";
+        }
+        
+        //public struct Tools
+        //{  // Tools refer to "Placed Tools"
+        //    public int itemid = 0;
+        //    public string toolName = "";
+        //    public string toolType = "";
+        //    public (int x, int y) roomLocation;
+        //    bool isQuestItem;
+        //    bool isWeapon;
+        //    bool isArmor;
+        //    bool isConsumable;
 
+
+
+           
+        //    public Tools(int x, int y, string name, int type)
+        //    {
+        //        int tvalue = type;
+        //        toolName = name;
+                
+
+        //        roomLocation = (x, y);
+        //        if (tvalue == 0)
+        //        {
+        //            isQuestItem = true;
+        //            toolType = "Quest Item";
+        //        }
+        //        else
+        //        if (tvalue == 1)
+        //        {
+        //            isWeapon = true;
+        //            toolType = "Weapon";
+        //        }
+        //        else
+        //        if (tvalue == 2)
+        //        {
+        //            isArmor = true;
+        //            toolType = "Armor";
+        //        }
+        //        else
+        //        if (tvalue == 3)
+        //        {
+        //            isConsumable = true;
+        //            toolType = "Consumable";
+        //        }
+        //        else
+        //        {
+        //            isArmor = false;
+        //            isConsumable = false;
+        //            isQuestItem = false;
+        //            isWeapon = false;
+        //            toolType = "This item doesn't exist";
+        //        }
+        //    }
+        //    } // End of item struct
+
+        //public Item(int x, int y) // Constructor for the Item Object that populates each room with an item
+        //{
+
+
+        //    for (int i = 0; i < itemname.Length; i++)
+        //    {
+        //        List<Tools> items = new List<Tools> {
+        //        new Tools(x, y, itemname[i], tvalue(itemname))
+        //        };
+
+        //    }
+
+        //}
+        //public int tvalue(string[] itemname)
+        //{
+
+        //    int value = 0;
+
+        //    for (int i = 0; i < itemname.Length; i++)
+        //    {
+        //        if (itemname[i].Contains("Helmet"))
+        //        {
+        //            value = 2;
+        //        }
+        //        else
+        //        if (itemname[i].Contains("Chestplate"))
+        //        {
+        //            value = 2;
+        //        }
+        //        else
+        //        if (itemname[i].Contains("Legging"))
+        //        {
+        //            value = 2;
+        //        }
+        //        else
+        //        if (itemname[i].Contains("Sword"))
+        //        {
+        //            value = 1;
+        //        }
+        //        else
+        //        if (itemname[i] == "Ladder" || itemname[i] == "Pickaxe" || itemname[i] == "Boss Key" || itemname[i] == "Talking Cat" || itemname[i] == "Friendship Bracelet")
+        //        {
+        //            value = 0;
+        //        }
+        //    }
+        //    return value;
+        //}
 
 
 

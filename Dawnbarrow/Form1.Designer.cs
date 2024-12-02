@@ -40,6 +40,7 @@
             pictureBox3 = new PictureBox();
             NGL = new Label();
             Equip = new Label();
+            bryant = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Background).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -56,6 +57,7 @@
             ConsoleOut.Location = new Point(12, 303);
             ConsoleOut.Margin = new Padding(3, 2, 3, 2);
             ConsoleOut.Name = "ConsoleOut";
+            ConsoleOut.ReadOnly = true;
             ConsoleOut.Size = new Size(1322, 455);
             ConsoleOut.TabIndex = 0;
             ConsoleOut.Text = resources.GetString("ConsoleOut.Text");
@@ -168,12 +170,23 @@
             Equip.TabIndex = 12;
             Equip.Text = "Current Equipped";
             // 
+            // bryant
+            // 
+            bryant.AutoSize = true;
+            bryant.Location = new Point(979, 224);
+            bryant.Name = "bryant";
+            bryant.Size = new Size(55, 15);
+            bryant.TabIndex = 13;
+            bryant.Text = "bryant";
+            // 
             // Dawnbarrow
             // 
+            AcceptButton = submit_button;
             AutoScaleDimensions = new SizeF(8F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.RosyBrown;
             ClientSize = new Size(1484, 804);
+            Controls.Add(bryant);
             Controls.Add(Equip);
             Controls.Add(NGL);
             Controls.Add(XP);
@@ -211,6 +224,7 @@
         private PictureBox pictureBox3;
         public Label NGL;
         public Label Equip;
+        private Label bryant;
     }
 
 }

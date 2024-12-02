@@ -31,7 +31,7 @@ namespace Dawnbarrow
                 enemyArmor = rangeCalc(1, 2); //method that chooses 1,2 (I learned that isn't built inherently in C# so I had to make one :)
                 enemyDamage = rangeCalc(1, 3);
                 currentEnemy = "rat";
-                enemyxpgiven = rangeCalc(1, 5);
+                enemyxpgiven = rangeCalc(5, 5);
                 desc = "\"You have encountered a rat! He look's kind of small though, I'm sure you can take him, realistically if you die here, you were never meant to play this game\"";
             }
             else
@@ -43,7 +43,7 @@ namespace Dawnbarrow
                 enemyArmor = rangeCalc(1, 2); 
                 enemyDamage = rangeCalc(1, 2); 
                 currentEnemy = "skeleton";
-                enemyxpgiven = rangeCalc(1, 10);
+                enemyxpgiven = rangeCalc(5, 10);
                 desc = "\"You have encountered a skeleton! He is a silly bag of bones, I think he's even falling apart. There isn't much he can do against a good old cardiovascular system\"";
             }
             else
@@ -55,7 +55,7 @@ namespace Dawnbarrow
                 enemyArmor = rangeCalc(1, 3);
                 enemyDamage = rangeCalc(1, 3);
                 currentEnemy = "rat";
-                enemyxpgiven = rangeCalc(1, 5);
+                enemyxpgiven = rangeCalc(3, 20);
                 desc = "\"You have encountered a rat! He look's kind of small though, I'm sure you can take him, realistically if you die here, you were never meant to play this game\"";
             }
             else
