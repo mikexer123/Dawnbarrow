@@ -19,7 +19,6 @@ namespace Dawnbarrow
         Game game = new Game();
         Room room = new Room();
         Player Player = new Player();
-        Item Item = new Item();
         Enemy enemy = new Enemy();
         public List<string> titemlist = new List<string>() { "Leather Helmet +1", "Iron Helmet +2", "Topaz Helmet +3", "Saviors Helmet +4", "Leather Chestplate +1", "Iron Chestplate +2", "Topaz Chestplate +3", "Saviors Chestplate +4", "Leather Leggings +1", "Iron Leggings +2", "Topaz Leggings +3", "Saviors Leggings +4", "Iron Sword +1", "Fire Sword +2", "Topaz Sword +3", "Saviors Sword +4", "Ladder", "Pickaxe", "Boss Key", "Talking Cat", "Friendship Bracelet" };
         public string[] itemname = { "Leather Helmet +1", "Iron Helmet +2", "Topaz Helmet +3", "Savior Helmet +4", "Leather Chestplate +1", "Iron Chestplate +2", "Topaz Chestplate +3", "Savior Chestplate +4", "Leather Leggings +1", "Iron Leggings +2", "Topaz Leggings +3", "Savior Leggings +4", "Iron Sword +1", "Fire Sword +2", "Topaz Sword +3", "Savior Sword +4", "Ladder", "Pickaxe", "Boss Key", "Talking Cat", "Friendship Bracelet", "Fire Bomb" };
@@ -143,14 +142,9 @@ namespace Dawnbarrow
                 input = input.Remove(0, 7);
                 Player.storeGender(input);
 
-                if ((Player.Gender == "Female") || (Player.Gender == "Male") || (Player.Gender == "male") || (Player.Gender == " female") || (Player.Gender == " Female") || (Player.Gender == " Male") || (Player.Gender == " male") || (Player.Gender == "female"))
-                {
-                    response = $"Your gender is {Player.Gender}\n";
-                }
-                else
-                {
-                    response = $"\"{Player.Gender}\" is not a real gender but okay, since this is a pretend game, you can be whatever you want";
-                }
+                response = $"Your gender is {Player.Gender}\n";
+
+                
             }
             else
             if (input.Contains("name") || input.Contains("Name")) // This is ALSO an entirely optional step in the game.
@@ -236,25 +230,25 @@ namespace Dawnbarrow
             else
             if (input.Contains("equip")) // Main equip command
             {
-                if ((input.Contains("iron sword")) || input.Contains("Iron Sword")) // Iron Sword
+                if (((input.Contains("iron sword")) || input.Contains("Iron Sword")) && (Player.hasIronSword == true)) // Iron Sword
                 {
                     response = "You equip iron sword";
                     Player.WeaponEquipped = "Iron Sword +1";
                 }
                 else
-                if ((input.Contains("fire sword")) || input.Contains("Fire Sword")) // Fire Sword
+                if (((input.Contains("fire sword")) || input.Contains("Fire Sword")) && (Player.hasFireSword == true)) // Fire Sword
                 {
                     response = "You equip fire sword";
                     Player.WeaponEquipped = "Fire Sword +2";
                 }
                 else
-                if ((input.Contains("topaz sword")) || input.Contains("Topaz Sword")) // Topaz Sword
+                if (((input.Contains("topaz sword")) || input.Contains("Topaz Sword")) && (Player.hasTopazSword == true) ) // Topaz Sword
                 {
                     response = "You equip topaz sword";
                     Player.WeaponEquipped = "Topaz Sword +3";
                 }
                 else
-                if ((input.Contains("savior sword")) || input.Contains("Savior Sword")) // Savior Sword
+                if (((input.Contains("savior sword")) || input.Contains("Savior Sword")) && (Player.hasSaviorSword == true) ) // Savior Sword
                 {
                     response = "You equip savior sword";
                     Player.WeaponEquipped = "Savior Sword +4";
@@ -338,6 +332,23 @@ namespace Dawnbarrow
                 }
             } // MAIN EQUIP COMMAND!
             else
+            if (input.Contains("pick up"))
+            {
+                response = $"You pick up the {enemy.placedObject}";
+                Player.giveItem(enemy.placedObject);
+            }
+            else
+            if (input.Contains("Inventory"))
+            {
+               response = Player.displayInventory();
+            }
+            else
+            if (input.Contains("Cheat"))
+            {
+                response = $"You have cheated!!!";
+                Player.cheat();
+            }
+            else
             {
                 response = $"You can't {input}";
             }
@@ -408,7 +419,7 @@ namespace Dawnbarrow
             //ArAt.Text = $"Armor: {Player.armor} /  Attack: {Player.dmg}";
             NGL.Text = $"{Player.playerName} / {Player.Gender} / Lvl: {Player.lvl}";
             Equip.Text = $"Currently Equipped:\n {Player.HeadEquipped},\n {Player.ChestEquipped},\n {Player.LegsEquipped},\n {Player.WeaponEquipped}";
-            bryant.Text = $"Item: {Item.itemvariable(itemname, 2)}";
+            //bryant.Text = $"Item: {Item.itemvariable(itemname, 2)}";
         }
 
         private void ArAt_Click(object sender, EventArgs e)

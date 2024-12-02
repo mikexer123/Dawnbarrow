@@ -10,47 +10,93 @@ using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms.VisualStyles;
 namespace Dawnbarrow
 {
+    public enum ItemType
+    {
+        Weapon,
+        Armor,
+        QuestItem,
+        Consumable,
+        Misc
+    }
     internal class Item
     {
-        
 
-
-
-        public string[] itemname = {"Leather Helmet +1", "Iron Helmet +2", "Topaz Helmet +3", "Savior Helmet +4", "Leather Chestplate +1", "Iron Chestplate +2", "Topaz Chestplate +3", "Savior Chestplate +4", "Leather Leggings +1", "Iron Leggings +2", "Topaz Leggings +3", "Savior Leggings +4", "Iron Sword +1", "Fire Sword +2", "Topaz Sword +3", "Savior Sword +4", "Ladder", "Pickaxe", "Boss Key", "Talking Cat", "Friendship Bracelet", "Fire Bomb" };
+        public string[] itemname = { "Leather Helmet +1", "Iron Helmet +2", "Topaz Helmet +3", "Savior Helmet +4", "Leather Chestplate +1", "Iron Chestplate +2", "Topaz Chestplate +3", "Savior Chestplate +4", "Leather Leggings +1", "Iron Leggings +2", "Topaz Leggings +3", "Savior Leggings +4", "Iron Sword +1", "Fire Sword +2", "Topaz Sword +3", "Savior Sword +4", "Ladder", "Pickaxe", "Boss Key", "Talking Cat", "Friendship Bracelet", "Fire Bomb" };
       
-        public string itemvariable(string[] itemname, int itemtype)
+        public string Name {  get; set; }
+        public ItemType Type { get; set; }
+        public bool IsWeapon { get; set; }
+        public bool IsArmor { get; set; }
+        public bool IsQuestItem { get; set; }
+        public bool IsConsumable { get; set; }
+        public bool IsMisc { get; set; }
+
+        public Item(string name, ItemType type)
         {
-            string bryant = itemname[itemtype];
-            return bryant;
+            Name = name;
+            Type = type;
+            IsWeapon = (type == ItemType.Weapon);
+            IsArmor = (type == ItemType.Armor);
+            IsQuestItem = (type == ItemType.QuestItem);
+            IsConsumable = (type == ItemType.Consumable);
+            IsMisc = (type == ItemType.Misc);
         }
-        public string checkitem(int itemtype)
+
+        public static ItemType determiner(string itemname)
         {
-            if (itemtype == 0)
-            { }
-            return "";
+            if (itemname.Contains("Helmet") || itemname.Contains("Chestplate") || itemname.Contains("Leggings"))
+            {
+                return ItemType.Armor;
+            }
+            if (itemname.Contains("Sword"))
+            {
+                return ItemType.Weapon;
+            }
+            if (itemname == "Ladder" || itemname == "Pickaxe" || itemname == "Boss Key" || itemname == "Talking Cat" || itemname == "Friendship Bracelet")
+            { 
+                return ItemType.QuestItem; 
+            }
+            if (itemname == "potion" || itemname == "firebomb")
+            {
+                return ItemType.Consumable;
+            }
+            else
+            return ItemType.Misc;
         }
-        public int itemType(string[] itemname)
-        {
+
+        //public string itemvariable(string[] itemname, int itemtype)
+        //{
+        //    string bryant = itemname[itemtype];
+        //    return bryant;
+        //}
+        //public string checkitem(int itemtype)
+        //{
+        //    if (itemtype == 0)
+        //    { }
+        //    return "";
+        //}
+        //public int itemType(string[] itemname)
+        //{
           
-            for (int i = 0; i < itemname.Length; i++)
-            {
-                if (itemname[i].Contains("Leather"))
-                {
-                    return 0;
-                }
-            }
-            return 0;
-        }
-        public string currentRoomItem(int x, int y)
-        {
-            int numColumns = 5;
-            int currentRoomIndex = (x - 1) + (y - 1) * numColumns;
-            if ((currentRoomIndex >= 0) && (currentRoomIndex < itemname.Length))
-            {
-                return itemname[currentRoomIndex];
-            }
-            else return "This item does not exist";
-        }
+        //    for (int i = 0; i < itemname.Length; i++)
+        //    {
+        //        if (itemname[i].Contains("Leather"))
+        //        {
+        //            return 0;
+        //        }
+        //    }
+        //    return 0;
+        //}
+        //public string currentRoomItem(int x, int y)
+        //{
+        //    int numColumns = 5;
+        //    int currentRoomIndex = (x - 1) + (y - 1) * numColumns;
+        //    if ((currentRoomIndex >= 0) && (currentRoomIndex < itemname.Length))
+        //    {
+        //        return itemname[currentRoomIndex];
+        //    }
+        //    else return "This item does not exist";
+        //}
         
         //public struct Tools
         //{  // Tools refer to "Placed Tools"

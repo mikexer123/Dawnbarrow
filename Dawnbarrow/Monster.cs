@@ -19,6 +19,7 @@ namespace Dawnbarrow
         public string currentEnemy = ""; //The enemy string value tied to the currentRoom
         public int enemyxpgiven = 1;
         public string desc = "";
+        public string placedObject = "";
         public void enemySpawn(int x, int y)
         {
 
@@ -33,6 +34,7 @@ namespace Dawnbarrow
                 currentEnemy = "rat";
                 enemyxpgiven = rangeCalc(5, 5);
                 desc = "\"You have encountered a rat! He look's kind of small though, I'm sure you can take him, realistically if you die here, you were never meant to play this game\"";
+                placedObject = "Iron Sword +1";
             }
             else
             //1,2
@@ -45,6 +47,7 @@ namespace Dawnbarrow
                 currentEnemy = "skeleton";
                 enemyxpgiven = rangeCalc(5, 10);
                 desc = "\"You have encountered a skeleton! He is a silly bag of bones, I think he's even falling apart. There isn't much he can do against a good old cardiovascular system\"";
+                placedObject = "Leather Helmet +1";
             }
             else
             //1,3
@@ -57,6 +60,7 @@ namespace Dawnbarrow
                 currentEnemy = "rat";
                 enemyxpgiven = rangeCalc(3, 20);
                 desc = "\"You have encountered a rat! He look's kind of small though, I'm sure you can take him, realistically if you die here, you were never meant to play this game\"";
+                placedObject = "";
             }
             else
             //1,4
@@ -69,6 +73,7 @@ namespace Dawnbarrow
                 currentEnemy = "Large Spider";
                 enemyxpgiven = rangeCalc(1, 5);
                 desc = "\" This spider is actually terrifying, but he's still just a spider right? RIGHT? There's no way you'll lose to a spider? You're meant to be the savior of Dawnbarrow not the sissy who ran from danger.\"";
+                placedObject = "";
             }
             else
             //1,5

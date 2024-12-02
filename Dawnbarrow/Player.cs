@@ -12,7 +12,7 @@ namespace Dawnbarrow
     {
        public string playerName = "";
        public string Gender = "";
-       public double lvl = 1;
+       public int lvl = 1;
        public double maxhealth = 10;
        public double currentHealth = 10;
        public int armor = 1;
@@ -26,11 +26,34 @@ namespace Dawnbarrow
        public double currentxp = 0;
        private double signif = 1;
        public string[] inventory = new string[20];
+        //questitems
        public bool hasLadder = false;
        public bool hasPickaxe = false;
        public bool hasBossKey = false;
        public bool hasTalkingCat = false;
        public bool hasFriendshipBracelet = false;
+        //swords
+        public bool hasIronSword = false;
+        public bool hasFireSword = false;
+        public bool hasTopazSword = false;
+        public bool hasSaviorSword = false;
+        //helmets
+        public bool hasLeatherHelmet = false;
+        public bool hasIronHelmet = false;
+        public bool hasTopazHelmet = false;
+        public bool hasSaviorHelmet = false;
+        //chestplate
+        public bool hasLeatherChestplate = false;
+        public bool hasIronChestplate = false;
+        public bool hasTopazChestplate = false;
+        public bool hasSaviorChestplate = false;
+        //leggings
+        public bool hasLeatherLeggings = false;
+        public bool hasIronLeggings = false;
+        public bool hasTopazLeggings = false;
+        public bool hasSaviorLeggings = false;
+        
+
         public string experience(int enemyxpgiven) //this method is for calculating experience and HOPEFULLY solving leveling completely.
         {
             string output;
@@ -76,7 +99,7 @@ namespace Dawnbarrow
         }
         public string playerInfo()
         {
-            string output = "PlayerName: " + playerName + "\n" + "Gender: " + Gender + "\n" + "Equipped Helmet:" + HeadEquipped + "\n" + "Equipped Chest" + HeadEquipped + "\n" + "Equipped Legs:" + LegsEquipped + "\n" + "Equipped Sword:" + WeaponEquipped + "\n" + "Player Hitpoints:" + currentHealth + "/" + maxhealth + "\n" + "currentDamage:" + playerDmg(2) + "\n";
+            string output = "PlayerName: " + playerName + "\n" + "Gender: " + Gender + "\n" + "Equipped Helmet:" + HeadEquipped + "\n" + "Equipped Chest" + ChestEquipped + "\n" + "Equipped Legs:" + LegsEquipped + "\n" + "Equipped Sword:" + WeaponEquipped + "\n" + "Player Hitpoints:" + currentHealth + "/" + maxhealth + "\n" + "currentDamage:" + playerDmg(2) + "\n";
             return output;
         }
         public int playerDmg(int enemyArmor)
@@ -85,7 +108,7 @@ namespace Dawnbarrow
             int playerdmg = rangeCalc (1, 7);
             if (WeaponEquipped == "nothing")
             {
-                playerdmg = rangeCalc(1, 7) - enemyArmor;
+                playerdmg = Math.Max(rangeCalc(1, 7) - enemyArmor, 0);
             }   
             else
             if (WeaponEquipped == "Iron Sword +1")
@@ -116,6 +139,206 @@ namespace Dawnbarrow
             string output = $"Player {playerName} hits {enemy} for {playerDmg(armorval)}!";
 
             return output;
+        }
+        public void giveItem(string item)
+        {
+            //helmets
+            if (item == "Leather Helmet +1")
+            {
+                hasLeatherHelmet = true;
+            }
+            if (item == "Iron Helmet +2")
+            {
+                hasLeatherHelmet = true;
+            }
+            if (item == "Topaz Helmet +3")
+            {
+                hasTopazHelmet = true;
+            }
+            if (item == "Savior Helmet +4")
+            {
+                hasSaviorHelmet = true;
+            }
+            //chestplate
+            if (item == "Leather Chestplate +1")
+            {
+                hasLeatherChestplate = true;
+            }
+            if (item == "Iron Chestplate +2")
+            {
+                hasIronChestplate = true;
+            }
+            if (item == "Topaz Chestplate +3")
+            {
+                hasTopazChestplate = true;
+            }
+            if (item == "Savior Chestplate +4")
+            {
+                hasSaviorChestplate = true;
+            }
+            //leggings
+            if (item == "Leather Leggings +1")
+            {
+                hasLeatherLeggings = true;
+            }
+            if (item == "Iron Leggings +2")
+            {
+                hasIronLeggings = true;
+            }
+            if (item == "Topaz Leggings +3")
+            {
+                hasTopazLeggings = true;
+            }
+            if (item == "Savior Leggings +4")
+            {
+                hasSaviorLeggings = true;
+            }
+            //Sword
+            if (item == "Iron Sword +1")
+            {
+                hasIronSword = true;
+            }
+            if (item == "Fire Sword +2")
+            {
+                hasFireSword = true;
+            }
+            if (item == "Topaz Sword +3")
+            {
+                hasTopazSword = true;
+            }
+            if (item == "Savior Sword +4")
+            {
+                hasTopazSword = true;
+            }
+            //Quest Item
+            if (item == "Ladder")
+            {
+                hasLadder = true;
+            }
+            if (item == "Boss Key")
+            {
+                hasBossKey = true;
+            }
+            if (item == "Talking Cat")
+            {
+                hasTalkingCat = true;
+            }
+            if (item == "Pickaxe")
+            {
+                hasPickaxe = true;
+            }
+            if (item == "Friendship Bracelet")
+            {
+                hasFriendshipBracelet = true;
+            }    
+        }
+        public string displayInventory()
+        {
+            string inv = "";
+            string questItems = "";
+            string helmets = "";
+            string chestplates = "";
+            string leggings = "";
+            string swords = "";
+            string consumables = "";
+            //QuestItems
+            if (hasLadder)
+            {
+                questItems += " Ladder";
+            }
+            if (hasBossKey)
+            {
+                questItems += " Boss Key";
+            }
+            if (hasTalkingCat)
+            {
+                questItems += " Talking Cat";
+            }
+            if (hasPickaxe)
+            {
+                questItems += " Pickaxe";
+            }
+            if (hasFriendshipBracelet)
+            {
+                questItems += " Friendship Bracelet";
+            }
+            //Helmets
+            if (hasLeatherHelmet)
+            {
+                helmets += " Leather Helmet +1";
+            }
+            if (hasIronHelmet)
+            {
+                helmets += " Iron Helmet +2";
+            }
+            if (hasTopazHelmet)
+            {
+                helmets += " Topaz Helmet +3";
+            }
+            if (hasSaviorHelmet)
+            {
+                helmets += " Savior Helmet +4";
+            }
+            //Chestplates
+            if (hasLeatherChestplate)
+            {
+                chestplates += " Leather Chestplate +1";
+            }
+            if (hasIronChestplate)
+            {
+                chestplates += " Iron Chestplate +2";
+            }
+            if (hasTopazChestplate)
+            {
+                chestplates += " Topaz Chestplate +3";
+            }
+            if (hasSaviorChestplate)
+            {
+                chestplates += " Savior Chestplate +4";
+            }
+            //Leggings
+            if (hasLeatherLeggings)
+            {
+                leggings += " Leather Leggings +1";
+            }
+            if (hasIronLeggings)
+            {
+                leggings += " Iron Leggings +2";
+            }
+            if (hasTopazLeggings)
+            {
+                leggings += " Topaz Leggings +3";
+            }
+            if (hasSaviorLeggings)
+            {
+                leggings += " Savior Leggings +4";
+            }
+            //Swords
+            if (hasIronSword)
+            {
+                swords += " Iron Sword +1";
+            }
+            if (hasFireSword)
+            {
+                swords += " Fire Sword +2";
+            }
+            if (hasTopazSword)
+            {
+                swords += " Topaz Sword +3";
+            }
+            if (hasSaviorSword)
+            {
+                swords += " Savior Sword +4";
+            }
+            inv = $"QuestItems: {questItems} \n Helmets: {helmets} \n Chestplates: {chestplates} \n Leggings: {leggings} \n Swords: {swords} \n Consumables: {consumables} ";
+            return inv;
+        }
+        public void cheat()
+        {
+            hasSaviorSword = true;
+            hasSaviorChestplate = true;
+            hasSaviorLeggings = true;
+            hasSaviorHelmet = true;
         }
     }
 }
