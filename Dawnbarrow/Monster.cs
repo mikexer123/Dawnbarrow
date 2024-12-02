@@ -21,6 +21,11 @@ namespace Dawnbarrow
         public string desc = "";
         public string placedObject = "";
         public bool isdefeated = false;
+        public bool needsTalkingCat = false;
+        public bool needsLadder = false;
+        public bool needsPickaxe = false;
+        public bool needsBossKey = false;
+        public bool needsFriendshipBracelet = false;
         public void enemySpawn(int x, int y)
         
         {
@@ -106,6 +111,8 @@ namespace Dawnbarrow
                 enemyDamage = 1;
                 currentEnemy = "Ghoul";
                 enemyxpgiven = rangeCalc(2, 25);
+                placedObject = "Ladder";
+                desc = "There is a ghoul here who has 4 peg legs for appendages, he doesn't seem threatening in the slightest but where did these pegs come from";
             }
             else
             //2,2
@@ -116,7 +123,8 @@ namespace Dawnbarrow
                 enemyCHP = 10;
                 enemyArmor = 1;
                 enemyDamage = 1;
-                currentEnemy = "rat";
+                currentEnemy = "Snake";
+                desc = "This snake is no ordinary snake, he seems slimier than usual and has extra rows of fangs? I'm not sure the species, but I can tell you one thing, this creature looks like the love child of a snake and a florida man!";
                 enemyxpgiven = rangeCalc(1, 5);
             }
             else
@@ -152,8 +160,10 @@ namespace Dawnbarrow
                 enemyCHP = 10;
                 enemyArmor = 1;
                 enemyDamage = 1;
-                currentEnemy = "rat";
+                currentEnemy = "Ghoul";
                 enemyxpgiven = rangeCalc(1, 5);
+                desc = "This ghoul looks hungry for cats, you can hear him purring as cats do, I think there is only ONE thing to do here, put this sick monster out of it's misery.";
+                placedObject = "Talking Cat";
             }
             else
             //3,1
@@ -328,12 +338,14 @@ namespace Dawnbarrow
             if ((x == 5) && (y == 5))
             {
                 isdefeated = false;
-                enemyHP = 10;
-                enemyCHP = 10;
+                needsFriendshipBracelet = true;
+                enemyHP = 1000;
+                enemyCHP = 1000;
                 enemyArmor = 1;
                 enemyDamage = 1;
-                currentEnemy = "rat";
-                enemyxpgiven = rangeCalc(1, 5);
+                currentEnemy = "Lonely Giant";
+                enemyxpgiven = rangeCalc(1, 2000);
+                desc = "This humongous creature could not look any more sad. He seems to be guarding a piece of the saviors armor, you're more than welcome to try and fight him, but people this sad need friends, and even this monster doesn't deserve this fate";
             }
             else
             // if the player somehow got out of bounds and fought an enemy, they will see a debug enemy listed below :)

@@ -339,6 +339,11 @@ namespace Dawnbarrow
             hasSaviorChestplate = true;
             hasSaviorLeggings = true;
             hasSaviorHelmet = true;
+            hasTalkingCat = true;
+            hasFriendshipBracelet = true;
+            hasLadder = true;
+            hasBossKey = true;
+            hasPickaxe = true;
         }
     }
 }

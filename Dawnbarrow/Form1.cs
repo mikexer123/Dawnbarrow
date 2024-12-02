@@ -341,12 +341,12 @@ namespace Dawnbarrow
                     "Fight ---> Fight the current monster in the room \n Hit ---> Hit the current monster (must first be fighting) \n check self ---> learn more information about yourself \n" +
                     " Inventory ---> look at your inventory \n equip (item) ---> toggle current equipment \n " +
                     "Search Ground ---> Pick up items on the ground \n North, South, East, West ---> Walk in direction written", "Dawnbarrow Commands");
-               
+
             }
             else
             if (input.Contains("Display Hidden Commands") || input.Contains("display hidden commands"))
             {
-                MessageBox.Show("Who is the cutest cat on the planet? ---> Find out \n die ---> Find out if you can die! \n Cheat ---> Gives full savior kit (ur a terrible person)","Dawnbarrow Hidden Commands (ur sneaky)");
+                MessageBox.Show("Who is the cutest cat on the planet? ---> Find out \n die ---> Find out if you can die! \n Cheat ---> Gives full savior kit (ur a terrible person)", "Dawnbarrow Hidden Commands (ur sneaky)");
             }
             else
             if ((input.Contains("pick up") || input.Contains("Pick up") || input.Contains("Search Ground") || input.Contains("search ground")) && enemy.isdefeated == false)
@@ -354,9 +354,15 @@ namespace Dawnbarrow
                 response = "It's not safe enough to pick up the item in this room!";
             }
             else
-            if (input.Contains("Inventory"))
+            if (input.Contains("Inventory") || input.Contains("inventory"))
             {
                response = Player.displayInventory();
+            }
+            else
+            if (input.Contains("give friendship bracelet") && Player.hasFriendshipBracelet == true)
+            {
+                    enemy.enemyCHP = 0;
+                    response = "You made the Lonely Giant happy, and thus he became your friend, feel free to pick up the saviors helmet before you go!";   
             }
             else
             if (input.Contains("Cheat") || input.Contains("cheat"))

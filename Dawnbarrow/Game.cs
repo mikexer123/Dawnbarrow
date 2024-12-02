@@ -48,7 +48,7 @@ namespace Dawnbarrow
             //16 INDICES 15 1,4
             "As you make your way through the forest, you are entranced by wonderful atmosphere. As your feet crunch through sticks and rocks, you can't help but admire the wonderful acoustics in this forest. The debris being smooshed by your feet produces an almost rhythmic melody that pierces your ears with the sound of over one thousand sweet and beautiful lies whispered softly. The sound is reassuring, telling you that everything is going to be okay. Your body knows better. The chills sent down your spine are the answer to your prayers as you realize that rats aren't the only creature in this forest. Spiders, and tons of them are crawling out of every fibrous layer of twigs and branches. You prepare to run or fight.",
             //17 INDICES 16
-            "nice dude",
+            "The grasslands welcome you as you step forth into unfamiliar territory, Dawnbarrow holds such mysticism and beauty, and this spot specifically illustrates just that. There are a few low level monsters here, which are perfect for grinding, although you might want to equip a weapon first.",
             //18 INDICES 17
             "what is this room",
             //19 INDICES 18
@@ -58,7 +58,7 @@ namespace Dawnbarrow
             //21 INDICES 20 1,5
             "In all of my years of narrating games, I have never seen such a wonderful forest, I am legitimately mesmerized once again, if only you could stop grinding xp for one second, you too could take in the beautiful scenery that is the Dawnbarrow forest, and you could see that the goblins that reside here aren't so bad once you've slain a few they've been known to hide things in areas like these, but I wouldn't pay it much mind. I just think that if you you could just see that there is a vast world out there, and that you can explore OTHER areas of Dawnbarrow, instead of camping out in the area that the developers intentionally made easier than the rest of the game.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                   \n I'll tell you what, why don't you go somewhere else for a change, I'll forgive you if you leave the forest.",
             //22 INDICES 21
-            "howdy",
+            "Before you in the grasslands lies a wonderful sight. A cat! You have never seen a cat so beautiful, and never have you seen a cat this special, there are markings on his hind legs, and markings on his face too. These markings resemble patterns that might be found in a deck of playing cards. You are welcome to try and take him with you, but know there is a creature lurking in the tall grass who is ALSO eyeing your new bespeckled commpanion.",
             //23 INDICES 22
             "boyohboy",
             //24 INDICES 23
