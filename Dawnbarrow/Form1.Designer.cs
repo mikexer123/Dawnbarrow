@@ -94,7 +94,7 @@
             label1.Font = new Font("Sitka Banner", 14.2499981F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(9, 7);
             label1.Name = "label1";
-            label1.Size = new Size(130, 35);
+            label1.Size = new Size(102, 28);
             label1.TabIndex = 4;
             label1.Text = "CurrCoords";
             label1.Click += label1_Click;
@@ -115,7 +115,7 @@
             PlayerHP.Font = new Font("SimSun-ExtB", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             PlayerHP.Location = new Point(958, 122);
             PlayerHP.Name = "PlayerHP";
-            PlayerHP.Size = new Size(124, 28);
+            PlayerHP.Size = new Size(98, 22);
             PlayerHP.TabIndex = 6;
             PlayerHP.Text = "PlayerHP";
             // 
@@ -126,7 +126,7 @@
             XP.Font = new Font("SimSun-ExtB", 16F);
             XP.Location = new Point(958, 80);
             XP.Name = "XP";
-            XP.Size = new Size(152, 27);
+            XP.Size = new Size(120, 22);
             XP.TabIndex = 7;
             XP.Text = "Experience";
             // 
@@ -138,6 +138,7 @@
             Background.Size = new Size(952, 298);
             Background.TabIndex = 8;
             Background.TabStop = false;
+            Background.Click += Background_Click;
             // 
             // pictureBox3
             // 
@@ -154,7 +155,7 @@
             NGL.Font = new Font("SimSun-ExtB", 16F);
             NGL.Location = new Point(958, 39);
             NGL.Name = "NGL";
-            NGL.Size = new Size(278, 27);
+            NGL.Size = new Size(219, 22);
             NGL.TabIndex = 11;
             NGL.Text = "Name / Gender / Lvl";
             // 
@@ -165,14 +166,14 @@
             Equip.Font = new Font("SimSun-ExtB", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Equip.Location = new Point(958, 164);
             Equip.Name = "Equip";
-            Equip.Size = new Size(236, 28);
+            Equip.Size = new Size(186, 22);
             Equip.TabIndex = 12;
             Equip.Text = "Current Equipped";
             // 
             // Dawnbarrow
             // 
             AcceptButton = submit_button;
-            AutoScaleDimensions = new SizeF(8F, 15F);
+            AutoScaleDimensions = new SizeF(6F, 12F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.RosyBrown;
             ClientSize = new Size(1484, 804);

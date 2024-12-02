@@ -206,23 +206,24 @@ namespace Dawnbarrow
             if ((x == 3) && (y == 4))
             {
                 isdefeated = false;
-                enemyHP = 10;
-                enemyCHP = 10;
-                enemyArmor = 1;
-                enemyDamage = 1;
-                currentEnemy = "rat";
+                enemyHP = 50;
+                enemyCHP = 50;
+                enemyArmor = 2;
+                enemyDamage = rangeCalc(1,12);
+                currentEnemy = "Cerberus";
                 enemyxpgiven = rangeCalc(1, 5);
+                placedObject = "Savior Sword +4";
             }
             else
             //3,5
                 if ((x == 3) && (y == 5))
             {
                 isdefeated = false;
-                enemyHP = 10;
-                enemyCHP = 10;
+                enemyHP = 30;
+                enemyCHP = 30;
                 enemyArmor = 1;
                 enemyDamage = 1;
-                currentEnemy = "rat";
+                currentEnemy = "Giant Prarie Dog";
                 enemyxpgiven = rangeCalc(1, 10);
             }
             else

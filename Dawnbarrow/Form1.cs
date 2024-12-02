@@ -121,10 +121,11 @@ namespace Dawnbarrow
             StartTyping(outputText, false);
             string whereami = room.Biome(room.getCurrentRoomCoordinates().x, room.getCurrentRoomCoordinates().y);
             label1.Text = whereami + room.getCurrentRoomCoordinates().ToString();
-            
+
 
             updatelabels();
             InputBox.Clear();
+            Player.calculateArmor();
 
 
 
@@ -153,8 +154,19 @@ namespace Dawnbarrow
                 {
                     response += "You share a name with one of the developers! Isn't that exciting? \n";
                 }
+                if (Player.playerName == "Barbara Bancroft")
+                {
+                    response = $"Your name is {Player.playerName}\n";
+                    response = $"You're our app development professor!";
+                }
+                if ( (Player.playerName == "Alexander Juxley") || (Player.playerName == "Jonathan Lanteigne") || (Player.playerName == "Tony Allam") || (Player.playerName == "Nicholas Harrington") || (Player.playerName == "Jonathan Rowe") || (Player.playerName == "Graham Zambrowicz") || (Player.playerName == "Gabriel Bashaw") || (Player.playerName == "Alexander Pessinis") || (Player.playerName == "Tony Allam") || (Player.playerName == "Sam Do") || (Player.playerName == "Reginald Hardwick"))
+                {
+                    response = $"Your name is {Player.playerName}\n";
+                    response = "You are in our app development class! You saw our developmental process!";
+                }
                 if ((Player.playerName == "Emmy") || (Player.playerName == "Emilia") || (Player.playerName == "emmy"))
                 {
+                    response = $"Your name is {Player.playerName}\n";
                     response += "You share a name with one of the developers girlfriend! If you're her, Mike says \"I love you Emmy, I hope you're not procrastinating!\" \n";
                 }
             }
@@ -179,7 +191,7 @@ namespace Dawnbarrow
                 response = "You start heading West";
             }
             else
-            if ((input == "fight") || (input == "kill" || (input == "murder") || (input == "mordor") || input.Contains("fight"))) //Begin Fighting
+            if ((input == "fight") || (input == "kill" || (input == "murder") || (input == "mordor") || input.Contains("fight") || input.Contains("Fight"))) //Begin Fighting
             {
                 response = "\n" + enemy.desc + "\n" + "You begin fighting\n" + enemy.MonsterInfo();
                 Player.isFighting = true;
@@ -356,13 +368,13 @@ namespace Dawnbarrow
             else
             if (input.Contains("Inventory") || input.Contains("inventory"))
             {
-               response = Player.displayInventory();
+                response = Player.displayInventory();
             }
             else
             if (input.Contains("give friendship bracelet") && Player.hasFriendshipBracelet == true)
             {
-                    enemy.enemyCHP = 0;
-                    response = "You made the Lonely Giant happy, and thus he became your friend, feel free to pick up the saviors helmet before you go!";   
+                enemy.enemyCHP = 0;
+                response = "You made the Lonely Giant happy, and thus he became your friend, feel free to pick up the saviors helmet before you go!";
             }
             else
             if (input.Contains("Cheat") || input.Contains("cheat"))
@@ -450,6 +462,9 @@ namespace Dawnbarrow
 
         }
 
+        private void Background_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

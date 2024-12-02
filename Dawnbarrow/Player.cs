@@ -345,5 +345,67 @@ namespace Dawnbarrow
             hasBossKey = true;
             hasPickaxe = true;
         }
+        public void calculateArmor()
+        {
+           
+            int headArmor = 0;
+            int chestArmor = 0;
+            int legArmor = 0;
+         if (HeadEquipped == "Leather Helmet +1")
+            {
+                headArmor = 1;
+            }
+         if (HeadEquipped == "Iron Helmet +2")
+            {
+                headArmor = 2;
+            }
+         if (HeadEquipped == "Topaz Helmet +3")
+            {
+                headArmor = 3;
+            }
+         if (HeadEquipped == "Savior Helmet +4")
+            {
+                headArmor = 4;
+            }    
+         if (ChestEquipped == "Leather Helmet +1")
+            {
+                chestArmor = 1;
+            }
+         if (ChestEquipped == "Iron Chestplate +2")
+            {
+                chestArmor = 2;
+            }
+         if (ChestEquipped == "Topaz Chestplate +3")
+            {
+                chestArmor = 3;
+            }
+         if (ChestEquipped == "Savior Chestplate +4")
+            {
+                chestArmor = 4;
+            }
+         if (LegsEquipped == "Leather Leggings +1")
+            {
+                legArmor = 1;
+            }
+         if (LegsEquipped == "Iron Leggings +2")
+            {
+                legArmor = 2;
+            }
+         if (LegsEquipped == "Topaz Leggings +3")
+            {
+                legArmor = 3;
+            }
+         if (LegsEquipped == "Savior Leggings +4")
+            {
+                legArmor = 4;
+            }
+
+                armor = headArmor + chestArmor + legArmor;
+
+
+
+
+
+        }
     }
 }
