@@ -16,7 +16,7 @@ namespace Dawnbarrow
         public string[] roomDescriptions =
         {
             //1 INDICES 0 ****1,1
-            "In the brightest reach of this forest, You spot a silly little man, and it's evident that he has almost no business being here. He's small and frail, and has no definitive purpose in the land of Dawnbarrow. Whatever divine force led you to check the very bottom left corner of Dawnbarrow couldn't have prepared you for the site of this despicable, rather annoying man.",
+            "In the brightest reach of this forest, You spot a silly little man, and it's evident that he has almost no business being here. He's small and frail, and has no definitive purpose in the land of Dawnbarrow. Whatever divine force led you to check the very bottom left corner of Dawnbarrow couldn't have prepared you for the site of this despicable, rather annoying man. Although you're in a rush to leave, this man tells you something that seems to haunt your very being. \n \"You must look for the fork in the road!\" ",
             //2 INDICES 1 ****2,1
             "Welcome to the jungle, a vast set of trees ranging from banana trees, to red cedars, to GIANT red cedars are littered throughout the area, there are all kinds of bugs as far as the eye can see. This is an awful place to be for people who hate humid temperatures. If I were you, I'd begin to wonder what creatures lurk here!",
             //3 INDICES 2 ****3,1
@@ -24,7 +24,7 @@ namespace Dawnbarrow
             //4 INDICES 3 ****4,1
             "Around you is a vast clearing, the open paths offer an expansive array of options, you can go in any cardinal direction, and find yourself in a new unknown enviornment",
             //5 INDICES 4 ****5,1
-            "nice",
+            "A humongous Hydra is on the coast of the Dawnbarrow sea. It's multiple heads are menacing, although there is one head that seems to be goofier than the others. It's impossible to gauge this creatures power, but I can assure you this Hydra is a force to be reckoned with!",
             //6 INDICES 5 ****1,2
             "\"Welcome to Dawnbarrow, there are a few things I wish to explain, at any given time, you can navigate in four cardinal directions: North, South, East, and West,\"A disembodied voice exclaims almost passive aggressively in a booming voice \"If for any reason you get lost or need help, don't hesitate to type the help command for more insight as to what you can do! Also refer to the location identifier in the top left hand corner of your screen for information about your surroundings, pay very close attention, as this identifier may disclose hidden information.\"  \nYou don't understand what the heck he is talking about, but you choose to just go with it. Why the creator of this game chose to nestle the tutorial into the very first room in his game world is beyond you. Anyhow, as you take in your surroundings, you notice that to the east is a heavy jungle, and to the north is more forest with plenty of trees. For some reason, the north path feels safer. \"The north path is safer for SURE!\" The disembodied voice screams one last time before his voice fades out of registry.",
             //7 INDICES 6 ****2,2
@@ -32,9 +32,9 @@ namespace Dawnbarrow
             //8 INDICES 7 ****3,2
             "Before you lies a gigantic Chimera, it's obviously guarding something rare, and the smell of this creature could peel paint off of a barn. The jungle is mostly quiet in this area, almost as if in respect for this behemoth. If you choose to do battle with this Chimera, be sure to proceed with caution, the corpses lying near promise one mean fight!",
             //9 INDICES 8 ****4,2
-            "what the heck",
+            "The Ocean beach is glistening with a prismarine color, surrounding you everywhere are silly creatures as far as the eye can see. There are starfish kissing the ground, and seagulls fighting over food. You're excited to be here, and the sun seems to mimic your excitement.",
             //10 INDICES 9 ****5,2
-            ":)",
+            "You take the beautiful path, it's obvious that you weren't cut out for the life of a hero, and even though you made it this far, some people just aren't apt for the savior lifestyle. The land around you is beautiful and stunning, but you certainly didn't do anything to deserve such a beautiful sight. Off in the distance you see a terrifying dragon breathing fire on a peaceful village, and although that is a terrifying sight, it's also gorgeous and not your problem. I hope you enjoyed taking the cowards way out, and that your beautiful scenery and your sissy serenity makes you happy. May you forever be blessed by the fortune of being a coward. THE END.",
             //11 INDICES 10 ****1,3
             "You walk into the forest, and it's evident to you that you're in the most peaceful area of DawnBarrow, the sunshine pokes through the trees beautifully and around you there are small critters that are minding their own business. Your attention fixates on a group of small rats that seem to appear endlessly almost out of thin air. It's worth mentioning that they aren't bothering anyone, certainly not you, but there is a looming feeling emanating from you that you should end their life without warning or reason...Should you choose to do so type \"fight rat\". Otherwise: to the east is a river, which seems to be the pointing in the direction of the centermost part of the land, and to the North is more forest. If you were feeling bold, you would probably take the path of the river, and if you were feeling like a sissy little crybaby, you would likely resume venturing north because grinding xp is necessary for longevity in these kinds of games I guess.",
             //12 INDICES 11 ****2,3
@@ -42,9 +42,9 @@ namespace Dawnbarrow
             //13 INDICES 12 ****3,3
             "There's an almost urgent thought floating in your head. You believe it's your instinct that is telling you you're at the centermost part of the map, and that the entire land of Dawnbarrow is just a 5x5 grid.",
             //14 INDICES 13 ****4,3
-            "this ought to be interesting",
+            "The river roars ferociously, amped by the will of the surrounding River Kappas. This river, although beautiful seems to hold a mystery, there are stones all around in the running water, begging to be smashed into a million pieces",
             //15 INDICES 14 ****5,3
-            "friends",
+            "This is it, the fork in the road. Everything amounts to this. There are two paths: A southern path, which evokes friendly, positive vibes. The southern path is wonderfully well lit, and even gives off a scent of lilac and shea butter. The other path has a humongous door with a lock on it the size of your ego. The door looms with darkness and gives an evil and malicious feeling that would haunt even the bravest men. You have half a mind about you to enter, but you're not too sure about what to do with the lock.",
             //16 INDICES 15 ****1,4
             "As you make your way through the forest, you are entranced by wonderful atmosphere. As your feet crunch through sticks and rocks, you can't help but admire the wonderful acoustics in this forest. The debris being smooshed by your feet produces an almost rhythmic melody that pierces your ears with the sound of over one thousand sweet and beautiful lies whispered softly. The sound is reassuring, telling you that everything is going to be okay. Your body knows better. The chills sent down your spine are the answer to your prayers as you realize that rats aren't the only creature in this forest. Spiders, and tons of them are crawling out of every fibrous layer of twigs and branches. You prepare to run or fight.",
             //17 INDICES 16 ****2,4
@@ -62,9 +62,9 @@ namespace Dawnbarrow
             //23 INDICES 22 ****3,5
             "The grasslands seem to giggle as prarie dogs and other critters crack the surface of the ground, just to say hi. You're having fun watching the prarie dogs emerge from and then descend back into their burrows. This fun is broken by the sight of a slightly more aggressive prarie dog. You can't shake the feeling that there is more than one!",
             //24 INDICES 23 ****4,5
-            "friends",
+            "A group of miner goblins lie about in this cavernous den, it's a serious offense to exist as a human in the presence of a goblin, so they quietly stare at you as you move quietly through the expansive rocky terrain. Something that catches your eye is the presence of a giant pickaxe in the hands of one of the more bulky goblins",
             //25 INDICES 24 ****5,5
-            "help me jafa"
+            "As you wander through the giant cave, you reach it's end, and before you lies a HUMONGOUS creature. It almost sounds as though he is crying, you could fight him, but maybe you could also do something else?"
         };
         public string[] roomsubtext =
         {

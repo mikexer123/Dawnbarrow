@@ -158,7 +158,7 @@
     <value>..\bin\Inventory\EmptyQuest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\dawnbarrowimages\1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\bin\Inventory\1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Inventory\1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -173,7 +173,7 @@
     <value>..\bin\dawnbarrowimages\4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\dawnbarrowimages\3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\bin\Inventory\3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Forest" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\dawnbarrowimages\Forest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -217,31 +217,52 @@
   <data name="31" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Inventory\1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\bin\Inventory\2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Inventory\3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="IChest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Inventory\New folder\IChest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BosskeyON" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Inventory\BosskeyON.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="IHelm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Inventory\New folder\IHelm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EmptyQuest" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Inventory\EmptyQuest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ILegs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Inventory\New folder\ILegs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FriendshipBraceletOn" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Inventory\FriendshipBraceletOn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LChest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Inventory\New folder\LChest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LadderOn" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Inventory\LadderOn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LHelm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Inventory\New folder\LHelm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PickaxeOn" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Inventory\PickaxeOn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LLegs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Inventory\New folder\LLegs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TalkingCatOn" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Inventory\TalkingCatOn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SChest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Inventory\New folder\SChest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SHelm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Inventory\New folder\SHelm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SLegs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Inventory\New folder\SLegs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TChest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Inventory\New folder\TChest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="THelm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Inventory\New folder\THelm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TLegs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Inventory\New folder\TLegs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EChest" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Inventory\New folder\EChest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EHelm" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Inventory\New folder\EHelm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ELegs__1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Inventory\New folder\ELegs (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

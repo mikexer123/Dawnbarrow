@@ -110,6 +110,10 @@ namespace Dawnbarrow
                     StartTyping(outputText, false);
 
                 }
+                else if ((room.CanGo(PlayerInput.ToLower()) == true) && (PlayerInput == "north" || PlayerInput == "south" || PlayerInput == "east" || PlayerInput == "west" || PlayerInput == "North" || PlayerInput == "South" || PlayerInput == "East" || PlayerInput == "West") && Player.isFighting == true)
+                {
+                    outputText = "You legit can't go that way right now you're in a fight, so stop trying to be sneaky, use the run command if you want to leave combat, you sissy!";
+                }
                 else
                 {
                     outputText = $"{playerAction} \n {gameResponse}";
@@ -166,7 +170,7 @@ namespace Dawnbarrow
                     response = $"Your name is {Player.playerName}\n";
                     response = $"You're our app development professor!";
                 }
-                if ( (Player.playerName == "Alexander Juxley") || (Player.playerName == "Jonathan Lanteigne") || (Player.playerName == "Tony Allam") || (Player.playerName == "Nicholas Harrington") || (Player.playerName == "Jonathan Rowe") || (Player.playerName == "Graham Zambrowicz") || (Player.playerName == "Gabriel Bashaw") || (Player.playerName == "Alexander Pessinis") || (Player.playerName == "Tony Allam") || (Player.playerName == "Sam Do") || (Player.playerName == "Reginald Hardwick"))
+                if ((Player.playerName == "Alexander Juxley") || (Player.playerName == "Jonathan Lanteigne") || (Player.playerName == "Tony Allam") || (Player.playerName == "Nicholas Harrington") || (Player.playerName == "Jonathan Rowe") || (Player.playerName == "Graham Zambrowicz") || (Player.playerName == "Gabriel Bashaw") || (Player.playerName == "Alexander Pessinis") || (Player.playerName == "Tony Allam") || (Player.playerName == "Sam Do") || (Player.playerName == "Reginald Hardwick"))
                 {
                     response = $"Your name is {Player.playerName}\n";
                     response = "You are in our app development class! You saw our developmental process!";
@@ -237,6 +241,12 @@ namespace Dawnbarrow
             if (input == "die")
             {
                 response = "I bet you thought I'd say you can't die huh?";
+            }
+            else
+            if (input == "run" || input == "Run")
+            {
+                response = "You got away sucessfully";
+                Player.isFighting = false;
             }
             else
             if (input == "map")
@@ -346,7 +356,111 @@ namespace Dawnbarrow
                     input = input.Remove(0, 6);
                     response = "You don't have a " + input + " to equip";
                 }
-            } 
+            }
+            else
+            if ((input.Contains("take off")) || (input.Contains("Take Off"))) // Main equip command
+            {
+                if (((input.Contains("iron sword")) || input.Contains("Iron Sword")) && (Player.WeaponEquipped == "Iron Sword +1")) // Iron Sword
+                {
+                    response = "You unequip Iron sword";
+                    Player.WeaponEquipped = "nothing";
+                }
+                else
+                if (((input.Contains("fire sword")) || input.Contains("Fire Sword")) && (Player.WeaponEquipped == "Fire Sword +2")) // Fire Sword
+                {
+                    response = "You unequip Fire Sword";
+                    Player.WeaponEquipped = "nothing";
+                }
+                else
+                if (((input.Contains("topaz sword")) || input.Contains("Topaz Sword")) && (Player.WeaponEquipped == "Topaz Sword +3")) // Topaz Sword
+                {
+                    response = "You unequip Topaz Sword";
+                    Player.WeaponEquipped = "nothing";
+                }
+                else
+                if (((input.Contains("savior sword")) || input.Contains("Savior Sword")) && (Player.WeaponEquipped == "Savior Sword +4")) // Savior Sword
+                {
+                    response = "You unequip Savior Sword";
+                    Player.WeaponEquipped = "nothing";
+                }
+                else
+                if (((input.Contains("Leather Leggings")) || input.Contains("leather leggings")) && (Player.LegsEquipped == "Leather Leggings +1"))// Leather leggings
+                {
+                    response = "You unequip Leather Leggings";
+                    Player.LegsEquipped = "nothing";
+                }
+                else
+                if (((input.Contains("Iron Leggings")) || input.Contains("iron leggings")) && (Player.LegsEquipped == "Iron Leggings +2"))//Iron Leggings
+                {
+                    response = "You unequip Iron Leggings";
+                    Player.LegsEquipped = "nothing";
+                }
+                else
+                if (((input.Contains("Topaz Leggings")) || input.Contains("topaz leggings")) && (Player.LegsEquipped == "Topaz Leggings +3"))// Topaz Leggings
+                {
+                    response = "You unequip Topaz Leggings";
+                    Player.LegsEquipped = "nothing";
+                }
+                else
+                if (((input.Contains("Savior Leggings")) || input.Contains("savior leggings")) && (Player.LegsEquipped == "Savior Leggings +4")) // Savior Leggings
+                {
+                    response = "You unequip Savior Leggings";
+                    Player.LegsEquipped = "nothing";
+                }
+                else
+                if (((input.Contains("Leather Chestplate")) || input.Contains("leather chestplate")) && (Player.ChestEquipped == "Leather Chestplate +1")) // Leather Chestplate
+                {
+                    response = "You unequip Leather Chestplate";
+                    Player.ChestEquipped = "nothing";
+                }
+                else
+                if (((input.Contains("Iron Chestplate")) || input.Contains("iron chestplate")) && (Player.ChestEquipped == "Iron Chestplate +2"))//Iron Chestplate
+                {
+                    response = "You unequip Iron Chestplate";
+                    Player.ChestEquipped = "nothing";
+                }
+                else
+                if (((input.Contains("topaz chestplate")) || input.Contains("Topaz Chestplate")) && (Player.ChestEquipped == "Topaz Chestplate +3")) //Topaz Chestplate
+                {
+                    response = "You unequip Topaz Chestplate";
+                    Player.ChestEquipped = "nothing";
+                }
+                else
+                if (((input.Contains("savior chestplate")) || input.Contains("Savior Chestplate")) && (Player.ChestEquipped == "Savior Chestplate +4")) //Savior Chestplate
+                {
+                    response = "You unequip Savior Chestplate";
+                    Player.ChestEquipped = "nothing";
+                }
+                else
+                if (((input.Contains("Leather Helmet")) || input.Contains("leather helmet")) && (Player.HeadEquipped == "Leather Helmet +1")) //Leather Helmet
+                {
+                    response = "You unequip Leather Helmet";
+                    Player.HeadEquipped = "nothing";
+                }
+                else
+                if (((input.Contains("Iron Helmet")) || input.Contains("iron helmet")) && (Player.HeadEquipped == "Iron Helmet +2")) //Iron Helmet
+                {
+                    response = "You unequip Iron Helmet";
+                    Player.HeadEquipped = "nothing";
+                }
+                else
+                if (((input.Contains("topaz helmet")) || input.Contains("Topaz Helmet")) && (Player.HeadEquipped == "Topaz Helmet +3")) //Topaz Helmet
+                {
+                    response = "You unequip Topaz Helmet";
+                    Player.HeadEquipped = "nothing";
+                }
+                else
+                if (((input.Contains("savior helmet")) || input.Contains("Savior Helmet")) && (Player.HeadEquipped == "Savior Helmet +4")) // Savior Helmet
+                {
+                    response = "You unequip Savior Helmet";
+                    Player.HeadEquipped = "nothing";
+                }
+                else
+                {
+                    input = input.Remove(0, 8);
+                    response = "You don't have a " + input + " to unequip";
+                }
+            }
             else
             if ((input.Contains("pick up") || input.Contains("Pick up") || input.Contains("Search Ground") || input.Contains("search ground")) && enemy.isdefeated == true)
             {
@@ -359,7 +473,8 @@ namespace Dawnbarrow
                 MessageBox.Show(" Look around ---> gain more information about your surroundings \n Gender (gender) ---> input your gender \n name (name) ---> Input your name \n " +
                     "Fight ---> Fight the current monster in the room \n Hit ---> Hit the current monster (must first be fighting) \n check self ---> learn more information about yourself \n" +
                     " Inventory ---> look at your inventory \n equip (item) ---> toggle current equipment \n " +
-                    "Search Ground ---> Pick up items on the ground \n North, South, East, West ---> Walk in direction written", "Dawnbarrow Commands");
+                    "Search Ground ---> Pick up items on the ground \n North, South, East, West ---> Walk in direction written", "Dawnbarrow Commands \n" +
+                    "Run ---> If you're in combat, get out of combat");
 
             }
             else
@@ -382,12 +497,28 @@ namespace Dawnbarrow
             {
                 enemy.enemyCHP = 0;
                 response = "You made the Lonely Giant happy, and thus he became your friend, feel free to pick up the saviors helmet before you go!";
+                enemy.enemyCHP = 0;
             }
             else
             if (input.Contains("Cheat") || input.Contains("cheat"))
             {
                 response = $"You have cheated!!! You have all quest items and all four pieces of the savior set";
                 Player.cheat();
+            }
+            else
+            if ((input.Contains("Mine") || input.Contains("Smash rocks")) && (Player.hasPickaxe = true))
+            {
+                response = $"There is nothing to mine or smash";
+            }
+            else
+            if ((input.Contains("Mine") || input.Contains("Smash rocks")) && (Player.hasPickaxe = false))
+            {
+                response = $"You have nothing with which to mine or smash things with";
+            }
+            else
+            if ((input.Contains("Mine") || input.Contains("Smash rocks")) && (Player.hasPickaxe = true) && (room.getCurrentRoomCoordinates().x == 4) && (room.getCurrentRoomCoordinates().y == 3))
+            {
+                response = $"You smash the rocks into a million pieces, inside the rocks is a key!";
             }
             else
             {
@@ -499,7 +630,7 @@ namespace Dawnbarrow
             {
                 Background.Image = Properties.Resources.Mountain_Pass___Ending;
             }
-            
+
             if (Player.hasFriendshipBracelet == true)
             {
                 FriendshipBracelet.Image = Properties.Resources.FriendshipBraceletOn;
@@ -520,6 +651,68 @@ namespace Dawnbarrow
             {
                 BossKey.Image = Properties.Resources.BosskeyON;
             }
+            if (Player.ChestEquipped == "nothing")
+            {
+                Chestplate.Image = Properties.Resources.EChest;
+            }
+            if (Player.ChestEquipped == "Topaz Chestplate +3")
+            {
+                Chestplate.Image = Properties.Resources.TChest;
+            }
+            if (Player.ChestEquipped == "Iron Chestplate +2")
+            {
+                Chestplate.Image = Properties.Resources.IChest;
+            }
+            if (Player.ChestEquipped == "Leather Chestplate +1")
+            {
+                Chestplate.Image = Properties.Resources.LChest;
+            }
+            if (Player.ChestEquipped == "Savior Chestplate +4")
+            {
+                Chestplate.Image = Properties.Resources.SChest;
+            }
+            if (Player.HeadEquipped == "nothing")
+            {
+                Helmet.Image = Properties.Resources.EHelm;
+            }
+            if (Player.HeadEquipped == "Leather Helmet +1")
+            {
+                Helmet.Image = Properties.Resources.LHelm;
+            }
+            if (Player.HeadEquipped == "Iron Helmet +2")
+            {
+                Helmet.Image = Properties.Resources.IHelm;
+            }
+            if (Player.HeadEquipped == "Topaz Helmet +3")
+            {
+                Helmet.Image = Properties.Resources.THelm;
+            }
+            if (Player.HeadEquipped == "Savior Helmet +4")
+            {
+                Helmet.Image = Properties.Resources.SHelm;
+            }
+            if (Player.LegsEquipped == "nothing")
+            {
+                Leggings.Image = Properties.Resources.ELegs__1_;
+            }
+            if (Player.LegsEquipped == "Leather Leggings +1")
+            {
+                Leggings.Image = Properties.Resources.LLegs;
+            }
+            if (Player.LegsEquipped == "Iron Leggings +2")
+            {
+                Leggings.Image = Properties.Resources.ILegs;
+            }
+            if (Player.LegsEquipped == "Topaz Leggings +3")
+            {
+                Leggings.Image = Properties.Resources.TLegs;
+            }
+            if (Player.LegsEquipped == "Savior Leggings +4")
+            {
+                Leggings.Image = Properties.Resources.SLegs;
+            }
         }
+
+       
     }
 }

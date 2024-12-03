@@ -47,7 +47,7 @@ namespace Dawnbarrow
                 new Roomdata(2,5, false, true, true, true),
                 new Roomdata(3,5, false, true, true, true),
                 new Roomdata(4,5, false, true, true, true),
-                new Roomdata(5,5, false, true, false, true),
+                new Roomdata(5,5, false, false, false, true),
                 new Roomdata(1,4, true, true, true, false),
                 new Roomdata(2,4, true, true, true, true),
                 new Roomdata(3,4, true, true, true, true),
@@ -67,7 +67,7 @@ namespace Dawnbarrow
                 new Roomdata(2,1, true, false, true, true),
                 new Roomdata(3,1, true, false, true, true),
                 new Roomdata(4,1, true, false, true, true),
-                new Roomdata(5,1, true, false, false, true),
+                new Roomdata(5,1, false, false, false, true),
              };
             currRoomCoordinates = (1, 1);
         }

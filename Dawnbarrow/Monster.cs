@@ -35,13 +35,13 @@ namespace Dawnbarrow
             if ((x == 1) && (y == 1))
             {
                 isdefeated = false;
-                enemyHP = rangeCalc(1, 3);
+                enemyHP = rangeCalc(1, 1);
                 enemyCHP = enemyHP;
-                enemyArmor = rangeCalc(1, 2); //method that chooses 1,2 (I learned that isn't built inherently in C# so I had to make one :)
-                enemyDamage = rangeCalc(1, 3);
-                currentEnemy = "Rat";
+                enemyArmor = rangeCalc(1, 1); //method that chooses 1,2 (I learned that isn't built inherently in C# so I had to make one :)
+                enemyDamage = rangeCalc(1, 2);
+                currentEnemy = "Rat Man";
                 enemyxpgiven = rangeCalc(5, 5);
-                desc = "\"You have encountered a rat! He look's kind of small though, I'm sure you can take him, realistically if you die here, you were never meant to play this game\"";
+                desc = "\"You fight the silly little man, You have legit no reason to, you are just kind of a terrible person all around, but at least he won't bother you anymore.\"";
                 placedObject = "Iron Sword +1";
             }
             else
@@ -51,7 +51,7 @@ namespace Dawnbarrow
                 isdefeated = false;
                 enemyHP = rangeCalc(1, 3);
                 enemyCHP = enemyHP;
-                enemyArmor = rangeCalc(1, 2); 
+                enemyArmor = rangeCalc(1, 1); 
                 enemyDamage = rangeCalc(1, 2); 
                 currentEnemy = "Skeleton";
                 enemyxpgiven = rangeCalc(5, 10);
@@ -137,9 +137,10 @@ namespace Dawnbarrow
                 enemyCHP = 10;
                 enemyArmor = 1;
                 enemyDamage = 1;
-                currentEnemy = "rat";
+                currentEnemy = "Kappa";
                 enemyxpgiven = rangeCalc(1, 5);
-                
+                placedObject = "Iron Leggings +2";
+                desc = "An evil river monster appears, and he is not up for small chat";
 
             }
             else
@@ -153,6 +154,7 @@ namespace Dawnbarrow
                 enemyDamage = 1;
                 currentEnemy = "rat";
                 enemyxpgiven = rangeCalc(1, 5);
+                placedObject = "Iron Chestplate +2";
             }
             else
             //2,5 Grassland TALKING CAT
@@ -179,6 +181,7 @@ namespace Dawnbarrow
                 enemyDamage = 1;
                 currentEnemy = "rat";
                 enemyxpgiven = rangeCalc(1, 5);
+                placedObject = "Topaz Leggings +3";
             }
             else
             //3,2
@@ -191,6 +194,7 @@ namespace Dawnbarrow
                 enemyDamage = 1;
                 currentEnemy = "rat";
                 enemyxpgiven = rangeCalc(1, 5);
+                placedObject = "Iron Helmet +2";
             }
             else
             //3,3
@@ -203,6 +207,7 @@ namespace Dawnbarrow
                 enemyDamage = 1;
                 currentEnemy = "rat";
                 enemyxpgiven = rangeCalc(1, 5);
+                placedObject = "Topaz Sword +3";
             }
             else
             //3,4 Cerberus Savior Sword Location
@@ -214,8 +219,9 @@ namespace Dawnbarrow
                 enemyArmor = 2;
                 enemyDamage = rangeCalc(1,12);
                 currentEnemy = "Cerberus";
-                enemyxpgiven = rangeCalc(1, 5);
+                enemyxpgiven = rangeCalc(100, 500);
                 placedObject = "Savior Sword +4";
+                desc = "*This creature is a hulking mass of 3 heads, it's clear that he doesn't like you, and that each head functions independently of each other, almost as if they were 3 mean dogs that were forced to be together for all of eternity.";
             }
             else
             //3,5 FRIENDSHIP BRACELET Location
@@ -280,16 +286,17 @@ namespace Dawnbarrow
                 enemyxpgiven = rangeCalc(1, 5);
             }
             else
-            //4,5
+            //4,5 PICKAXE
                 if ((x == 4) && (y == 5))
             {
                 isdefeated = false;
-                enemyHP = 10;
-                enemyCHP = 10;
+                enemyHP = 25;
+                enemyCHP = 25;
                 enemyArmor = 1;
                 enemyDamage = 1;
-                currentEnemy = "rat";
+                currentEnemy = "Goblin";
                 enemyxpgiven = rangeCalc(1, 5);
+                placedObject = "Pickaxe";
             }
             else
             //5,1
@@ -351,7 +358,7 @@ namespace Dawnbarrow
                 enemyDamage = 1;
                 currentEnemy = "Lonely Giant";
                 enemyxpgiven = rangeCalc(1, 2000);
-                desc = "This humongous creature could not look any more sad. He seems to be guarding a piece of the saviors armor, you're more than welcome to try and fight him, but people this sad need friends, and even this monster doesn't deserve this fate";
+                desc = "*This humongous creature could not look any more sad. He seems to be guarding a piece of the saviors armor, you're more than welcome to try and fight him, but people this sad need friends, and even this monster doesn't deserve this fate";
             }
             else
             // if the player somehow got out of bounds and fought an enemy, they will see a debug enemy listed below :)
@@ -403,7 +410,12 @@ namespace Dawnbarrow
         public int MonsterDmg(int PlayerArmor)
         {
            int monsterdmg = rangeCalc(1, enemyDamage) - PlayerArmor;
-           return monsterdmg;
+
+            if (monsterdmg == 1)
+            {
+                monsterdmg = 2;
+            }
+            return monsterdmg;
         }
         public string MonsterTurn(int PlayerArmor)
         {
