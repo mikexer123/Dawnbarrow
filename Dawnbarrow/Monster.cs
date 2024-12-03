@@ -355,7 +355,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "DRAGON";
-                desc = "*THIS IS IT, THE FINAL FIGHT, WELCOME TO THE THUNDERDOME, THIS GIGANTIC DRAGON IS THE HECKIN SCARIEST THING KNOWN TO MAN, BE CAREFUL BRAVE ADVENTURER";
+                desc = "*THIS IS IT, THE FINAL FIGHT, WELCOME TO THE THUNDERDOME, THIS GIGANTIC DRAGON IS THE HECKIN SCARIEST THING KNOWN TO MAN, BE CAREFUL BRAVE ADVENTURER. IN THE CLEAREST SPOT OF THIS ROOM IS AN ANTI-CAT SIGN";
                 enemyxpgiven = rangeCalc(20, 200);
             }
             else

@@ -533,9 +533,13 @@ namespace Dawnbarrow
                 }
             }
             else
-            if ((input.Contains("pick up") || input.Contains("Pick up") || input.Contains("Search Ground") || input.Contains("search ground")) && enemy.isdefeated == true)
+            if ((input.Contains("pick up") || input.Contains("Pick up") || input.Contains("Search Ground") || input.Contains("search ground") || input.Contains("loot") || input.Contains ("Loot") && enemy.isdefeated == true))
             {
                 response = $"You pick up the {enemy.placedObject}";
+                if  (enemy.placedObject == "Pickaxe")
+                {
+                    response = "Use the mine command use it when necessary!";
+                }
                 Player.giveItem(enemy.placedObject);
             }
             else
@@ -544,7 +548,7 @@ namespace Dawnbarrow
                 MessageBox.Show(" Look around ---> gain more information about your surroundings \n Gender (gender) ---> input your gender \n name (name) ---> Input your name \n " +
                     "Fight ---> Fight the current monster in the room \n Hit ---> Hit the current monster (must first be fighting) \n check self ---> learn more information about yourself \n" +
                     " Inventory ---> look at your inventory \n equip (item) ---> toggle current equipment \n " +
-                    "Search Ground ---> Pick up items on the ground \n North, South, East, West ---> Walk in direction written" + "Run ---> If you're in combat, get out of combat", "Dawnbarrow Commands");
+                    "Search Ground ---> Pick up items on the ground \n North, South, East, West ---> Walk in direction written\n" + "Run ---> If you're in combat, get out of combat", "Dawnbarrow Commands");
 
             }
             else
@@ -576,19 +580,26 @@ namespace Dawnbarrow
                 Player.cheat();
             }
             else
-            if ((input.Contains("Mine") || input.Contains("Smash rocks")) && (Player.hasPickaxe = true))
-            {
-                response = $"There is nothing to mine or smash";
-            }
-            else
-            if ((input.Contains("Mine") || input.Contains("Smash rocks")) && (Player.hasPickaxe = false))
+            if ((input.Contains("Mine") || input.Contains("Smash rocks") || input.Contains("mine") && (Player.hasPickaxe = false)))
             {
                 response = $"You have nothing with which to mine or smash things with";
+            }
+            else
+            if ((input.Contains("Mine") || input.Contains("Smash rocks") || input.Contains ("mine")) && (Player.hasPickaxe = true))
+            {
+                response = $"There is nothing to mine or smash";
             }
             else
             if ((input.Contains("Mine") || input.Contains("Smash rocks")) && (Player.hasPickaxe = true) && (room.getCurrentRoomCoordinates().x == 4) && (room.getCurrentRoomCoordinates().y == 3))
             {
                 response = $"You smash the rocks into a million pieces, inside the rocks is a key!";
+                Player.giveItem("Boss Key");
+            }
+            else
+            if ((input.Contains("Throw Talking Cat") && (room.getCurrentRoomCoordinates().x == 5) && (room.getCurrentRoomCoordinates().y == 4)))
+            {
+                response = "The dragon ddn't like that at all, the cat scratches the ferocious beasts eyes!";
+                enemy.enemyCHP -= 100;
             }
             else
             {
@@ -605,7 +616,7 @@ namespace Dawnbarrow
 
             output += Player.playerTurn(enemy.currentEnemy, enemy.enemyArmor) + "\n";
             enemy.enemyCHP -= Player.playerDmg(enemy.enemyArmor);
-            output += "The enemy has" + enemy.enemyCHP + "/" + enemy.enemyHP + "Hit Points Remaining \n";
+            output += "The enemy " + enemy.currentEnemy + " has " + enemy.enemyCHP + "/" + enemy.enemyHP + "Hit Points Remaining \n";
 
             if (enemy.enemyCHP <= 0)
             {

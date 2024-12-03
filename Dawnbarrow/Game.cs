@@ -52,9 +52,9 @@ namespace Dawnbarrow
             //18 INDICES 17 ****3,4
             "The grasslands hum a quiet tone as you take in your surroundings. It's darker here, and the smoke is only enveloping you more and more. Soon you can't see in front of you. You manage to gasp a breath of black fog, a feeling of danger is present. A Cerberus stands before you... and it's staring at you menacingly.",
             //19 INDICES 18 ****4,4
-            "alrighty",
+            "The cavernous den is lit only by a few sparks of static electricity brewing from the stalagmites and stalagtites in the room. You're surrounded by pitch black. You don't know what to do here, but it seems like there's something UP in here",
             //20 INDICES 19 ****5,4
-            "friends,",
+            "Ahead lies a giant door, you need a key to open it, there's not much here to do without it, I suggest turning back if you don't have it, just make sure you don't head south at the signpost by accident!",
             //21 INDICES 20 ****1,5
             "In all of my years of narrating games, I have never seen such a wonderful forest, I am legitimately mesmerized once again, if only you could stop grinding xp for one second, you too could take in the beautiful scenery that is the Dawnbarrow forest, and you could see that the goblins that reside here aren't so bad once you've slain a few they've been known to hide things in areas like these, but I wouldn't pay it much mind. I just think that if you you could just see that there is a vast world out there, and that you can explore OTHER areas of Dawnbarrow, instead of camping out in the area that the developers intentionally made easier than the rest of the game.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n                                                                                                                                                   \n I'll tell you what, why don't you go somewhere else for a change, I'll forgive you if you leave the forest.",
             //22 INDICES 21 ****2,5
