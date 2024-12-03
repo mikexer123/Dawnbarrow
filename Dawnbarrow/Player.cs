@@ -354,63 +354,64 @@ namespace Dawnbarrow
          if (HeadEquipped == "Leather Helmet +1")
             {
                 headArmor = 1;
-                maxhealth += 25;
+                
             }
          if (HeadEquipped == "Iron Helmet +2")
             {
                 headArmor = 2;
-                maxhealth += 50;
+                
             }
          if (HeadEquipped == "Topaz Helmet +3")
             {
                 headArmor = 3;
-                maxhealth += 75;
+                
             }
          if (HeadEquipped == "Savior Helmet +4")
             {
                 headArmor = 4;
-                maxhealth += 100;
+                
             }    
          if (ChestEquipped == "Leather Helmet +1")
             {
                 chestArmor = 1;
-                maxhealth += 25;
+              
 
             }
          if (ChestEquipped == "Iron Chestplate +2")
             {
                 chestArmor = 2;
-                maxhealth += 50;
+                
             }
          if (ChestEquipped == "Topaz Chestplate +3")
             {
                 chestArmor = 3;
-                maxhealth += 75;
+                
             }
          if (ChestEquipped == "Savior Chestplate +4")
             {
                 chestArmor = 4;
-                maxhealth += 100;
+                
             }
          if (LegsEquipped == "Leather Leggings +1")
             {
                 legArmor = 1;
-                maxhealth += 25;
+               
+
             }
          if (LegsEquipped == "Iron Leggings +2")
             {
                 legArmor = 2;
-                maxhealth += 50;
+                
             }
          if (LegsEquipped == "Topaz Leggings +3")
             {
                 legArmor = 3;
-                maxhealth += 75;
+               
             }
          if (LegsEquipped == "Savior Leggings +4")
             {
                 legArmor = 4;
-                maxhealth += 100;
+                
             }
 
                 armor = headArmor + chestArmor + legArmor;

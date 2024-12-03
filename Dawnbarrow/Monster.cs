@@ -82,7 +82,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "Large Spider";
-                enemyxpgiven = rangeCalc(1, 5);
+                enemyxpgiven = rangeCalc(20, 200);
                 desc = "\" This spider is actually terrifying, but he's still just a spider right? RIGHT? There's no way you'll lose to a spider? You're meant to be the savior of Dawnbarrow not the sissy who ran from danger.\"";
                 placedObject = "Leather Leggings +1";
             }
@@ -96,7 +96,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = rangeCalc(1,2);
                 currentEnemy = "Zombie";
-                enemyxpgiven = rangeCalc(1, 5);
+                enemyxpgiven = rangeCalc(20, 200);
                 desc = "I hope it's clear now that you should only be using this part of the game as an exploration tool, and that by NO means should you search on the ground after defeating this zombie";
                 placedObject = "Iron Sword +1";
             }
@@ -138,7 +138,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "Kappa";
-                enemyxpgiven = rangeCalc(1, 5);
+                enemyxpgiven = rangeCalc(20, 200);
                 placedObject = "Iron Leggings +2";
                 desc = "An evil river monster appears, and he is not up for small chat";
 
@@ -152,8 +152,9 @@ namespace Dawnbarrow
                 enemyCHP = 10;
                 enemyArmor = 1;
                 enemyDamage = 1;
-                currentEnemy = "rat";
-                enemyxpgiven = rangeCalc(1, 5);
+                currentEnemy = "Skeleton";
+                desc = "Spooky Scary Skeletons send shivers down my spine";
+                enemyxpgiven = rangeCalc(20, 200);
                 placedObject = "Iron Chestplate +2";
             }
             else
@@ -166,7 +167,7 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "Ghoul";
-                enemyxpgiven = rangeCalc(1, 5);
+                enemyxpgiven = rangeCalc(20, 200);
                 desc = "This ghoul looks hungry for cats, you can hear him purring as cats do, I think there is only ONE thing to do here, put this sick monster out of it's misery.";
                 placedObject = "Talking Cat";
             }
@@ -180,21 +181,22 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "rat";
-                enemyxpgiven = rangeCalc(1, 5);
+                enemyxpgiven = rangeCalc(20, 200);
                 placedObject = "Topaz Leggings +3";
             }
             else
-            //3,2
+            //3,2 BOSS CHIMERA SAVIOR CHESTPLATE LOCATION
             if ((x == 3) && (y == 2))
             {
                 isdefeated = false;
-                enemyHP = 50;
-                enemyCHP = 50;
+                enemyHP = 200;
+                enemyCHP = 200;
                 enemyArmor = 3;
                 enemyDamage = 1;
-                currentEnemy = "rat";
-                enemyxpgiven = rangeCalc(1, 5);
-                placedObject = "Iron Helmet +2";
+                currentEnemy = "Chimera";
+                desc = "An amalgamation of different creatures you're sure you've seen before are melded into one super creature. Staring in its many faces crying in agony, you notice that this creature has as many legs, tails, and arms as it does eyes.";
+                enemyxpgiven = rangeCalc(200, 500);
+                placedObject = "Savior Chestplate +4";
             }
             else
             //3,3
@@ -205,8 +207,8 @@ namespace Dawnbarrow
                 enemyCHP = 10;
                 enemyArmor = 1;
                 enemyDamage = 1;
-                currentEnemy = "rat";
-                enemyxpgiven = rangeCalc(1, 5);
+                currentEnemy = "River sprite";
+                enemyxpgiven = rangeCalc(1, 200);
                 placedObject = "Topaz Sword +3";
             }
             else
@@ -214,12 +216,12 @@ namespace Dawnbarrow
             if ((x == 3) && (y == 4))
             {
                 isdefeated = false;
-                enemyHP = 50;
-                enemyCHP = 50;
+                enemyHP = 200;
+                enemyCHP = 200;
                 enemyArmor = 2;
                 enemyDamage = rangeCalc(1,12);
                 currentEnemy = "Cerberus";
-                enemyxpgiven = rangeCalc(100, 500);
+                enemyxpgiven = rangeCalc(200, 500);
                 placedObject = "Savior Sword +4";
                 desc = "*This creature is a hulking mass of 3 heads, it's clear that he doesn't like you, and that each head functions independently of each other, almost as if they were 3 mean dogs that were forced to be together for all of eternity.";
             }
@@ -234,7 +236,7 @@ namespace Dawnbarrow
                 enemyDamage = 1;
                 currentEnemy = "Giant Prarie Dog";
                 desc = "The menacing Prarie Dog has an irrational anger towards you for laughing at his brethren. There's something caught around his neck! His razor sharp fangs look deadly and are best dealt with using a blade of your own!";
-                enemyxpgiven = rangeCalc(1, 10);
+                enemyxpgiven = rangeCalc(1, 55);
                 placedObject = "Friendship Bracelet";
             }
             else
@@ -242,48 +244,52 @@ namespace Dawnbarrow
                 if ((x == 4) && (y == 1))
             {
                 isdefeated = false;
-                enemyHP = 10;
-                enemyCHP = 10;
-                enemyArmor = 1;
-                enemyDamage = 1;
-                currentEnemy = "rat";
-                enemyxpgiven = rangeCalc(1, 5);
+                enemyHP = 200;
+                enemyCHP = 200;
+                enemyArmor = 3;
+                enemyDamage = 3;
+                currentEnemy = "Ocean Monster";
+                desc = "We're getting really creative with these monster names are we not?";
+                enemyxpgiven = rangeCalc(1, 200);
             }
             else
             //4,2
                 if ((x == 4) && (y == 2))
             {
                 isdefeated = false;
-                enemyHP = 10;
-                enemyCHP = 10;
+                enemyHP = 40;
+                enemyCHP = 40;
                 enemyArmor = 1;
                 enemyDamage = 1;
-                currentEnemy = "rat";
-                enemyxpgiven = rangeCalc(1, 5);
+                currentEnemy = "Giant Starfish";
+                desc = "Wow, how original, a sea creature, but it's BIGGER";
+                enemyxpgiven = rangeCalc(1, 200);
             }
             else
             //4,3
                 if ((x == 4) && (y == 3))
             {
                 isdefeated = false;
-                enemyHP = 10;
-                enemyCHP = 10;
+                enemyHP = 120;
+                enemyCHP = 120;
                 enemyArmor = 1;
                 enemyDamage = 1;
-                currentEnemy = "rat";
-                enemyxpgiven = rangeCalc(1, 5);
+                currentEnemy = "NOT a Rock Lobster";
+                desc = "This creature COULD have been a Rock Lobster, but it seems like he is fixated on NOT being a rock lobster";
+                enemyxpgiven = rangeCalc(20, 200);
             }
             else
             //4,4
                 if ((x == 4) && (y == 4))
             {
                 isdefeated = false;
-                enemyHP = 10;
-                enemyCHP = 10;
-                enemyArmor = 1;
-                enemyDamage = 1;
-                currentEnemy = "rat";
-                enemyxpgiven = rangeCalc(1, 5);
+                enemyHP = 100;
+                enemyCHP = 100;
+                enemyArmor = 3;
+                enemyDamage = 4;
+                currentEnemy = "Rock Lobster";
+                desc = "Anyone can be a Rock Lobster if they set their mind to it. Be a little careful here";
+                enemyxpgiven = rangeCalc(20, 200);
             }
             else
             //4,5 PICKAXE
@@ -295,7 +301,8 @@ namespace Dawnbarrow
                 enemyArmor = 1;
                 enemyDamage = 1;
                 currentEnemy = "Goblin";
-                enemyxpgiven = rangeCalc(1, 5);
+                desc = "You really want that pickaxe, and the only thing standing between you and that pickaxe is this goblin!";
+                enemyxpgiven = rangeCalc(20, 200);
                 placedObject = "Pickaxe";
             }
             else
@@ -303,12 +310,14 @@ namespace Dawnbarrow
             if ((x == 5) && (y == 1))
             {
                 isdefeated = false;
-                enemyHP = 10;
-                enemyCHP = 10;
-                enemyArmor = 1;
-                enemyDamage = 1;
-                currentEnemy = "rat";
-                enemyxpgiven = rangeCalc(1, 5);
+                enemyHP = 200;
+                enemyCHP = 200;
+                enemyArmor = rangeCalc(2,4);
+                enemyDamage = rangeCalc(5,10);
+                currentEnemy = "Hydra";
+                desc = "*The hydra is unafraid of you, and even though he is stuck in the ocean, his reach feels MUCH longer, as if he could pick up the entire beach and throw it at you.";
+                enemyxpgiven = rangeCalc(200, 500);
+                placedObject = "Savior Leggings +4";
             }
             else
             //5,2
@@ -319,32 +328,35 @@ namespace Dawnbarrow
                 enemyCHP = 10;
                 enemyArmor = 1;
                 enemyDamage = 1;
-                currentEnemy = "rat";
-                enemyxpgiven = rangeCalc(1, 5);
+                currentEnemy = "Coward";
+                enemyxpgiven = rangeCalc(1, 1);
+                desc = "Nice try trying to fight here you COWARD, you must feel really proud of yourself, I bet you can beat this other COWARD";
             }
             //5,3
             else
                 if ((x == 5) && (y == 3))
             {
                 isdefeated = false;
-                enemyHP = 10;
-                enemyCHP = 10;
+                enemyHP = 5;
+                enemyCHP = 5;
                 enemyArmor = 1;
                 enemyDamage = 1;
-                currentEnemy = "rat";
-                enemyxpgiven = rangeCalc(1, 5);
+                currentEnemy = "Signpost";
+                desc = "***The signpost @ the fork in the road reads \"Only cowards take the southern path\"";
+                enemyxpgiven = rangeCalc(1000, 1000);
             }
             else
             //5,4
                 if ((x == 5) && (y == 4))
             {
                 isdefeated = false;
-                enemyHP = 10;
-                enemyCHP = 10;
+                enemyHP = 500;
+                enemyCHP = 500;
                 enemyArmor = 1;
                 enemyDamage = 1;
-                currentEnemy = "rat";
-                enemyxpgiven = rangeCalc(1, 5);
+                currentEnemy = "DRAGON";
+                desc = "*THIS IS IT, THE FINAL FIGHT, WELCOME TO THE THUNDERDOME, THIS GIGANTIC DRAGON IS THE HECKIN SCARIEST THING KNOWN TO MAN, BE CAREFUL BRAVE ADVENTURER";
+                enemyxpgiven = rangeCalc(20, 200);
             }
             else
             //5,5
@@ -369,7 +381,7 @@ namespace Dawnbarrow
                 enemyArmor = 2;
                 enemyDamage = 2;
                 currentEnemy = "YOU SHOULD NOT BE HERE";
-                enemyxpgiven = rangeCalc(1, 5);
+                enemyxpgiven = rangeCalc(20, 200);
             }
 
         }

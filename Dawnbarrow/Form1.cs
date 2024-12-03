@@ -127,10 +127,11 @@ namespace Dawnbarrow
             label1.Text = whereami + room.getCurrentRoomCoordinates().ToString();
 
 
-            updatelabels();
+            
             InputBox.Clear();
             Player.calculateArmor();
             updateBackground();
+            updatelabels();
 
 
 
@@ -283,48 +284,65 @@ namespace Dawnbarrow
                 if (((input.Contains("Leather Leggings")) || input.Contains("leather leggings")) && (Player.hasLeatherLeggings == true))// Leather leggings
                 {
                     response = "You equip Leather Leggings";
+                    Player.currentHealth += 25;
+                    Player.maxhealth += 25;
                     Player.LegsEquipped = "Leather Leggings +1";
                 }
                 else
                 if (((input.Contains("Iron Leggings")) || input.Contains("iron leggings")) && (Player.hasIronLeggings == true))//Iron Leggings
                 {
                     response = "You equip Iron Leggings";
+                    Player.currentHealth += 50;
+                    Player.maxhealth += 50;
                     Player.LegsEquipped = "Iron Leggings +2";
                 }
                 else
                 if (((input.Contains("Topaz Leggings")) || input.Contains("topaz leggings")) && (Player.hasTopazLeggings == true))// Topaz Leggings
                 {
                     response = "You equip Topaz Leggings";
+                    Player.currentHealth += 75;
+                    Player.maxhealth += 75;
                     Player.LegsEquipped = "Topaz Leggings +3";
                 }
                 else
                 if (((input.Contains("Savior Leggings")) || input.Contains("savior leggings")) && (Player.hasSaviorLeggings == true)) // Savior Leggings
                 {
                     response = "You equip Savior Leggings +4";
+                    Player.currentHealth += 100;
+                    Player.maxhealth += 100;
                     Player.LegsEquipped = "Savior Leggings +4";
                 }
                 else
                 if (((input.Contains("Leather Chestplate")) || input.Contains("leather chestplate")) && (Player.hasLeatherChestplate == true)) // Leather Chestplate
                 {
                     response = "You equip Leather Chestplate";
+                    Player.currentHealth += 25;
+                    Player.maxhealth += 25;
                     Player.ChestEquipped = "Leather Chestplate +1";
                 }
                 else
                 if (((input.Contains("Iron Chestplate")) || input.Contains("iron chestplate")) && (Player.hasIronChestplate == true))//Iron Chestplate
                 {
                     response = "You equip Iron Chestplate";
+                    Player.currentHealth += 50;
+                    Player.maxhealth += 50;
                     Player.ChestEquipped = "Iron Chestplate +2";
+                   
                 }
                 else
                 if (((input.Contains("topaz chestplate")) || input.Contains("Topaz Chestplate")) && (Player.hasTopazChestplate == true)) //Topaz Chestplate
                 {
                     response = "You equip Topaz Chestplate";
+                    Player.currentHealth += 75;
+                    Player.maxhealth += 75;
                     Player.ChestEquipped = "Topaz Chestplate +3";
                 }
                 else
                 if (((input.Contains("savior chestplate")) || input.Contains("Savior Chestplate")) && (Player.hasSaviorChestplate == true)) //Savior Chestplate
                 {
                     response = "You equip Savior Chestplate";
+                    Player.currentHealth += 100;
+                    Player.maxhealth += 100;
                     Player.ChestEquipped = "Savior Chestplate +4";
                 }
                 else
@@ -332,24 +350,43 @@ namespace Dawnbarrow
                 {
                     response = "You equip Leather Helmet +1";
                     Player.HeadEquipped = "Leather Helmet +1";
+                    Player.currentHealth += 25;
+                    Player.maxhealth += 25;
                 }
                 else
                 if (((input.Contains("Iron Helmet")) || input.Contains("iron helmet")) && (Player.hasIronHelmet == true)) //Iron Helmet
                 {
                     response = "You equip Iron Helmet +2";
                     Player.HeadEquipped = "Iron Helmet +2";
+                    Player.currentHealth += 50;
+                    Player.maxhealth += 50;
                 }
                 else
                 if (((input.Contains("topaz helmet")) || input.Contains("Topaz Helmet")) && (Player.hasTopazHelmet == true)) //Topaz Helmet
                 {
-                    response = "You equip topaz sword";
+                    response = "You equip Topaz Helmet +3";
+                    Player.currentHealth += 75;
+                    Player.maxhealth += 75;
                     Player.HeadEquipped = "Topaz Helmet +3";
                 }
                 else
                 if (((input.Contains("savior helmet")) || input.Contains("Savior Helmet")) && (Player.hasSaviorHelmet == true)) // Savior Helmet
                 {
                     response = "You equip savior Helmet";
+                    Player.currentHealth += 100;
+                    Player.maxhealth += 100;
                     Player.HeadEquipped = "Savior Helmet +4";
+                }
+                else
+                if (input.Contains("savior set"))
+                {
+                    response = "You equip the savior set";
+                    Player.HeadEquipped = "Savior Helmet +4";
+                    Player.ChestEquipped = "Savior Chestplate +4";
+                    Player.LegsEquipped = "Savior Leggings +4";
+                    Player.WeaponEquipped = "Savior Sword +4";
+                    Player.currentHealth += 400;
+                    Player.maxhealth += 400;
                 }
                 else
                 {
@@ -387,73 +424,107 @@ namespace Dawnbarrow
                 if (((input.Contains("Leather Leggings")) || input.Contains("leather leggings")) && (Player.LegsEquipped == "Leather Leggings +1"))// Leather leggings
                 {
                     response = "You unequip Leather Leggings";
+                    Player.currentHealth -= 25;
+                    Player.maxhealth -= 25;
                     Player.LegsEquipped = "nothing";
                 }
                 else
                 if (((input.Contains("Iron Leggings")) || input.Contains("iron leggings")) && (Player.LegsEquipped == "Iron Leggings +2"))//Iron Leggings
                 {
                     response = "You unequip Iron Leggings";
+                    Player.currentHealth -= 50;
+                    Player.maxhealth -= 50;
                     Player.LegsEquipped = "nothing";
                 }
                 else
                 if (((input.Contains("Topaz Leggings")) || input.Contains("topaz leggings")) && (Player.LegsEquipped == "Topaz Leggings +3"))// Topaz Leggings
                 {
                     response = "You unequip Topaz Leggings";
+                    Player.currentHealth -= 75;
+                    Player.maxhealth -= 75;
                     Player.LegsEquipped = "nothing";
                 }
                 else
                 if (((input.Contains("Savior Leggings")) || input.Contains("savior leggings")) && (Player.LegsEquipped == "Savior Leggings +4")) // Savior Leggings
                 {
                     response = "You unequip Savior Leggings";
+                    Player.currentHealth -= 100;
+                    Player.maxhealth -= 100;
                     Player.LegsEquipped = "nothing";
                 }
                 else
                 if (((input.Contains("Leather Chestplate")) || input.Contains("leather chestplate")) && (Player.ChestEquipped == "Leather Chestplate +1")) // Leather Chestplate
                 {
                     response = "You unequip Leather Chestplate";
+                    Player.currentHealth -= 25;
+                    Player.maxhealth -= 25;
                     Player.ChestEquipped = "nothing";
                 }
                 else
                 if (((input.Contains("Iron Chestplate")) || input.Contains("iron chestplate")) && (Player.ChestEquipped == "Iron Chestplate +2"))//Iron Chestplate
                 {
                     response = "You unequip Iron Chestplate";
+                    Player.currentHealth -= 50;
+                    Player.maxhealth -= 50;
                     Player.ChestEquipped = "nothing";
                 }
                 else
                 if (((input.Contains("topaz chestplate")) || input.Contains("Topaz Chestplate")) && (Player.ChestEquipped == "Topaz Chestplate +3")) //Topaz Chestplate
                 {
                     response = "You unequip Topaz Chestplate";
+                    Player.currentHealth -= 75;
+                    Player.maxhealth -= 75;
                     Player.ChestEquipped = "nothing";
                 }
                 else
                 if (((input.Contains("savior chestplate")) || input.Contains("Savior Chestplate")) && (Player.ChestEquipped == "Savior Chestplate +4")) //Savior Chestplate
                 {
                     response = "You unequip Savior Chestplate";
+                    Player.currentHealth -= 100;
+                    Player.maxhealth -= 100;
                     Player.ChestEquipped = "nothing";
                 }
                 else
                 if (((input.Contains("Leather Helmet")) || input.Contains("leather helmet")) && (Player.HeadEquipped == "Leather Helmet +1")) //Leather Helmet
                 {
                     response = "You unequip Leather Helmet";
+                    Player.currentHealth -= 25;
+                    Player.maxhealth -= 25;
                     Player.HeadEquipped = "nothing";
                 }
                 else
                 if (((input.Contains("Iron Helmet")) || input.Contains("iron helmet")) && (Player.HeadEquipped == "Iron Helmet +2")) //Iron Helmet
                 {
                     response = "You unequip Iron Helmet";
+                    Player.currentHealth -= 50;
+                    Player.maxhealth -= 50;
                     Player.HeadEquipped = "nothing";
                 }
                 else
                 if (((input.Contains("topaz helmet")) || input.Contains("Topaz Helmet")) && (Player.HeadEquipped == "Topaz Helmet +3")) //Topaz Helmet
                 {
                     response = "You unequip Topaz Helmet";
+                    Player.currentHealth -= 75;
+                    Player.maxhealth -= 75;
                     Player.HeadEquipped = "nothing";
                 }
                 else
                 if (((input.Contains("savior helmet")) || input.Contains("Savior Helmet")) && (Player.HeadEquipped == "Savior Helmet +4")) // Savior Helmet
                 {
                     response = "You unequip Savior Helmet";
+                    Player.currentHealth -= 100;
+                    Player.maxhealth -= 100;
                     Player.HeadEquipped = "nothing";
+                }
+                if (input.Contains("savior set"))
+                {
+                    response = "You unequip the savior set";
+                    Player.HeadEquipped = "nothing";
+                    Player.ChestEquipped = "nothing";
+                    Player.LegsEquipped = "nothing";
+                    Player.WeaponEquipped = "nothing";
+                    Player.currentHealth -= 400;
+                    Player.maxhealth -= 400;
                 }
                 else
                 {
@@ -473,8 +544,7 @@ namespace Dawnbarrow
                 MessageBox.Show(" Look around ---> gain more information about your surroundings \n Gender (gender) ---> input your gender \n name (name) ---> Input your name \n " +
                     "Fight ---> Fight the current monster in the room \n Hit ---> Hit the current monster (must first be fighting) \n check self ---> learn more information about yourself \n" +
                     " Inventory ---> look at your inventory \n equip (item) ---> toggle current equipment \n " +
-                    "Search Ground ---> Pick up items on the ground \n North, South, East, West ---> Walk in direction written", "Dawnbarrow Commands \n" +
-                    "Run ---> If you're in combat, get out of combat");
+                    "Search Ground ---> Pick up items on the ground \n North, South, East, West ---> Walk in direction written" + "Run ---> If you're in combat, get out of combat", "Dawnbarrow Commands");
 
             }
             else

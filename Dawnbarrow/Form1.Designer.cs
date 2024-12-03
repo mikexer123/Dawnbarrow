@@ -67,6 +67,7 @@ namespace Dawnbarrow
             // 
             ConsoleOut.AcceptsTab = true;
             ConsoleOut.BackColor = Color.Black;
+            ConsoleOut.BorderStyle = BorderStyle.FixedSingle;
             ConsoleOut.EnableAutoDragDrop = true;
             ConsoleOut.Font = new Font("Consolas", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ConsoleOut.ForeColor = SystemColors.ActiveCaption;
@@ -75,19 +76,21 @@ namespace Dawnbarrow
             ConsoleOut.Margin = new Padding(3, 2, 3, 2);
             ConsoleOut.Name = "ConsoleOut";
             ConsoleOut.ReadOnly = true;
-            ConsoleOut.Size = new Size(1322, 455);
+            ConsoleOut.ScrollBars = RichTextBoxScrollBars.Vertical;
+            ConsoleOut.Size = new Size(1579, 578);
             ConsoleOut.TabIndex = 0;
             ConsoleOut.Text = resources.GetString("ConsoleOut.Text");
+            ConsoleOut.UseWaitCursor = true;
             ConsoleOut.TextChanged += ConsoleOut_TextChanged;
             // 
             // InputBox
             // 
             InputBox.Font = new Font("Consolas", 15F);
-            InputBox.Location = new Point(12, 762);
+            InputBox.Location = new Point(9, 885);
             InputBox.Margin = new Padding(3, 2, 3, 2);
             InputBox.Multiline = true;
             InputBox.Name = "InputBox";
-            InputBox.Size = new Size(1322, 39);
+            InputBox.Size = new Size(1582, 39);
             InputBox.TabIndex = 1;
             InputBox.Text = "Click To Type Here";
             InputBox.MouseClick += InputBox_MouseClick;
@@ -96,7 +99,7 @@ namespace Dawnbarrow
             // submit_button
             // 
             submit_button.Font = new Font("Rockwell Extra Bold", 9F);
-            submit_button.Location = new Point(1354, 578);
+            submit_button.Location = new Point(1597, 709);
             submit_button.Margin = new Padding(3, 2, 3, 2);
             submit_button.Name = "submit_button";
             submit_button.Size = new Size(118, 215);
@@ -120,7 +123,7 @@ namespace Dawnbarrow
             // pictureBox1
             // 
             pictureBox1.BackColor = Color.Blue;
-            pictureBox1.Location = new Point(1354, 144);
+            pictureBox1.Location = new Point(1597, 217);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(118, 429);
             pictureBox1.TabIndex = 5;
@@ -131,7 +134,7 @@ namespace Dawnbarrow
             PlayerHP.AutoSize = true;
             PlayerHP.BackColor = Color.LightCoral;
             PlayerHP.Font = new Font("SimSun-ExtB", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            PlayerHP.Location = new Point(958, 122);
+            PlayerHP.Location = new Point(1061, 107);
             PlayerHP.Name = "PlayerHP";
             PlayerHP.Size = new Size(124, 28);
             PlayerHP.TabIndex = 6;
@@ -142,7 +145,7 @@ namespace Dawnbarrow
             XP.AutoSize = true;
             XP.BackColor = Color.LightCoral;
             XP.Font = new Font("SimSun-ExtB", 16F);
-            XP.Location = new Point(958, 80);
+            XP.Location = new Point(1061, 66);
             XP.Name = "XP";
             XP.Size = new Size(152, 27);
             XP.TabIndex = 7;
@@ -153,7 +156,7 @@ namespace Dawnbarrow
             Background.Image = Properties.Resources._11;
             Background.Location = new Point(0, 0);
             Background.Name = "Background";
-            Background.Size = new Size(952, 298);
+            Background.Size = new Size(1060, 298);
             Background.TabIndex = 8;
             Background.TabStop = false;
             Background.Click += Background_Click;
@@ -171,7 +174,7 @@ namespace Dawnbarrow
             NGL.AutoSize = true;
             NGL.BackColor = Color.LightCoral;
             NGL.Font = new Font("SimSun-ExtB", 16F);
-            NGL.Location = new Point(958, 39);
+            NGL.Location = new Point(1061, 9);
             NGL.Name = "NGL";
             NGL.Size = new Size(278, 27);
             NGL.TabIndex = 11;
@@ -182,7 +185,7 @@ namespace Dawnbarrow
             Equip.AutoSize = true;
             Equip.BackColor = Color.LightCoral;
             Equip.Font = new Font("SimSun-ExtB", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Equip.Location = new Point(958, 164);
+            Equip.Location = new Point(1061, 149);
             Equip.Name = "Equip";
             Equip.Size = new Size(236, 28);
             Equip.TabIndex = 12;
@@ -191,7 +194,7 @@ namespace Dawnbarrow
             // Pickaxe
             // 
             Pickaxe.Image = Properties.Resources.EmptyQuest;
-            Pickaxe.Location = new Point(1367, 361);
+            Pickaxe.Location = new Point(1606, 405);
             Pickaxe.Name = "Pickaxe";
             Pickaxe.Size = new Size(42, 38);
             Pickaxe.TabIndex = 13;
@@ -200,7 +203,7 @@ namespace Dawnbarrow
             // Ladder
             // 
             Ladder.Image = Properties.Resources.EmptyQuest;
-            Ladder.Location = new Point(1415, 361);
+            Ladder.Location = new Point(1660, 405);
             Ladder.Name = "Ladder";
             Ladder.Size = new Size(42, 38);
             Ladder.TabIndex = 14;
@@ -209,7 +212,7 @@ namespace Dawnbarrow
             // TalkingCat
             // 
             TalkingCat.Image = Properties.Resources.EmptyQuest;
-            TalkingCat.Location = new Point(1367, 405);
+            TalkingCat.Location = new Point(1606, 449);
             TalkingCat.Name = "TalkingCat";
             TalkingCat.Size = new Size(42, 38);
             TalkingCat.TabIndex = 15;
@@ -218,7 +221,7 @@ namespace Dawnbarrow
             // BossKey
             // 
             BossKey.Image = Properties.Resources.EmptyQuest;
-            BossKey.Location = new Point(1415, 405);
+            BossKey.Location = new Point(1660, 449);
             BossKey.Name = "BossKey";
             BossKey.Size = new Size(42, 38);
             BossKey.TabIndex = 16;
@@ -227,7 +230,7 @@ namespace Dawnbarrow
             // FriendshipBracelet
             // 
             FriendshipBracelet.Image = Properties.Resources.EmptyQuest;
-            FriendshipBracelet.Location = new Point(1395, 449);
+            FriendshipBracelet.Location = new Point(1630, 493);
             FriendshipBracelet.Name = "FriendshipBracelet";
             FriendshipBracelet.Size = new Size(42, 38);
             FriendshipBracelet.TabIndex = 17;
@@ -237,7 +240,7 @@ namespace Dawnbarrow
             // 
             Helmet.BackColor = Color.Blue;
             Helmet.Image = Properties.Resources.EHelm;
-            Helmet.Location = new Point(1394, 217);
+            Helmet.Location = new Point(1621, 236);
             Helmet.Name = "Helmet";
             Helmet.Size = new Size(51, 45);
             Helmet.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -248,7 +251,7 @@ namespace Dawnbarrow
             // 
             Chestplate.BackColor = Color.Blue;
             Chestplate.Image = Properties.Resources.EChest;
-            Chestplate.Location = new Point(1367, 254);
+            Chestplate.Location = new Point(1597, 287);
             Chestplate.Name = "Chestplate";
             Chestplate.Size = new Size(105, 44);
             Chestplate.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -259,7 +262,7 @@ namespace Dawnbarrow
             // 
             Leggings.BackColor = Color.Blue;
             Leggings.Image = Properties.Resources.ELegs__1_;
-            Leggings.Location = new Point(1379, 297);
+            Leggings.Location = new Point(1606, 337);
             Leggings.Name = "Leggings";
             Leggings.Size = new Size(78, 57);
             Leggings.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -272,7 +275,7 @@ namespace Dawnbarrow
             AutoScaleDimensions = new SizeF(8F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.RosyBrown;
-            ClientSize = new Size(1484, 804);
+            ClientSize = new Size(1727, 935);
             Controls.Add(Leggings);
             Controls.Add(Chestplate);
             Controls.Add(Helmet);
