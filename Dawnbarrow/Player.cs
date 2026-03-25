@@ -149,7 +149,7 @@ namespace Dawnbarrow
             }
             if (item == "Iron Helmet +2")
             {
-                hasLeatherHelmet = true;
+                hasIronHelmet = true;
             }
             if (item == "Topaz Helmet +3")
             {
@@ -208,7 +208,7 @@ namespace Dawnbarrow
             }
             if (item == "Savior Sword +4")
             {
-                hasTopazSword = true;
+                hasSaviorSword = true;
             }
             //Quest Item
             if (item == "Ladder")
@@ -371,7 +371,7 @@ namespace Dawnbarrow
                 headArmor = 4;
                 
             }    
-         if (ChestEquipped == "Leather Helmet +1")
+         if (ChestEquipped == "Leather Chestplate +1")
             {
                 chestArmor = 1;
               

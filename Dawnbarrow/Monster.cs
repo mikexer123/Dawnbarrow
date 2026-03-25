@@ -9,6 +9,7 @@ namespace Dawnbarrow
 {
     internal class Enemy
     {
+        private readonly Random random = new Random();
         List<string> Boss = new List<string>() { "dragon", "chimera", "hydra", "cerberus", "giant" };
         List<string> Monster = new List<string>() { "rat", "ghoul", "skeleton", "zombie", "spider", "snake", "red ant", "liger", "kappa", "goblin"  };
 
@@ -26,6 +27,86 @@ namespace Dawnbarrow
         public bool needsPickaxe = false;
         public bool needsBossKey = false;
         public bool needsFriendshipBracelet = false;
+        public void ClearEncounter()
+        {
+            enemyHP = 0;
+            enemyCHP = 0;
+            enemyArmor = 0;
+            enemyDamage = 0;
+            currentEnemy = "";
+            enemyxpgiven = 0;
+            desc = "";
+            placedObject = "";
+            isdefeated = false;
+            needsTalkingCat = false;
+            needsLadder = false;
+            needsPickaxe = false;
+            needsBossKey = false;
+            needsFriendshipBracelet = false;
+        }
+
+        public void SpawnExploreEncounter(string biome)
+        {
+            ClearEncounter();
+
+            if (biome.Contains("Forest"))
+            {
+                currentEnemy = random.Next(2) == 0 ? "Wild Rat" : "Forest Spider";
+                enemyHP = rangeCalc(4, 12);
+                enemyArmor = rangeCalc(0, 1);
+                enemyDamage = rangeCalc(1, 3);
+                enemyxpgiven = rangeCalc(3, 15);
+                desc = "Something small but mean rustles in the brush and lunges at you.";
+            }
+            else if (biome.Contains("Jungle"))
+            {
+                currentEnemy = random.Next(2) == 0 ? "Jungle Snake" : "Rotting Ghoul";
+                enemyHP = rangeCalc(8, 18);
+                enemyArmor = rangeCalc(1, 2);
+                enemyDamage = rangeCalc(2, 5);
+                enemyxpgiven = rangeCalc(8, 20);
+                desc = "The thick jungle stirs and something ugly comes crawling out.";
+            }
+            else if (biome.Contains("River"))
+            {
+                currentEnemy = random.Next(2) == 0 ? "River Kappa" : "River Sprite";
+                enemyHP = rangeCalc(8, 16);
+                enemyArmor = rangeCalc(1, 2);
+                enemyDamage = rangeCalc(2, 4);
+                enemyxpgiven = rangeCalc(8, 18);
+                desc = "The water breaks and a wandering river creature takes interest in you.";
+            }
+            else if (biome.Contains("Grassland"))
+            {
+                currentEnemy = random.Next(2) == 0 ? "Prairie Ghoul" : "Grassland Skeleton";
+                enemyHP = rangeCalc(10, 20);
+                enemyArmor = rangeCalc(1, 2);
+                enemyDamage = rangeCalc(2, 5);
+                enemyxpgiven = rangeCalc(10, 24);
+                desc = "Something skulking through the tall grass decides you look worth bothering.";
+            }
+            else if (biome.Contains("Ocean") || biome.Contains("Den"))
+            {
+                currentEnemy = random.Next(2) == 0 ? "Cave Goblin" : "Stray Lobster Thing";
+                enemyHP = rangeCalc(12, 24);
+                enemyArmor = rangeCalc(1, 3);
+                enemyDamage = rangeCalc(3, 6);
+                enemyxpgiven = rangeCalc(12, 28);
+                desc = "Your exploring wakes up something that should have stayed hidden.";
+            }
+            else
+            {
+                currentEnemy = "Wandering Monster";
+                enemyHP = rangeCalc(6, 14);
+                enemyArmor = rangeCalc(0, 2);
+                enemyDamage = rangeCalc(1, 4);
+                enemyxpgiven = rangeCalc(5, 16);
+                desc = "You poke around too much and attract trouble.";
+            }
+
+            enemyCHP = enemyHP;
+            isdefeated = false;
+        }
         public void enemySpawn(int x, int y)
         
         {
@@ -395,7 +476,6 @@ namespace Dawnbarrow
                     throw new ArgumentException("The first parameter (min) must be less than or equal to the second parameter (max).");
                 }
 
-                Random random = new Random();
                 return random.Next(n, n2 + 1);
             }
         }

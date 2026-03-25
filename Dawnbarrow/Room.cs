@@ -12,6 +12,7 @@ namespace Dawnbarrow
     {
         private const int gridWidth = 5;
         private const int gridHeight = 5;
+        private readonly Random random = new Random();
         private (int x, int y) currRoomCoordinates;
         private int[] roomid = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
         private List<Roomdata> rooms;
@@ -266,10 +267,23 @@ namespace Dawnbarrow
         {
             return currRoomCoordinates;
         }
-        public void randomEncounter()
+        public bool randomEncounter()
         {
-            (int x, int y) pos = getCurrentRoomCoordinates();
-            
+            return random.Next(100) < 55;
+        }
+        public bool IsRepeatableEncounterRoom(int x, int y)
+        {
+            if ((x == 1) && (y == 1))
+            {
+                return false;
+            }
+
+            if (((x == 2) && (y == 1)) || ((x == 2) && (y == 5)) || ((x == 3) && (y == 2)) || ((x == 3) && (y == 4)) || ((x == 3) && (y == 5)) || ((x == 4) && (y == 5)) || ((x == 5) && (y == 1)) || ((x == 5) && (y == 2)) || ((x == 5) && (y == 3)) || ((x == 5) && (y == 4)) || ((x == 5) && (y == 5)))
+            {
+                return false;
+            }
+
+            return true;
         }
         public void setCurrentRoom(int x, int y)
         {

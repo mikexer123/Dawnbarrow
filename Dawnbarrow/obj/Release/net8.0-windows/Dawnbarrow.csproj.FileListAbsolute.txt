@@ -34,3 +34,21 @@ C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\obj\Releas
 C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\obj\Release\net8.0-windows\Dawnbarrow.pdb
 C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\obj\Release\net8.0-windows\Dawnbarrow.genruntimeconfig.cache
 C:\Users\mikex\OneDrive\Desktop\IT-145 Bancroft\Dawnbarrow\Dawnbarrow\obj\Release\net8.0-windows\ref\Dawnbarrow.dll
+C:\GitGit\Dawnbarrow\Dawnbarrow\bin\Release\net8.0-windows\Dawnbarrow.exe
+C:\GitGit\Dawnbarrow\Dawnbarrow\bin\Release\net8.0-windows\Dawnbarrow.deps.json
+C:\GitGit\Dawnbarrow\Dawnbarrow\bin\Release\net8.0-windows\Dawnbarrow.runtimeconfig.json
+C:\GitGit\Dawnbarrow\Dawnbarrow\bin\Release\net8.0-windows\Dawnbarrow.dll
+C:\GitGit\Dawnbarrow\Dawnbarrow\bin\Release\net8.0-windows\Dawnbarrow.pdb
+C:\GitGit\Dawnbarrow\Dawnbarrow\obj\Release\net8.0-windows\Dawnbarrow.Dawnbarrow.resources
+C:\GitGit\Dawnbarrow\Dawnbarrow\obj\Release\net8.0-windows\Dawnbarrow.Properties.Resources.resources
+C:\GitGit\Dawnbarrow\Dawnbarrow\obj\Release\net8.0-windows\Dawnbarrow.csproj.GenerateResource.cache
+C:\GitGit\Dawnbarrow\Dawnbarrow\obj\Release\net8.0-windows\Dawnbarrow.GeneratedMSBuildEditorConfig.editorconfig
+C:\GitGit\Dawnbarrow\Dawnbarrow\obj\Release\net8.0-windows\Dawnbarrow.AssemblyInfoInputs.cache
+C:\GitGit\Dawnbarrow\Dawnbarrow\obj\Release\net8.0-windows\Dawnbarrow.AssemblyInfo.cs
+C:\GitGit\Dawnbarrow\Dawnbarrow\obj\Release\net8.0-windows\Dawnbarrow.csproj.CoreCompileInputs.cache
+C:\GitGit\Dawnbarrow\Dawnbarrow\obj\Release\net8.0-windows\Dawnbarrow.sourcelink.json
+C:\GitGit\Dawnbarrow\Dawnbarrow\obj\Release\net8.0-windows\Dawnbarrow.dll
+C:\GitGit\Dawnbarrow\Dawnbarrow\obj\Release\net8.0-windows\refint\Dawnbarrow.dll
+C:\GitGit\Dawnbarrow\Dawnbarrow\obj\Release\net8.0-windows\Dawnbarrow.pdb
+C:\GitGit\Dawnbarrow\Dawnbarrow\obj\Release\net8.0-windows\Dawnbarrow.genruntimeconfig.cache
+C:\GitGit\Dawnbarrow\Dawnbarrow\obj\Release\net8.0-windows\ref\Dawnbarrow.dll

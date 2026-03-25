@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "WDpsf7w2gqk=",
+  "dgSpecHash": "8JXa/p/R0yE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\mikex\\Source\\Repos\\Dawnbarrow\\Dawnbarrow\\Dawnbarrow.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\GitGit\\Dawnbarrow\\Dawnbarrow\\Dawnbarrow.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mikex\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.22\\microsoft.windowsdesktop.app.ref.8.0.22.nupkg.sha512",
+    "C:\\Users\\mikex\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.22\\microsoft.netcore.app.ref.8.0.22.nupkg.sha512",
+    "C:\\Users\\mikex\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.22\\microsoft.aspnetcore.app.ref.8.0.22.nupkg.sha512",
+    "C:\\Users\\mikex\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.22\\microsoft.netcore.app.host.win-x64.8.0.22.nupkg.sha512"
+  ],
   "logs": []
 }
