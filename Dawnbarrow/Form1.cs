@@ -49,13 +49,18 @@ namespace Dawnbarrow
             public int Level { get; set; }
             public double MaxHealth { get; set; }
             public double CurrentHealth { get; set; }
+            public double MaxMana { get; set; }
+            public double CurrentMana { get; set; }
             public int Armor { get; set; }
             public int Damage { get; set; }
+            public int Gold { get; set; }
             public string HeadEquipped { get; set; } = "nothing";
             public string ChestEquipped { get; set; } = "nothing";
             public string LegsEquipped { get; set; } = "nothing";
             public string WeaponEquipped { get; set; } = "nothing";
             public bool IsFighting { get; set; }
+            public bool IsGameOver { get; set; }
+            public bool HasWon { get; set; }
             public double XpToNextLevel { get; set; }
             public double CurrentXp { get; set; }
             public bool HasLadder { get; set; }
@@ -63,7 +68,9 @@ namespace Dawnbarrow
             public bool HasBossKey { get; set; }
             public bool HasTalkingCat { get; set; }
             public bool HasFriendshipBracelet { get; set; }
+            public int FireBombCount { get; set; }
             public bool HasIronSword { get; set; }
+                private readonly List<string> exploreItems = new List<string>() { "Leather Helmet +1", "Leather Chestplate +1", "Leather Leggings +1", "Iron Sword +1", "Iron Helmet +2", "Iron Chestplate +2", "Iron Leggings +2", "Fire Sword +2", "Topaz Helmet +3", "Topaz Chestplate +3", "Topaz Leggings +3", "Topaz Sword +3", "Fire Bomb" };
             public bool HasFireSword { get; set; }
             public bool HasTopazSword { get; set; }
             public bool HasSaviorSword { get; set; }
@@ -89,6 +96,7 @@ namespace Dawnbarrow
             public int EnemyDamage { get; set; }
             public string CurrentEnemy { get; set; } = "";
             public int EnemyXpGiven { get; set; }
+            public int GoldDrop { get; set; }
             public string Description { get; set; } = "";
             public string PlacedObject { get; set; } = "";
             public bool IsDefeated { get; set; }
@@ -175,12 +183,17 @@ namespace Dawnbarrow
             string gameResponse = checkInput(PlayerInput);
             string normalizedDirection = room.direction(PlayerInput);
             bool isMovementCommand = normalizedDirection == "north" || normalizedDirection == "south" || normalizedDirection == "east" || normalizedDirection == "west";
+            bool canMove = Player.isGameOver == false && Player.hasWon == false;
 
             (int x, int y) nextroomCoordinates = room.GetNextRoomIndex(normalizedDirection);
 
 
             {
-                if (isMovementCommand && Player.isFighting == true)
+                if (isMovementCommand && canMove == false)
+                {
+                    outputText = $"{playerAction} \n {gameResponse}";
+                }
+                else if (isMovementCommand && Player.isFighting == true)
                 {
                     outputText = $"{playerAction} \n You legit can't go that way right now you're in a fight, so stop trying to be sneaky, use the run command if you want to leave combat, you sissy!";
                 }
@@ -273,6 +286,16 @@ namespace Dawnbarrow
             if ((Player.playerName == "Emmy") || (Player.playerName == "Emilia") || (Player.playerName == "emmy"))
             {
                 return response + "You share a name with one of the developers girlfriend! If you're her, Mike says \"I love you Emmy, I hope you're not procrastinating!\" \n";
+            }
+
+            if((Player.playerName == "Jojo") || (Player.playerName == "Toulouse"))
+            {
+                return response + "You share a name with one of the cutest cats on the planet! \n";
+            }
+
+            if ((Player.playerName == "Bryant") || (Player.playerName == "Bryant Lanier") || (Player.playerName == "bryant") || (Player.playerName == "bryant lanier") || (Player.playerName == "Brandon Lanier") || (Player.playerName == "brandon lanier") || (Player.playerName == "Brandon") || (Player.playerName == "brandon"))
+            {
+                return response + "You share a name with one of the developers brother's! \n";
             }
 
             return response;
@@ -551,10 +574,329 @@ namespace Dawnbarrow
             return "You don't have a " + itemName + " to unequip";
         }
 
+        private string ResolveEnemyCounterattack()
+        {
+            if (enemy.enemyCHP <= 0)
+            {
+                return "";
+            }
+
+            int monsterDamage = enemy.MonsterDmg(Player.armor);
+            Player.currentHealth -= monsterDamage;
+
+            string output = $"Enemy {enemy.currentEnemy} hits you for {monsterDamage}\n";
+            output += "The player has" + Player.currentHealth + "/" + Player.maxhealth + "Hit Points Remaining \n";
+
+            if (Player.currentHealth <= 0)
+            {
+                Player.currentHealth = 0;
+                Player.isFighting = false;
+                Player.isGameOver = true;
+                output += "You have 0 health remaining. Game Over. Type restart to begin again, or load to restore a save.";
+            }
+
+            return output;
+        }
+
+        private string UseConsumable(string itemName)
+        {
+            if (itemName == "Fire Bomb")
+            {
+                if (Player.fireBombCount <= 0)
+                {
+                    return "You don't have any Fire Bombs left.";
+                }
+
+                if (Player.isFighting == false)
+                {
+                    return "Save the Fire Bomb for a fight unless you're trying to burn your own boots off.";
+                }
+
+                Player.fireBombCount--;
+                int damage = Math.Max(exploreRandom.Next(16, 29) - enemy.enemyArmor, 0);
+                string output = ResolveCombatTechnique("Fire Bomb", damage, 0, "The bomb bursts in a spray of flame and sparks.");
+
+                if (Player.fireBombCount == 0)
+                {
+                    output += "\nThat was your last Fire Bomb.";
+                }
+
+                return output;
+            }
+
+            return $"You can't use {itemName} right now.";
+        }
+
+        private string HandleEnemyDefeat(string enemyName)
+        {
+            string output = "You have sucessfully defeated the enemy!\n";
+            output += Player.experience(enemy.enemyxpgiven);
+            Player.gold += enemy.goldDrop;
+            output += $"You loot {enemy.goldDrop} gold.\n";
+            enemy.isdefeated = true;
+            Player.isFighting = false;
+            defeatedRooms.Add(GetCurrentRoomKey());
+
+            if (enemyName == "Coward")
+            {
+                Player.playerName = "Coward";
+                output += "The shame sticks. Your name is now Coward.\n";
+            }
+
+            if (enemyName == "DRAGON")
+            {
+                Player.hasWon = true;
+                Player.isGameOver = true;
+                output += "The dragon collapses and Dawnbarrow is finally safe. You won.\nType restart to begin again, or save your victory.\n";
+            }
+
+            return output;
+        }
+
+        private string ResolveCombatTechnique(string actionName, int damage, int manaCost, string extraText = "", Action? onHit = null)
+        {
+            if (Player.isFighting == false)
+            {
+                return $"There is nothing here to use {actionName} on.";
+            }
+
+            if (manaCost > 0 && Player.currentMana < manaCost)
+            {
+                return $"You don't have enough mana to use {actionName}.";
+            }
+
+            if (manaCost > 0)
+            {
+                Player.currentMana -= manaCost;
+            }
+
+            string enemyName = enemy.currentEnemy;
+            enemy.enemyCHP -= damage;
+
+            string output = $"You use {actionName} and hit {enemyName} for {damage}!\n";
+            if (string.IsNullOrWhiteSpace(extraText) == false)
+            {
+                output += extraText + "\n";
+            }
+
+            onHit?.Invoke();
+
+            if (enemy.enemyCHP <= 0)
+            {
+                enemy.enemyCHP = 0;
+                output += "The enemy " + enemyName + " has 0/" + enemy.enemyHP + "Hit Points Remaining \n";
+                output += HandleEnemyDefeat(enemyName);
+                return output;
+            }
+
+            output += "The enemy " + enemyName + " has " + enemy.enemyCHP + "/" + enemy.enemyHP + "Hit Points Remaining \n";
+            output += ResolveEnemyCounterattack();
+            return output;
+        }
+
+        private string CastSpell(string lowerInput)
+        {
+            if (lowerInput == "fireball")
+            {
+                int damage = Math.Max(exploreRandom.Next(12, 23) - enemy.enemyArmor, 0);
+                return ResolveCombatTechnique("Fireball", damage, 6, "The fireball explodes against your enemy in a hot burst.");
+            }
+
+            if (lowerInput == "ice ball")
+            {
+                int damage = Math.Max(exploreRandom.Next(8, 17) - enemy.enemyArmor, 0);
+                return ResolveCombatTechnique("Ice Ball", damage, 5, "Frost clings to your foe and dulls its edge.", () =>
+                {
+                    if (enemy.enemyDamage > 1)
+                    {
+                        enemy.enemyDamage--;
+                    }
+                });
+            }
+
+            if (lowerInput == "heal")
+            {
+                if (Player.isFighting == false)
+                {
+                    return "You can patch yourself up later, but there is no battle pressure right now.";
+                }
+
+                if (Player.currentMana < 7)
+                {
+                    return "You don't have enough mana to cast Heal.";
+                }
+
+                Player.currentMana -= 7;
+                double healAmount = exploreRandom.Next(12, 23);
+                Player.currentHealth = Math.Min(Player.maxhealth, Player.currentHealth + healAmount);
+
+                string output = $"You cast Heal and recover {healAmount} health.\n";
+                output += "The player has" + Player.currentHealth + "/" + Player.maxhealth + "Hit Points Remaining \n";
+                output += ResolveEnemyCounterattack();
+                return output;
+            }
+
+            return "That spell fizzles before it even starts.";
+        }
+
+        private string UseSkill(string lowerInput)
+        {
+            if (lowerInput == "bash")
+            {
+                int damage = Math.Max(exploreRandom.Next(6, 13) - enemy.enemyArmor, 0);
+                return ResolveCombatTechnique("Bash", damage, 0, "The impact rattles your enemy and dents its defenses.", () =>
+                {
+                    if (enemy.enemyArmor > 0)
+                    {
+                        enemy.enemyArmor--;
+                    }
+                });
+            }
+
+            if (lowerInput == "slice")
+            {
+                int damage = Math.Max(Player.playerDmg(enemy.enemyArmor) + 4, 0);
+                return ResolveCombatTechnique("Slice", damage, 0, "You follow through with a cleaner, deeper cut.");
+            }
+
+            if (lowerInput == "ultra instinct")
+            {
+                if (Player.isFighting == false)
+                {
+                    return "There is nothing here to go Ultra Instinct against.";
+                }
+
+                if (Player.currentMana < 10)
+                {
+                    return "You don't have enough mana to tap into Ultra Instinct.";
+                }
+
+                Player.currentMana -= 10;
+                int damage = Math.Max(exploreRandom.Next(14, 26) - enemy.enemyArmor, 0);
+                string enemyName = enemy.currentEnemy;
+                enemy.enemyCHP -= damage;
+
+                string output = $"You slip into Ultra Instinct and strike {enemyName} for {damage}!\n";
+                if (enemy.enemyCHP <= 0)
+                {
+                    enemy.enemyCHP = 0;
+                    output += "The enemy " + enemyName + " has 0/" + enemy.enemyHP + "Hit Points Remaining \n";
+                    output += HandleEnemyDefeat(enemyName);
+                    return output;
+                }
+
+                output += "The enemy " + enemyName + " has " + enemy.enemyCHP + "/" + enemy.enemyHP + "Hit Points Remaining \n";
+                output += "You evade the counterattack entirely.\n";
+                return output;
+            }
+
+            return "That skill is all confidence and no execution.";
+        }
+
+        private bool IsShopRoom()
+        {
+            (int x, int y) coords = room.getCurrentRoomCoordinates();
+            return coords.x == 3 && coords.y == 1;
+        }
+
+        private string GetShopText()
+        {
+            return "A traveling merchant has set up in this calm stretch of jungle.\n" +
+                "Type buy fire bomb for 18 gold.\n" +
+                "Type buy heal for 12 gold to recover 20 health instantly.\n" +
+                "Type buy mana for 10 gold to recover 10 mana instantly.";
+        }
+
+        private string HandleBuyCommand(string lowerInput)
+        {
+            if (IsShopRoom() == false)
+            {
+                return "There is nobody here selling anything.";
+            }
+
+            if (Player.isFighting)
+            {
+                return "Now is not the time to browse wares.";
+            }
+
+            if (lowerInput == "buy fire bomb")
+            {
+                const int cost = 18;
+                if (Player.gold < cost)
+                {
+                    return "You don't have enough gold for a Fire Bomb.";
+                }
+
+                Player.gold -= cost;
+                Player.fireBombCount++;
+                updatelabels();
+                return "You buy a Fire Bomb and tuck it away for later.";
+            }
+
+            if (lowerInput == "buy heal")
+            {
+                const int cost = 12;
+                if (Player.gold < cost)
+                {
+                    return "You don't have enough gold for healing.";
+                }
+
+                if (Player.currentHealth >= Player.maxhealth)
+                {
+                    return "You're already at full health.";
+                }
+
+                Player.gold -= cost;
+                Player.currentHealth = Math.Min(Player.maxhealth, Player.currentHealth + 20);
+                updatelabels();
+                return "The merchant patches you up and you feel steadier already.";
+            }
+
+            if (lowerInput == "buy mana")
+            {
+                const int cost = 10;
+                if (Player.gold < cost)
+                {
+                    return "You don't have enough gold for mana.";
+                }
+
+                if (Player.currentMana >= Player.maxMana)
+                {
+                    return "Your mana is already full.";
+                }
+
+                Player.gold -= cost;
+                Player.currentMana = Math.Min(Player.maxMana, Player.currentMana + 10);
+                updatelabels();
+                return "You drink a sharp herbal tonic and your mana returns.";
+            }
+
+            return "The merchant doesn't stock that.";
+        }
+
+        private string HandleUseCommand(string lowerInput)
+        {
+            if (lowerInput == "use fire bomb" || lowerInput == "throw fire bomb")
+            {
+                return UseConsumable("Fire Bomb");
+            }
+
+            return "You can't use that right now.";
+        }
+
         public string checkInput(string input) // where the magic happens
         {
             string trimmedInput = input.Trim();
             string lowerInput = trimmedInput.ToLowerInvariant();
+
+            if (Player.isGameOver || Player.hasWon)
+            {
+                string gameOverResponse = HandleGameOverState(lowerInput);
+                if (string.IsNullOrEmpty(gameOverResponse) == false)
+                {
+                    return gameOverResponse;
+                }
+            }
 
             if (MatchesAny(lowerInput, "look around", "see around", "search", "inspect surroundings"))
             {
@@ -603,6 +945,31 @@ namespace Dawnbarrow
                 return Player.isFighting ? Combat() : $"There is nothing to {input}";
             }
 
+            if (MatchesAny(lowerInput, "fireball", "ice ball", "heal"))
+            {
+                return CastSpell(lowerInput);
+            }
+
+            if (MatchesAny(lowerInput, "bash", "slice", "ultra instinct"))
+            {
+                return UseSkill(lowerInput);
+            }
+
+            if (lowerInput == "shop")
+            {
+                return IsShopRoom() ? GetShopText() : "There is no shop here.";
+            }
+
+            if (MatchesAny(lowerInput, "buy fire bomb", "buy heal", "buy mana"))
+            {
+                return HandleBuyCommand(lowerInput);
+            }
+
+            if (MatchesAny(lowerInput, "use fire bomb", "throw fire bomb"))
+            {
+                return HandleUseCommand(lowerInput);
+            }
+
             if (trimmedInput.Contains("Who is the cutest cat on the planet?"))
             {
                 return "Fun fact, there is a tie between the two cutest cat's on the planet! One is named Jojo, the other is named Toulouse.";
@@ -621,6 +988,12 @@ namespace Dawnbarrow
             if (lowerInput == "die")
             {
                 return "I bet you thought I'd say you can't die huh?";
+            }
+
+            if (lowerInput == "suicide")
+            {
+                ResetGameState(true);
+                return "You end your own adventure. A new one begins immediately.";
             }
 
             if (lowerInput == "run")
@@ -665,9 +1038,9 @@ namespace Dawnbarrow
             if (ContainsAny(lowerInput, "display commands", "show commands"))
             {
                 MessageBox.Show(" Look around ---> gain more information about your surroundings \n Gender (gender) ---> input your gender \n name (name) ---> Input your name \n " +
-                    "Fight ---> Fight the current monster in the room \n Hit ---> Hit the current monster (must first be fighting) \n check self ---> learn more information about yourself \n" +
+                    "Fight ---> Fight the current monster in the room \n Hit ---> Hit the current monster (must first be fighting) \n Fireball / Ice Ball / Heal ---> cast combat spells \n Bash / Slice / Ultra Instinct ---> use combat skills \n check self ---> learn more information about yourself \n" +
                     " Inventory ---> look at your inventory \n equip (item) ---> toggle current equipment \n " +
-                    "Search Ground ---> Pick up items on the ground \n Explore ---> look for repeatable encounters or loot in cleared rooms \n North, South, East, West ---> Walk in direction written\n" + "Run ---> If you're in combat, get out of combat \n Save ---> writes the default save file \n Save <filename> ---> writes a named save file \n Load ---> restores your default save", "Dawnbarrow Commands");
+                    "Search Ground ---> Pick up items on the ground \n Explore ---> look for repeatable encounters or loot in cleared rooms \n Shop ---> view merchant stock in the safe jungle room \n Buy Fire Bomb / Buy Heal / Buy Mana ---> spend gold at the shop \n Use Fire Bomb ---> throw a consumable during combat \n North, South, East, West ---> Walk in direction written\n" + "Run ---> If you're in combat, get out of combat \n Suicide ---> reset immediately \n Restart ---> begins a new run \n Save ---> writes the default save file \n Save <filename> ---> writes a named save file \n Load ---> restores your default save \n Load <filename> ---> restores a named save", "Dawnbarrow Commands");
                 return "";
             }
 
@@ -701,6 +1074,15 @@ namespace Dawnbarrow
                 return "You made the Lonely Giant happy, and thus he became your friend, feel free to pick up the saviors helmet before you go!";
             }
 
+            if ((lowerInput == "befriend creature" || lowerInput == "friend creature") && Player.hasFriendshipBracelet == true && enemy.currentEnemy == "Lonely Giant")
+            {
+                enemy.enemyCHP = 0;
+                enemy.isdefeated = true;
+                Player.isFighting = false;
+                defeatedRooms.Add(GetCurrentRoomKey());
+                return "You offer friendship instead of violence. The Lonely Giant brightens immediately and lets you take the savior's helmet.";
+            }
+
             if (lowerInput.Contains("cheat"))
             {
                 Player.cheat();
@@ -720,6 +1102,17 @@ namespace Dawnbarrow
             if (lowerInput == "load")
             {
                 return LoadGame();
+            }
+
+            if (lowerInput.StartsWith("load "))
+            {
+                return LoadGame(trimmedInput.Substring(5).Trim());
+            }
+
+            if (lowerInput == "restart")
+            {
+                ResetGameState(true);
+                return "A new adventure begins.";
             }
 
             if (ContainsAny(lowerInput, "mine", "smash rocks") && Player.hasPickaxe == false)
@@ -785,6 +1178,45 @@ namespace Dawnbarrow
             return GetRoomKey(coords.x, coords.y);
         }
 
+        private void RenderMiniMap()
+        {
+            (int x, int y) currentRoom = room.getCurrentRoomCoordinates();
+            List<string> lines = new List<string>
+            {
+                "MINIMAP",
+                "P = You",
+                "c = Cleared",
+                "o = Unknown",
+                ""
+            };
+
+            for (int row = 5; row >= 1; row--)
+            {
+                string line = "";
+                for (int column = 1; column <= 5; column++)
+                {
+                    string symbol = "o";
+                    if (currentRoom.x == column && currentRoom.y == row)
+                    {
+                        symbol = "P";
+                    }
+                    else if (defeatedRooms.Contains(GetRoomKey(column, row)))
+                    {
+                        symbol = "c";
+                    }
+
+                    line += "[" + symbol + "]";
+                }
+
+                lines.Add(line);
+            }
+
+            lines.Add("");
+            lines.Add("Biome:");
+            lines.Add(room.Biome(currentRoom.x, currentRoom.y));
+            MiniMap.Text = string.Join("\n", lines);
+        }
+
         private string PrepareRoomEncounter()
         {
             (int x, int y) coords = room.getCurrentRoomCoordinates();
@@ -805,6 +1237,54 @@ namespace Dawnbarrow
             return "";
         }
 
+        private void ResetGameState(bool clearConsole)
+        {
+            game = new Game();
+            room = new Room();
+            Player = new Player();
+            enemy = new Enemy();
+            defeatedRooms.Clear();
+
+            room.setCurrentRoom(1, 1);
+            game.setCurrentRoom(1, 1);
+            enemy.enemySpawn(1, 1);
+
+            currentOutput = "";
+            currentCharIndex = 0;
+            typingQueue.Clear();
+            typingTimer.Stop();
+
+            if (clearConsole)
+            {
+                ConsoleOut.Clear();
+            }
+
+            label1.Text = room.Biome(1, 1) + room.getCurrentRoomCoordinates().ToString();
+            updateBackground();
+            updatelabels();
+        }
+
+        private string HandleGameOverState(string lowerInput)
+        {
+            if (lowerInput == "restart")
+            {
+                ResetGameState(true);
+                return "A new adventure begins.";
+            }
+
+            if (lowerInput == "save" || lowerInput.StartsWith("save ") || lowerInput == "load" || lowerInput.StartsWith("load "))
+            {
+                return "";
+            }
+
+            if (Player.hasWon)
+            {
+                return "The adventure is over. Type restart to play again, or load to revisit a save.";
+            }
+
+            return "Game Over. Type restart to begin again, or load to restore a save.";
+        }
+
         private string ExploreCurrentRoom()
         {
             (int x, int y) coords = room.getCurrentRoomCoordinates();
@@ -818,6 +1298,11 @@ namespace Dawnbarrow
             if (room.IsRepeatableEncounterRoom(coords.x, coords.y) == false)
             {
                 return "There's nothing new to explore here, this room's important business is already settled.";
+            }
+
+            if (IsShopRoom())
+            {
+                return "The merchant already has this spot claimed. Type shop if you want to browse instead of wandering around.";
             }
 
             if (defeatedRooms.Contains(roomKey) == false)
@@ -864,13 +1349,18 @@ namespace Dawnbarrow
                     Level = Player.lvl,
                     MaxHealth = Player.maxhealth,
                     CurrentHealth = Player.currentHealth,
+                    MaxMana = Player.maxMana,
+                    CurrentMana = Player.currentMana,
                     Armor = Player.armor,
                     Damage = Player.dmg,
+                    Gold = Player.gold,
                     HeadEquipped = Player.HeadEquipped,
                     ChestEquipped = Player.ChestEquipped,
                     LegsEquipped = Player.LegsEquipped,
                     WeaponEquipped = Player.WeaponEquipped,
                     IsFighting = Player.isFighting,
+                    IsGameOver = Player.isGameOver,
+                    HasWon = Player.hasWon,
                     XpToNextLevel = Player.xptonextlevel,
                     CurrentXp = Player.currentxp,
                     HasLadder = Player.hasLadder,
@@ -878,6 +1368,7 @@ namespace Dawnbarrow
                     HasBossKey = Player.hasBossKey,
                     HasTalkingCat = Player.hasTalkingCat,
                     HasFriendshipBracelet = Player.hasFriendshipBracelet,
+                    FireBombCount = Player.fireBombCount,
                     HasIronSword = Player.hasIronSword,
                     HasFireSword = Player.hasFireSword,
                     HasTopazSword = Player.hasTopazSword,
@@ -903,6 +1394,7 @@ namespace Dawnbarrow
                     EnemyDamage = enemy.enemyDamage,
                     CurrentEnemy = enemy.currentEnemy,
                     EnemyXpGiven = enemy.enemyxpgiven,
+                    GoldDrop = enemy.goldDrop,
                     Description = enemy.desc,
                     PlacedObject = enemy.placedObject,
                     IsDefeated = enemy.isdefeated,
@@ -930,9 +1422,18 @@ namespace Dawnbarrow
             return $"Game saved to {savePath}";
         }
 
-        private string LoadGame()
+        private string LoadGame(string? saveName = null)
         {
-            string savePath = GetSaveFilePath();
+            string savePath;
+
+            try
+            {
+                savePath = GetSaveFilePath(saveName);
+            }
+            catch (ArgumentException exception)
+            {
+                return exception.Message;
+            }
 
             if (File.Exists(savePath) == false)
             {
@@ -961,13 +1462,18 @@ namespace Dawnbarrow
             Player.lvl = saveData.Player.Level;
             Player.maxhealth = saveData.Player.MaxHealth;
             Player.currentHealth = saveData.Player.CurrentHealth;
+            Player.maxMana = saveData.Player.MaxMana;
+            Player.currentMana = saveData.Player.CurrentMana;
             Player.armor = saveData.Player.Armor;
             Player.dmg = saveData.Player.Damage;
+            Player.gold = saveData.Player.Gold;
             Player.HeadEquipped = saveData.Player.HeadEquipped;
             Player.ChestEquipped = saveData.Player.ChestEquipped;
             Player.LegsEquipped = saveData.Player.LegsEquipped;
             Player.WeaponEquipped = saveData.Player.WeaponEquipped;
             Player.isFighting = saveData.Player.IsFighting;
+            Player.isGameOver = saveData.Player.IsGameOver;
+            Player.hasWon = saveData.Player.HasWon;
             Player.xptonextlevel = saveData.Player.XpToNextLevel;
             Player.currentxp = saveData.Player.CurrentXp;
             Player.hasLadder = saveData.Player.HasLadder;
@@ -975,6 +1481,7 @@ namespace Dawnbarrow
             Player.hasBossKey = saveData.Player.HasBossKey;
             Player.hasTalkingCat = saveData.Player.HasTalkingCat;
             Player.hasFriendshipBracelet = saveData.Player.HasFriendshipBracelet;
+            Player.fireBombCount = saveData.Player.FireBombCount;
             Player.hasIronSword = saveData.Player.HasIronSword;
             Player.hasFireSword = saveData.Player.HasFireSword;
             Player.hasTopazSword = saveData.Player.HasTopazSword;
@@ -998,6 +1505,7 @@ namespace Dawnbarrow
             enemy.enemyDamage = saveData.Enemy.EnemyDamage;
             enemy.currentEnemy = saveData.Enemy.CurrentEnemy;
             enemy.enemyxpgiven = saveData.Enemy.EnemyXpGiven;
+            enemy.goldDrop = saveData.Enemy.GoldDrop;
             enemy.desc = saveData.Enemy.Description;
             enemy.placedObject = saveData.Enemy.PlacedObject;
             enemy.isdefeated = saveData.Enemy.IsDefeated;
@@ -1025,36 +1533,21 @@ namespace Dawnbarrow
         public string Combat()
         {
             string output = "";
+            string enemyName = enemy.currentEnemy;
             int playerDamage = Player.playerDmg(enemy.enemyArmor);
 
-            output += $"Player {Player.playerName} hits {enemy.currentEnemy} for {playerDamage}!\n";
+            output += $"Player {Player.playerName} hits {enemyName} for {playerDamage}!\n";
             enemy.enemyCHP -= playerDamage;
-            output += "The enemy " + enemy.currentEnemy + " has " + enemy.enemyCHP + "/" + enemy.enemyHP + "Hit Points Remaining \n";
+            output += "The enemy " + enemyName + " has " + enemy.enemyCHP + "/" + enemy.enemyHP + "Hit Points Remaining \n";
 
             if (enemy.enemyCHP <= 0)
             {
                 enemy.enemyCHP = 0;
-                output += "You have sucessfully defeated the enemy!\n";
-                output += Player.experience(enemy.enemyxpgiven);
-                enemy.isdefeated = true;
-                Player.isFighting = false;
-                defeatedRooms.Add(GetCurrentRoomKey());
+                output += HandleEnemyDefeat(enemyName);
+                return output;
             }
 
-            if (enemy.enemyCHP != 0)
-            {
-                int monsterDamage = enemy.MonsterDmg(Player.armor);
-                output += $"Enemy {enemy.currentEnemy} hits you for {monsterDamage}\n";
-                Player.currentHealth -= monsterDamage;
-                output += "The player has" + Player.currentHealth + "/" + Player.maxhealth + "Hit Points Remaining \n";
-            }
-
-            if (Player.currentHealth <= 0)
-            {
-                output += "You have 0 health remaining, you cannot continue, the evil forces of Dawnbarrow grow stronger. Please exit the game and start again.";
-            }
-
-
+            output += ResolveEnemyCounterattack();
             return output;
         }
         private void ConsoleOut_TextChanged(object sender, EventArgs e)
@@ -1081,13 +1574,16 @@ namespace Dawnbarrow
         {
             { InputBox.Text = ""; }
         }
+
         public void updatelabels()
         { //every label in the game except currcoordinates lol
-            PlayerHP.Text = $"CurrHP: {Player.currentHealth} / TotHP: {Player.maxhealth}";
-            XP.Text = $"CurrXP: {Player.currentxp} / Xp2nex: {Player.xptonextlevel}";
+            PlayerHP.Text = $"CurrHP: {Player.currentHealth} / TotHP: {Player.maxhealth}\nMana: {Player.currentMana} / {Player.maxMana}";
+            XP.Text = $"CurrXP: {Player.currentxp} / Xp2nex: {Player.xptonextlevel}\nGold: {Player.gold}";
             //ArAt.Text = $"Armor: {Player.armor} /  Attack: {Player.dmg}";
             NGL.Text = $"{Player.playerName} / {Player.Gender} / Lvl: {Player.lvl}";
             Equip.Text = $"Currently Equipped:\n {Player.HeadEquipped},\n {Player.ChestEquipped},\n {Player.LegsEquipped},\n {Player.WeaponEquipped}";
+            RenderMiniMap();
+            RefreshInventoryPanel();
             //bryant.Text = $"Item: {Item.itemvariable(itemname, 2)}";
         }
 
@@ -1104,108 +1600,108 @@ namespace Dawnbarrow
         {
             if (room.Biome(room.getCurrentRoomCoordinates().x, room.getCurrentRoomCoordinates().y) == "Forest")
             {
-                Background.Image = Properties.Resources.Forest1;
+                Background.Image = global::Dawnbarrow.Properties.Resources.Forest1;
             }
             else
             if (room.Biome(room.getCurrentRoomCoordinates().x, room.getCurrentRoomCoordinates().y) == "Jungle")
             {
-                Background.Image = Properties.Resources._51;
+                Background.Image = global::Dawnbarrow.Properties.Resources._51;
             }
             else
             if (room.Biome(room.getCurrentRoomCoordinates().x, room.getCurrentRoomCoordinates().y) == "Grassland")
             {
-                Background.Image = Properties.Resources.grassland;
+                Background.Image = global::Dawnbarrow.Properties.Resources.grassland;
             }
             else
             if (room.Biome(room.getCurrentRoomCoordinates().x, room.getCurrentRoomCoordinates().y) == "River")
             {
-                Background.Image = Properties.Resources.River;
+                Background.Image = global::Dawnbarrow.Properties.Resources.River;
             }
             else
             if (room.Biome(room.getCurrentRoomCoordinates().x, room.getCurrentRoomCoordinates().y) == "Mountain Pass")
             {
-                Background.Image = Properties.Resources.Mountain_Pass___Ending;
+                Background.Image = global::Dawnbarrow.Properties.Resources.Mountain_Pass___Ending;
             }
 
             if (Player.hasFriendshipBracelet == true)
             {
-                FriendshipBracelet.Image = Properties.Resources.FriendshipBraceletOn;
+                FriendshipBracelet.Image = global::Dawnbarrow.Properties.Resources.FriendshipBraceletOn;
             }
             if (Player.hasPickaxe == true)
             {
-                Pickaxe.Image = Properties.Resources.PickaxeOn;
+                Pickaxe.Image = global::Dawnbarrow.Properties.Resources.PickaxeOn;
             }
             if (Player.hasTalkingCat == true)
             {
-                TalkingCat.Image = Properties.Resources.TalkingCatOn;
+                TalkingCat.Image = global::Dawnbarrow.Properties.Resources.TalkingCatOn;
             }
             if (Player.hasLadder == true)
             {
-                Ladder.Image = Properties.Resources.LadderOn;
+                Ladder.Image = global::Dawnbarrow.Properties.Resources.LadderOn;
             }
             if (Player.hasBossKey == true)
             {
-                BossKey.Image = Properties.Resources.BosskeyON;
+                BossKey.Image = global::Dawnbarrow.Properties.Resources.BosskeyON;
             }
             if (Player.ChestEquipped == "nothing")
             {
-                Chestplate.Image = Properties.Resources.EChest;
+                Chestplate.Image = global::Dawnbarrow.Properties.Resources.EChest;
             }
             if (Player.ChestEquipped == "Topaz Chestplate +3")
             {
-                Chestplate.Image = Properties.Resources.TChest;
+                Chestplate.Image = global::Dawnbarrow.Properties.Resources.TChest;
             }
             if (Player.ChestEquipped == "Iron Chestplate +2")
             {
-                Chestplate.Image = Properties.Resources.IChest;
+                Chestplate.Image = global::Dawnbarrow.Properties.Resources.IChest;
             }
             if (Player.ChestEquipped == "Leather Chestplate +1")
             {
-                Chestplate.Image = Properties.Resources.LChest;
+                Chestplate.Image = global::Dawnbarrow.Properties.Resources.LChest;
             }
             if (Player.ChestEquipped == "Savior Chestplate +4")
             {
-                Chestplate.Image = Properties.Resources.SChest;
+                Chestplate.Image = global::Dawnbarrow.Properties.Resources.SChest;
             }
             if (Player.HeadEquipped == "nothing")
             {
-                Helmet.Image = Properties.Resources.EHelm;
+                Helmet.Image = global::Dawnbarrow.Properties.Resources.EHelm;
             }
             if (Player.HeadEquipped == "Leather Helmet +1")
             {
-                Helmet.Image = Properties.Resources.LHelm;
+                Helmet.Image = global::Dawnbarrow.Properties.Resources.LHelm;
             }
             if (Player.HeadEquipped == "Iron Helmet +2")
             {
-                Helmet.Image = Properties.Resources.IHelm;
+                Helmet.Image = global::Dawnbarrow.Properties.Resources.IHelm;
             }
             if (Player.HeadEquipped == "Topaz Helmet +3")
             {
-                Helmet.Image = Properties.Resources.THelm;
+                Helmet.Image = global::Dawnbarrow.Properties.Resources.THelm;
             }
             if (Player.HeadEquipped == "Savior Helmet +4")
             {
-                Helmet.Image = Properties.Resources.SHelm;
+                Helmet.Image = global::Dawnbarrow.Properties.Resources.SHelm;
             }
             if (Player.LegsEquipped == "nothing")
             {
-                Leggings.Image = Properties.Resources.ELegs__1_;
+                Leggings.Image = global::Dawnbarrow.Properties.Resources.ELegs__1_;
             }
             if (Player.LegsEquipped == "Leather Leggings +1")
             {
-                Leggings.Image = Properties.Resources.LLegs;
+                Leggings.Image = global::Dawnbarrow.Properties.Resources.LLegs;
             }
             if (Player.LegsEquipped == "Iron Leggings +2")
             {
-                Leggings.Image = Properties.Resources.ILegs;
+                Leggings.Image = global::Dawnbarrow.Properties.Resources.ILegs;
             }
             if (Player.LegsEquipped == "Topaz Leggings +3")
             {
-                Leggings.Image = Properties.Resources.TLegs;
+                Leggings.Image = global::Dawnbarrow.Properties.Resources.TLegs;
             }
             if (Player.LegsEquipped == "Savior Leggings +4")
             {
-                Leggings.Image = Properties.Resources.SLegs;
+                Leggings.Image = global::Dawnbarrow.Properties.Resources.SLegs;
             }
         }
 

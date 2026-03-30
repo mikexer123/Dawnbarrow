@@ -15,13 +15,18 @@ namespace Dawnbarrow
        public int lvl = 1;
        public double maxhealth = 10;
        public double currentHealth = 10;
+    public double maxMana = 5;
+    public double currentMana = 5;
        public int armor = 1;
        public int dmg = 1;
+    public int gold = 0;
        public string HeadEquipped = "nothing";
        public string ChestEquipped = "nothing";
        public string LegsEquipped = "nothing";
        public string WeaponEquipped = "nothing";
        public bool isFighting = false;
+    public bool isGameOver = false;
+    public bool hasWon = false;
        public double xptonextlevel = 5;
        public double currentxp = 0;
        private double signif = 1;
@@ -32,6 +37,7 @@ namespace Dawnbarrow
        public bool hasBossKey = false;
        public bool hasTalkingCat = false;
        public bool hasFriendshipBracelet = false;
+    public int fireBombCount = 0;
         //swords
         public bool hasIronSword = false;
         public bool hasFireSword = false;
@@ -69,6 +75,8 @@ namespace Dawnbarrow
                 xptonextlevel = Math.Round(xptonextlevel * 1.4 + (signif * 3));
                 maxhealth = Math.Round(maxhealth * 1.25);
                 currentHealth = maxhealth;
+                maxMana = Math.Round(maxMana * 1.25 + signif);
+                currentMana = maxMana;
             }
             
             return output;
@@ -99,7 +107,7 @@ namespace Dawnbarrow
         }
         public string playerInfo()
         {
-            string output = "PlayerName: " + playerName + "\n" + "Gender: " + Gender + "\n" + "Equipped Helmet:" + HeadEquipped + "\n" + "Equipped Chest" + ChestEquipped + "\n" + "Equipped Legs:" + LegsEquipped + "\n" + "Equipped Sword:" + WeaponEquipped + "\n" + "Player Hitpoints:" + currentHealth + "/" + maxhealth + "\n" + "currentDamage:" + playerDmg(2) + "\n";
+            string output = "PlayerName: " + playerName + "\n" + "Gender: " + Gender + "\n" + "Gold: " + gold + "\n" + "Mana: " + currentMana + "/" + maxMana + "\n" + "Equipped Helmet:" + HeadEquipped + "\n" + "Equipped Chest" + ChestEquipped + "\n" + "Equipped Legs:" + LegsEquipped + "\n" + "Equipped Sword:" + WeaponEquipped + "\n" + "Player Hitpoints:" + currentHealth + "/" + maxhealth + "\n" + "currentDamage:" + playerDmg(2) + "\n";
             return output;
         }
         public int playerDmg(int enemyArmor)
@@ -130,7 +138,7 @@ namespace Dawnbarrow
             {
                 playerdmg = rangeCalc(6, 15) - enemyArmor;
             }
-            return playerdmg;
+            return Math.Max(playerdmg, 0);
         }
         public string playerTurn(string monster, int armorval)
         {
@@ -230,7 +238,11 @@ namespace Dawnbarrow
             if (item == "Friendship Bracelet")
             {
                 hasFriendshipBracelet = true;
-            }    
+            }
+            if (item == "Fire Bomb")
+            {
+                fireBombCount++;
+            }
         }
         public string displayInventory()
         {
@@ -261,6 +273,10 @@ namespace Dawnbarrow
             if (hasFriendshipBracelet)
             {
                 questItems += " Friendship Bracelet";
+            }
+            if (fireBombCount > 0)
+            {
+                consumables += " Fire Bomb x" + fireBombCount;
             }
             //Helmets
             if (hasLeatherHelmet)
@@ -344,6 +360,53 @@ namespace Dawnbarrow
             hasLadder = true;
             hasBossKey = true;
             hasPickaxe = true;
+            fireBombCount = 3;
+        }
+        public void resetProgress()
+        {
+            playerName = "";
+            Gender = "";
+            lvl = 1;
+            maxhealth = 10;
+            currentHealth = 10;
+            maxMana = 5;
+            currentMana = 5;
+            armor = 1;
+            dmg = 1;
+            gold = 0;
+            HeadEquipped = "nothing";
+            ChestEquipped = "nothing";
+            LegsEquipped = "nothing";
+            WeaponEquipped = "nothing";
+            isFighting = false;
+            isGameOver = false;
+            hasWon = false;
+            xptonextlevel = 5;
+            currentxp = 0;
+            signif = 1;
+            inventory = new string[20];
+            hasLadder = false;
+            hasPickaxe = false;
+            hasBossKey = false;
+            hasTalkingCat = false;
+            hasFriendshipBracelet = false;
+            fireBombCount = 0;
+            hasIronSword = false;
+            hasFireSword = false;
+            hasTopazSword = false;
+            hasSaviorSword = false;
+            hasLeatherHelmet = false;
+            hasIronHelmet = false;
+            hasTopazHelmet = false;
+            hasSaviorHelmet = false;
+            hasLeatherChestplate = false;
+            hasIronChestplate = false;
+            hasTopazChestplate = false;
+            hasSaviorChestplate = false;
+            hasLeatherLeggings = false;
+            hasIronLeggings = false;
+            hasTopazLeggings = false;
+            hasSaviorLeggings = false;
         }
         public void calculateArmor()
         {

@@ -19,6 +19,7 @@ namespace Dawnbarrow
         public int enemyDamage = 1; // Enemy Damage to player on every hit
         public string currentEnemy = ""; //The enemy string value tied to the currentRoom
         public int enemyxpgiven = 1;
+        public int goldDrop = 0;
         public string desc = "";
         public string placedObject = "";
         public bool isdefeated = false;
@@ -35,6 +36,7 @@ namespace Dawnbarrow
             enemyDamage = 0;
             currentEnemy = "";
             enemyxpgiven = 0;
+            goldDrop = 0;
             desc = "";
             placedObject = "";
             isdefeated = false;
@@ -106,6 +108,7 @@ namespace Dawnbarrow
 
             enemyCHP = enemyHP;
             isdefeated = false;
+            goldDrop = CalculateGoldDrop();
         }
         public void enemySpawn(int x, int y)
         
@@ -465,6 +468,19 @@ namespace Dawnbarrow
                 enemyxpgiven = rangeCalc(20, 200);
             }
 
+            goldDrop = CalculateGoldDrop();
+
+        }
+        private int CalculateGoldDrop()
+        {
+            if (enemyHP <= 0)
+            {
+                return 0;
+            }
+
+            int minimumGold = Math.Max(1, (enemyHP / 5) + enemyArmor);
+            int maximumGold = Math.Max(minimumGold, minimumGold + Math.Max(1, enemyDamage) + (enemyxpgiven / 20));
+            return random.Next(minimumGold, maximumGold + 1);
         }
         private int rangeCalc(int n, int n2)
         {
@@ -501,13 +517,8 @@ namespace Dawnbarrow
         }
         public int MonsterDmg(int PlayerArmor)
         {
-           int monsterdmg = rangeCalc(1, enemyDamage) - PlayerArmor;
-
-            if (monsterdmg == 1)
-            {
-                monsterdmg = 2;
-            }
-            return monsterdmg;
+           int monsterdmg = rangeCalc(1, Math.Max(enemyDamage, 1)) - PlayerArmor;
+            return Math.Max(monsterdmg, 0);
         }
         public string MonsterTurn(int PlayerArmor)
         {

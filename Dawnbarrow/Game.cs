@@ -20,7 +20,7 @@ namespace Dawnbarrow
             //2 INDICES 1 ****2,1
             "Welcome to the jungle, a vast set of trees ranging from banana trees, to red cedars, to GIANT red cedars are littered throughout the area, there are all kinds of bugs as far as the eye can see. This is an awful place to be for people who hate humid temperatures. If I were you, I'd begin to wonder what creatures lurk here!",
             //3 INDICES 2 ****3,1
-            "This is a weird spot of the jungle, there's a sense of danger to your north, but you can't help but feel the safest you've felt since you've begun this adventure, probably on account of the singing jungle birds soothing your soul, if ever you feel in trouble, or like you don't know what to do, this might be a good place to gather yourself when battle has made you weary.",
+            "This is a weird spot of the jungle, there's a sense of danger to your north, but you can't help but feel the safest you've felt since you've begun this adventure, probably on account of the singing jungle birds soothing your soul. A traveling merchant has made camp here under a broad tree, quietly polishing bottles and black powder bombs. If ever you feel in trouble, or like you don't know what to do, this might be a good place to gather yourself when battle has made you weary.",
             //4 INDICES 3 ****4,1
             "Around you is a vast clearing, the open paths offer an expansive array of options, you can go in any cardinal direction, and find yourself in a new unknown enviornment",
             //5 INDICES 4 ****5,1
@@ -73,7 +73,7 @@ namespace Dawnbarrow
             //2 INDICES 1
             "The man before you seems happy to see you",
             //3 INDICES 2
-            "You return to the strange meadow, and the man that was once here is gone, and the decaying architecture seems to want to be put out of it's misery",
+            "You return to the strange meadow, and the man that was once here is gone, and the decaying architecture seems to want to be put out of it's misery. Off to the side, a traveling merchant watches the road and occasionally mutters about fair prices.",
             //4 INDICES 3
             "Around you is a vast clearing, the open paths offer an expansive array of options, you can go in any cardinal direction, and find yourself in a new unknown enviornment",
             //5 INDICES 4
