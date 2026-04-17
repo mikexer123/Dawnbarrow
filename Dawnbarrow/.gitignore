@@ -1,0 +1,20 @@
+# Build outputs
+bin/
+obj/
+
+# Visual Studio / user-specific
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# IDE / OS clutter
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+
+# Optional package caches
+packages/
