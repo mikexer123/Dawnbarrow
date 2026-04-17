@@ -233,6 +233,11 @@ namespace Dawnbarrow
         {
             output = "";
 
+            if (TryResolveEnemyUniqueSkillFromData(out output))
+            {
+                return true;
+            }
+
             if (Player.isFighting == false || enemy.enemyCHP <= 0)
             {
                 return false;

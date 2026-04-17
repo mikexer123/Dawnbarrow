@@ -129,7 +129,7 @@ namespace Dawnbarrow
 
             room.setCurrentRoom(1, 1);
             game.setCurrentRoom(1, 1);
-            enemy.enemySpawn(1, 1);
+            SpawnRoomEncounterWithFallback(1, 1);
             label1.Text = room.Biome(1, 1) + room.getCurrentRoomCoordinates().ToString();
             updateBackground();
             updatelabels();
@@ -1517,7 +1517,7 @@ namespace Dawnbarrow
                 return "\n This room has already been cleared.";
             }
 
-            enemy.enemySpawn(coords.x, coords.y);
+            SpawnRoomEncounterWithFallback(coords.x, coords.y);
             ClearEnemyStatusEffects();
             return "";
         }
@@ -1534,7 +1534,7 @@ namespace Dawnbarrow
 
             room.setCurrentRoom(1, 1);
             game.setCurrentRoom(1, 1);
-            enemy.enemySpawn(1, 1);
+            SpawnRoomEncounterWithFallback(1, 1);
 
             currentOutput = "";
             currentCharIndex = 0;
@@ -1609,7 +1609,19 @@ namespace Dawnbarrow
 
             if (room.randomEncounter())
             {
-                enemy.SpawnExploreEncounter(room.Biome(coords.x, coords.y));
+                if (TrySpawnExploreEncounterFromData(room.Biome(coords.x, coords.y)) == false)
+                {
+                    enemy.ClearEncounter();
+                    enemy.isdefeated = false;
+                    enemy.currentEnemy = "Wandering Monster";
+                    enemy.enemyHP = exploreRandom.Next(6, 15);
+                    enemy.enemyCHP = enemy.enemyHP;
+                    enemy.enemyArmor = exploreRandom.Next(0, 3);
+                    enemy.enemyDamage = exploreRandom.Next(1, 5);
+                    enemy.enemyxpgiven = exploreRandom.Next(5, 17);
+                    enemy.desc = "You explore the area and provoke an unknown wandering enemy.";
+                    enemy.goldDrop = Math.Max(1, exploreRandom.Next(2, 12));
+                }
                 ClearEnemyStatusEffects();
                 return "You explore the area and stir something up...\n" + enemy.desc + "\n" + enemy.MonsterInfo() + "\nType fight if you want to engage.";
             }
