@@ -235,12 +235,21 @@ namespace Dawnbarrow
             currentCharIndex = 0;
             typingTimer.Start();
         }
+
+        private void ScrollConsoleToBottom()
+        {
+            ConsoleOut.SelectionStart = ConsoleOut.TextLength;
+            ConsoleOut.SelectionLength = 0;
+            ConsoleOut.ScrollToCaret();
+        }
+
         private void TypingTimerTick(object? sender, EventArgs e)
         {
             if (currentCharIndex < currentOutput.Length)
             {
                 int charsToWrite = Math.Min(charactersPerTick, currentOutput.Length - currentCharIndex);
                 ConsoleOut.AppendText(currentOutput.Substring(currentCharIndex, charsToWrite));
+                ScrollConsoleToBottom();
                 currentCharIndex += charsToWrite;
             }
             else

@@ -91,7 +91,7 @@ namespace Dawnbarrow
             ConsoleOut.Name = "ConsoleOut";
             ConsoleOut.ReadOnly = true;
             ConsoleOut.ScrollBars = RichTextBoxScrollBars.Vertical;
-            ConsoleOut.Size = new Size(1579, 578);
+            ConsoleOut.Size = new Size(1579, 685);
             ConsoleOut.TabIndex = 0;
             ConsoleOut.Text = resources.GetString("ConsoleOut.Text");
             ConsoleOut.UseWaitCursor = true;
@@ -100,7 +100,7 @@ namespace Dawnbarrow
             // InputBox
             // 
             InputBox.Font = new Font("Consolas", 15F);
-            InputBox.Location = new Point(9, 885);
+            InputBox.Location = new Point(9, 992);
             InputBox.Margin = new Padding(3, 2, 3, 2);
             InputBox.Multiline = true;
             InputBox.Name = "InputBox";
@@ -113,10 +113,10 @@ namespace Dawnbarrow
             // submit_button
             // 
             submit_button.Font = new Font("Rockwell Extra Bold", 9F);
-            submit_button.Location = new Point(1597, 709);
+            submit_button.Location = new Point(1597, 738);
             submit_button.Margin = new Padding(3, 2, 3, 2);
             submit_button.Name = "submit_button";
-            submit_button.Size = new Size(118, 215);
+            submit_button.Size = new Size(118, 293);
             submit_button.TabIndex = 2;
             submit_button.Text = "Submit";
             submit_button.UseVisualStyleBackColor = true;
@@ -137,9 +137,9 @@ namespace Dawnbarrow
             // pictureBox1
             // 
             pictureBox1.BackColor = Color.Blue;
-            pictureBox1.Location = new Point(1597, 217);
+            pictureBox1.Location = new Point(1597, 303);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(118, 429);
+            pictureBox1.Size = new Size(118, 430);
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
             // 
@@ -208,45 +208,45 @@ namespace Dawnbarrow
             // Pickaxe
             // 
             Pickaxe.Image = global::Dawnbarrow.Properties.Resources.EmptyQuest;
-            Pickaxe.Location = new Point(1606, 405);
+            Pickaxe.Location = new Point(1606, 498);
             Pickaxe.Name = "Pickaxe";
-            Pickaxe.Size = new Size(42, 38);
+            Pickaxe.Size = new Size(42, 39);
             Pickaxe.TabIndex = 13;
             Pickaxe.TabStop = false;
             // 
             // Ladder
             // 
             Ladder.Image = global::Dawnbarrow.Properties.Resources.EmptyQuest;
-            Ladder.Location = new Point(1660, 405);
+            Ladder.Location = new Point(1660, 498);
             Ladder.Name = "Ladder";
-            Ladder.Size = new Size(42, 38);
+            Ladder.Size = new Size(42, 39);
             Ladder.TabIndex = 14;
             Ladder.TabStop = false;
             // 
             // TalkingCat
             // 
             TalkingCat.Image = global::Dawnbarrow.Properties.Resources.EmptyQuest;
-            TalkingCat.Location = new Point(1606, 449);
+            TalkingCat.Location = new Point(1606, 542);
             TalkingCat.Name = "TalkingCat";
-            TalkingCat.Size = new Size(42, 38);
+            TalkingCat.Size = new Size(42, 39);
             TalkingCat.TabIndex = 15;
             TalkingCat.TabStop = false;
             // 
             // BossKey
             // 
             BossKey.Image = global::Dawnbarrow.Properties.Resources.EmptyQuest;
-            BossKey.Location = new Point(1660, 449);
+            BossKey.Location = new Point(1660, 542);
             BossKey.Name = "BossKey";
-            BossKey.Size = new Size(42, 38);
+            BossKey.Size = new Size(42, 39);
             BossKey.TabIndex = 16;
             BossKey.TabStop = false;
             // 
             // FriendshipBracelet
             // 
             FriendshipBracelet.Image = global::Dawnbarrow.Properties.Resources.EmptyQuest;
-            FriendshipBracelet.Location = new Point(1630, 493);
+            FriendshipBracelet.Location = new Point(1630, 586);
             FriendshipBracelet.Name = "FriendshipBracelet";
-            FriendshipBracelet.Size = new Size(42, 38);
+            FriendshipBracelet.Size = new Size(42, 39);
             FriendshipBracelet.TabIndex = 17;
             FriendshipBracelet.TabStop = false;
             // 
@@ -254,9 +254,9 @@ namespace Dawnbarrow
             // 
             Helmet.BackColor = Color.Blue;
             Helmet.Image = global::Dawnbarrow.Properties.Resources.EHelm;
-            Helmet.Location = new Point(1621, 236);
+            Helmet.Location = new Point(1621, 329);
             Helmet.Name = "Helmet";
-            Helmet.Size = new Size(51, 45);
+            Helmet.Size = new Size(51, 46);
             Helmet.SizeMode = PictureBoxSizeMode.StretchImage;
             Helmet.TabIndex = 18;
             Helmet.TabStop = false;
@@ -265,9 +265,9 @@ namespace Dawnbarrow
             // 
             Chestplate.BackColor = Color.Blue;
             Chestplate.Image = global::Dawnbarrow.Properties.Resources.EChest;
-            Chestplate.Location = new Point(1597, 287);
+            Chestplate.Location = new Point(1597, 380);
             Chestplate.Name = "Chestplate";
-            Chestplate.Size = new Size(105, 44);
+            Chestplate.Size = new Size(105, 45);
             Chestplate.SizeMode = PictureBoxSizeMode.StretchImage;
             Chestplate.TabIndex = 19;
             Chestplate.TabStop = false;
@@ -276,9 +276,9 @@ namespace Dawnbarrow
             // 
             Leggings.BackColor = Color.Blue;
             Leggings.Image = global::Dawnbarrow.Properties.Resources.ELegs__1_;
-            Leggings.Location = new Point(1606, 337);
+            Leggings.Location = new Point(1606, 430);
             Leggings.Name = "Leggings";
-            Leggings.Size = new Size(78, 57);
+            Leggings.Size = new Size(78, 58);
             Leggings.SizeMode = PictureBoxSizeMode.StretchImage;
             Leggings.TabIndex = 20;
             Leggings.TabStop = false;
@@ -289,7 +289,7 @@ namespace Dawnbarrow
             MiniMap.BorderStyle = BorderStyle.FixedSingle;
             MiniMap.Font = new Font("Consolas", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             MiniMap.ForeColor = Color.PaleGreen;
-            MiniMap.Location = new Point(804, 12);
+            MiniMap.Location = new Point(1138, 1033);
             MiniMap.Name = "MiniMap";
             MiniMap.Size = new Size(246, 272);
             MiniMap.TabIndex = 21;
@@ -304,16 +304,16 @@ namespace Dawnbarrow
             InventoryPanel.Controls.Add(InventoryActionButton);
             InventoryPanel.Controls.Add(InventoryList);
             InventoryPanel.Controls.Add(InventoryHeader);
-            InventoryPanel.Location = new Point(1061, 198);
+            InventoryPanel.Location = new Point(565, 1166);
             InventoryPanel.Name = "InventoryPanel";
-            InventoryPanel.Size = new Size(530, 100);
+            InventoryPanel.Size = new Size(567, 131);
             InventoryPanel.TabIndex = 22;
             // 
             // InventoryHint
             // 
             InventoryHint.AutoSize = true;
             InventoryHint.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            InventoryHint.Location = new Point(336, 72);
+            InventoryHint.Location = new Point(336, 105);
             InventoryHint.Name = "InventoryHint";
             InventoryHint.Size = new Size(109, 13);
             InventoryHint.TabIndex = 4;
@@ -324,7 +324,7 @@ namespace Dawnbarrow
             InventoryConsumableButton.Font = new Font("SimSun-ExtB", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             InventoryConsumableButton.Location = new Point(336, 53);
             InventoryConsumableButton.Name = "InventoryConsumableButton";
-            InventoryConsumableButton.Size = new Size(182, 29);
+            InventoryConsumableButton.Size = new Size(205, 46);
             InventoryConsumableButton.TabIndex = 3;
             InventoryConsumableButton.Text = "Use Consumable";
             InventoryConsumableButton.UseVisualStyleBackColor = true;
@@ -333,9 +333,9 @@ namespace Dawnbarrow
             // InventoryActionButton
             // 
             InventoryActionButton.Font = new Font("SimSun-ExtB", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            InventoryActionButton.Location = new Point(336, 22);
+            InventoryActionButton.Location = new Point(336, 3);
             InventoryActionButton.Name = "InventoryActionButton";
-            InventoryActionButton.Size = new Size(182, 29);
+            InventoryActionButton.Size = new Size(205, 48);
             InventoryActionButton.TabIndex = 2;
             InventoryActionButton.Text = "Equip / Use";
             InventoryActionButton.UseVisualStyleBackColor = true;
@@ -348,7 +348,7 @@ namespace Dawnbarrow
             InventoryList.ItemHeight = 15;
             InventoryList.Location = new Point(13, 31);
             InventoryList.Name = "InventoryList";
-            InventoryList.Size = new Size(315, 49);
+            InventoryList.Size = new Size(317, 64);
             InventoryList.TabIndex = 1;
             InventoryList.SelectedIndexChanged += InventoryList_SelectedIndexChanged;
             InventoryList.DoubleClick += InventoryList_DoubleClick;
@@ -371,7 +371,7 @@ namespace Dawnbarrow
             ShopPanel.Controls.Add(ShopBuyButton);
             ShopPanel.Controls.Add(ShopList);
             ShopPanel.Controls.Add(ShopHeader);
-            ShopPanel.Location = new Point(1061, 303);
+            ShopPanel.Location = new Point(12, 1166);
             ShopPanel.Name = "ShopPanel";
             ShopPanel.Size = new Size(530, 128);
             ShopPanel.TabIndex = 23;
@@ -382,7 +382,7 @@ namespace Dawnbarrow
             ShopHint.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ShopHint.Location = new Point(346, 102);
             ShopHint.Name = "ShopHint";
-            ShopHint.Size = new Size(145, 13);
+            ShopHint.Size = new Size(133, 13);
             ShopHint.TabIndex = 3;
             ShopHint.Text = "Travel to 3,1 to shop";
             // 
@@ -415,7 +415,7 @@ namespace Dawnbarrow
             ShopHeader.Font = new Font("SimSun-ExtB", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
             ShopHeader.Location = new Point(9, 8);
             ShopHeader.Name = "ShopHeader";
-            ShopHeader.Size = new Size(43, 16);
+            ShopHeader.Size = new Size(39, 16);
             ShopHeader.TabIndex = 0;
             ShopHeader.Text = "Shop";
             // 
@@ -425,7 +425,7 @@ namespace Dawnbarrow
             AutoScaleDimensions = new SizeF(6F, 12F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.RosyBrown;
-            ClientSize = new Size(1727, 935);
+            ClientSize = new Size(1717, 1297);
             Controls.Add(ShopPanel);
             Controls.Add(InventoryPanel);
             Controls.Add(MiniMap);
