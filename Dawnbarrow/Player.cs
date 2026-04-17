@@ -378,8 +378,30 @@ namespace Dawnbarrow
         }
         public void cheat()
         {
+            // Push a powerful but bounded test profile.
+            lvl = Math.Max(lvl, 99);
+            maxhealth = Math.Max(maxhealth, 5000);
+            currentHealth = maxhealth;
+            maxMana = Math.Max(maxMana, 2000);
+            currentMana = maxMana;
+            gold = Math.Max(gold, 999999);
+
+            hasIronSword = true;
+            hasFireSword = true;
+            hasTopazSword = true;
             hasSaviorSword = true;
+
+            hasLeatherHelmet = true;
+            hasIronHelmet = true;
+            hasTopazHelmet = true;
             hasSaviorChestplate = true;
+            hasLeatherChestplate = true;
+            hasIronChestplate = true;
+            hasTopazChestplate = true;
+
+            hasLeatherLeggings = true;
+            hasIronLeggings = true;
+            hasTopazLeggings = true;
             hasSaviorLeggings = true;
             hasSaviorHelmet = true;
             hasTalkingCat = true;
@@ -387,10 +409,15 @@ namespace Dawnbarrow
             hasLadder = true;
             hasBossKey = true;
             hasPickaxe = true;
-            fireBombCount = 3;
-            freezingScrollCount = 2;
-            fireScrollCount = 2;
-            flightScrollCount = 1;
+            fireBombCount = Math.Max(fireBombCount, 250);
+            freezingScrollCount = Math.Max(freezingScrollCount, 120);
+            fireScrollCount = Math.Max(fireScrollCount, 120);
+            flightScrollCount = Math.Max(flightScrollCount, 80);
+
+            HeadEquipped = "Savior Helmet +4";
+            ChestEquipped = "Savior Chestplate +4";
+            LegsEquipped = "Savior Leggings +4";
+            WeaponEquipped = "Savior Sword +4";
         }
         public void resetProgress()
         {
