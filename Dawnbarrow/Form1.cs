@@ -21,6 +21,9 @@ namespace Dawnbarrow
         private readonly HashSet<string> defeatedRooms = new HashSet<string>();
         private readonly Random exploreRandom = new Random();
         private readonly List<string> exploreItems = new List<string>() { "Leather Helmet +1", "Leather Chestplate +1", "Leather Leggings +1", "Iron Sword +1", "Iron Helmet +2", "Iron Chestplate +2", "Iron Leggings +2", "Fire Sword +2", "Topaz Helmet +3", "Topaz Chestplate +3", "Topaz Leggings +3", "Topaz Sword +3" };
+        private readonly List<string> commandHistory = new List<string>();
+        private int commandHistoryIndex = -1;
+        private const string inputPlaceholderText = "Click To Type Here";
         private int currentCharIndex = 0;
         private string currentOutput = "";
         Game game = new Game();
@@ -69,8 +72,10 @@ namespace Dawnbarrow
             public bool HasTalkingCat { get; set; }
             public bool HasFriendshipBracelet { get; set; }
             public int FireBombCount { get; set; }
+            public int FreezingScrollCount { get; set; }
+            public int FireScrollCount { get; set; }
+            public int FlightScrollCount { get; set; }
             public bool HasIronSword { get; set; }
-                private readonly List<string> exploreItems = new List<string>() { "Leather Helmet +1", "Leather Chestplate +1", "Leather Leggings +1", "Iron Sword +1", "Iron Helmet +2", "Iron Chestplate +2", "Iron Leggings +2", "Fire Sword +2", "Topaz Helmet +3", "Topaz Chestplate +3", "Topaz Leggings +3", "Topaz Sword +3", "Fire Bomb" };
             public bool HasFireSword { get; set; }
             public bool HasTopazSword { get; set; }
             public bool HasSaviorSword { get; set; }
@@ -110,6 +115,8 @@ namespace Dawnbarrow
         public Dawnbarrow()
         {
             InitializeComponent();
+            InputBox.KeyDown += InputBox_KeyDown;
+            LoadGameData();
             typingTimer = new System.Windows.Forms.Timer();
             typingTimer.Interval = 1; //typing speed
             typingTimer.Tick += TypingTimerTick;
@@ -128,6 +135,89 @@ namespace Dawnbarrow
             updatelabels();
 
         }
+
+        private static int GetEquipmentHealthBonus(string itemName)
+        {
+            if (itemName.Contains("+1"))
+            {
+                return 25;
+            }
+
+            if (itemName.Contains("+2"))
+            {
+                return 50;
+            }
+
+            if (itemName.Contains("+3"))
+            {
+                return 75;
+            }
+
+            if (itemName.Contains("+4"))
+            {
+                return 100;
+            }
+
+            return 0;
+        }
+
+        private void SetEquippedArmor(Func<string> currentItemGetter, Action<string> currentItemSetter, string nextItem)
+        {
+            string currentItem = currentItemGetter();
+
+            if (currentItem == nextItem)
+            {
+                return;
+            }
+
+            int healthDelta = GetEquipmentHealthBonus(nextItem) - GetEquipmentHealthBonus(currentItem);
+            currentItemSetter(nextItem);
+
+            if (healthDelta == 0)
+            {
+                return;
+            }
+
+            Player.maxhealth = Math.Max(1, Player.maxhealth + healthDelta);
+            Player.currentHealth = Math.Max(0, Math.Min(Player.maxhealth, Player.currentHealth + healthDelta));
+        }
+
+        private void RememberCommand(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return;
+            }
+
+            if (string.Equals(input, inputPlaceholderText, StringComparison.OrdinalIgnoreCase))
+            {
+                return;
+            }
+
+            if (commandHistory.Count == 0 || commandHistory[commandHistory.Count - 1] != input)
+            {
+                commandHistory.Add(input);
+            }
+
+            commandHistoryIndex = commandHistory.Count;
+        }
+
+        private void SetInputFromHistoryIndex()
+        {
+            if (commandHistoryIndex < 0)
+            {
+                commandHistoryIndex = 0;
+            }
+
+            if (commandHistoryIndex > commandHistory.Count)
+            {
+                commandHistoryIndex = commandHistory.Count;
+            }
+
+            InputBox.Text = commandHistoryIndex == commandHistory.Count ? "" : commandHistory[commandHistoryIndex];
+            InputBox.SelectionStart = InputBox.Text.Length;
+        }
+
         private void StartTyping(string text, bool append = false)
         {
 
@@ -180,6 +270,7 @@ namespace Dawnbarrow
             }
 
             string playerAction = $"\nYou typed: {PlayerInput}";
+            RememberCommand(PlayerInput);
             string gameResponse = checkInput(PlayerInput);
             string normalizedDirection = room.direction(PlayerInput);
             bool isMovementCommand = normalizedDirection == "north" || normalizedDirection == "south" || normalizedDirection == "east" || normalizedDirection == "west";
@@ -257,6 +348,30 @@ namespace Dawnbarrow
 
             value = input.Substring(keywordIndex + keyword.Length).Trim();
             return true;
+        }
+
+        private bool TryParseCoordinatePair(string rawCoordinates, out int x, out int y)
+        {
+            x = 0;
+            y = 0;
+
+            if (string.IsNullOrWhiteSpace(rawCoordinates))
+            {
+                return false;
+            }
+
+            string[] parts = rawCoordinates
+                .Replace("(", "")
+                .Replace(")", "")
+                .Replace(",", " ")
+                .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (parts.Length != 2)
+            {
+                return false;
+            }
+
+            return int.TryParse(parts[0], out x) && int.TryParse(parts[1], out y);
         }
 
         private string BuildNameResponse()
@@ -356,96 +471,70 @@ namespace Dawnbarrow
             }
             if (lowerInput.Contains("leather leggings") && Player.hasLeatherLeggings == true)
             {
-                Player.currentHealth += 25;
-                Player.maxhealth += 25;
-                Player.LegsEquipped = "Leather Leggings +1";
+                SetEquippedArmor(() => Player.LegsEquipped, value => Player.LegsEquipped = value, "Leather Leggings +1");
                 return "You equip Leather Leggings";
             }
             if (lowerInput.Contains("iron leggings") && Player.hasIronLeggings == true)
             {
-                Player.currentHealth += 50;
-                Player.maxhealth += 50;
-                Player.LegsEquipped = "Iron Leggings +2";
+                SetEquippedArmor(() => Player.LegsEquipped, value => Player.LegsEquipped = value, "Iron Leggings +2");
                 return "You equip Iron Leggings";
             }
             if (lowerInput.Contains("topaz leggings") && Player.hasTopazLeggings == true)
             {
-                Player.currentHealth += 75;
-                Player.maxhealth += 75;
-                Player.LegsEquipped = "Topaz Leggings +3";
+                SetEquippedArmor(() => Player.LegsEquipped, value => Player.LegsEquipped = value, "Topaz Leggings +3");
                 return "You equip Topaz Leggings";
             }
             if (lowerInput.Contains("savior leggings") && Player.hasSaviorLeggings == true)
             {
-                Player.currentHealth += 100;
-                Player.maxhealth += 100;
-                Player.LegsEquipped = "Savior Leggings +4";
+                SetEquippedArmor(() => Player.LegsEquipped, value => Player.LegsEquipped = value, "Savior Leggings +4");
                 return "You equip Savior Leggings +4";
             }
             if (lowerInput.Contains("leather chestplate") && Player.hasLeatherChestplate == true)
             {
-                Player.currentHealth += 25;
-                Player.maxhealth += 25;
-                Player.ChestEquipped = "Leather Chestplate +1";
+                SetEquippedArmor(() => Player.ChestEquipped, value => Player.ChestEquipped = value, "Leather Chestplate +1");
                 return "You equip Leather Chestplate";
             }
             if (lowerInput.Contains("iron chestplate") && Player.hasIronChestplate == true)
             {
-                Player.currentHealth += 50;
-                Player.maxhealth += 50;
-                Player.ChestEquipped = "Iron Chestplate +2";
+                SetEquippedArmor(() => Player.ChestEquipped, value => Player.ChestEquipped = value, "Iron Chestplate +2");
                 return "You equip Iron Chestplate";
             }
             if (lowerInput.Contains("topaz chestplate") && Player.hasTopazChestplate == true)
             {
-                Player.currentHealth += 75;
-                Player.maxhealth += 75;
-                Player.ChestEquipped = "Topaz Chestplate +3";
+                SetEquippedArmor(() => Player.ChestEquipped, value => Player.ChestEquipped = value, "Topaz Chestplate +3");
                 return "You equip Topaz Chestplate";
             }
             if (lowerInput.Contains("savior chestplate") && Player.hasSaviorChestplate == true)
             {
-                Player.currentHealth += 100;
-                Player.maxhealth += 100;
-                Player.ChestEquipped = "Savior Chestplate +4";
+                SetEquippedArmor(() => Player.ChestEquipped, value => Player.ChestEquipped = value, "Savior Chestplate +4");
                 return "You equip Savior Chestplate";
             }
             if (lowerInput.Contains("leather helmet") && Player.hasLeatherHelmet == true)
             {
-                Player.HeadEquipped = "Leather Helmet +1";
-                Player.currentHealth += 25;
-                Player.maxhealth += 25;
+                SetEquippedArmor(() => Player.HeadEquipped, value => Player.HeadEquipped = value, "Leather Helmet +1");
                 return "You equip Leather Helmet +1";
             }
             if (lowerInput.Contains("iron helmet") && Player.hasIronHelmet == true)
             {
-                Player.HeadEquipped = "Iron Helmet +2";
-                Player.currentHealth += 50;
-                Player.maxhealth += 50;
+                SetEquippedArmor(() => Player.HeadEquipped, value => Player.HeadEquipped = value, "Iron Helmet +2");
                 return "You equip Iron Helmet +2";
             }
             if (lowerInput.Contains("topaz helmet") && Player.hasTopazHelmet == true)
             {
-                Player.currentHealth += 75;
-                Player.maxhealth += 75;
-                Player.HeadEquipped = "Topaz Helmet +3";
+                SetEquippedArmor(() => Player.HeadEquipped, value => Player.HeadEquipped = value, "Topaz Helmet +3");
                 return "You equip Topaz Helmet +3";
             }
             if (lowerInput.Contains("savior helmet") && Player.hasSaviorHelmet == true)
             {
-                Player.currentHealth += 100;
-                Player.maxhealth += 100;
-                Player.HeadEquipped = "Savior Helmet +4";
+                SetEquippedArmor(() => Player.HeadEquipped, value => Player.HeadEquipped = value, "Savior Helmet +4");
                 return "You equip savior Helmet";
             }
             if (lowerInput.Contains("savior set"))
             {
-                Player.HeadEquipped = "Savior Helmet +4";
-                Player.ChestEquipped = "Savior Chestplate +4";
-                Player.LegsEquipped = "Savior Leggings +4";
+                SetEquippedArmor(() => Player.HeadEquipped, value => Player.HeadEquipped = value, "Savior Helmet +4");
+                SetEquippedArmor(() => Player.ChestEquipped, value => Player.ChestEquipped = value, "Savior Chestplate +4");
+                SetEquippedArmor(() => Player.LegsEquipped, value => Player.LegsEquipped = value, "Savior Leggings +4");
                 Player.WeaponEquipped = "Savior Sword +4";
-                Player.currentHealth += 400;
-                Player.maxhealth += 400;
                 return "You equip the savior set";
             }
 
@@ -477,96 +566,70 @@ namespace Dawnbarrow
             }
             if (lowerInput.Contains("leather leggings") && Player.LegsEquipped == "Leather Leggings +1")
             {
-                Player.currentHealth -= 25;
-                Player.maxhealth -= 25;
-                Player.LegsEquipped = "nothing";
+                SetEquippedArmor(() => Player.LegsEquipped, value => Player.LegsEquipped = value, "nothing");
                 return "You unequip Leather Leggings";
             }
             if (lowerInput.Contains("iron leggings") && Player.LegsEquipped == "Iron Leggings +2")
             {
-                Player.currentHealth -= 50;
-                Player.maxhealth -= 50;
-                Player.LegsEquipped = "nothing";
+                SetEquippedArmor(() => Player.LegsEquipped, value => Player.LegsEquipped = value, "nothing");
                 return "You unequip Iron Leggings";
             }
             if (lowerInput.Contains("topaz leggings") && Player.LegsEquipped == "Topaz Leggings +3")
             {
-                Player.currentHealth -= 75;
-                Player.maxhealth -= 75;
-                Player.LegsEquipped = "nothing";
+                SetEquippedArmor(() => Player.LegsEquipped, value => Player.LegsEquipped = value, "nothing");
                 return "You unequip Topaz Leggings";
             }
             if (lowerInput.Contains("savior leggings") && Player.LegsEquipped == "Savior Leggings +4")
             {
-                Player.currentHealth -= 100;
-                Player.maxhealth -= 100;
-                Player.LegsEquipped = "nothing";
+                SetEquippedArmor(() => Player.LegsEquipped, value => Player.LegsEquipped = value, "nothing");
                 return "You unequip Savior Leggings";
             }
             if (lowerInput.Contains("leather chestplate") && Player.ChestEquipped == "Leather Chestplate +1")
             {
-                Player.currentHealth -= 25;
-                Player.maxhealth -= 25;
-                Player.ChestEquipped = "nothing";
+                SetEquippedArmor(() => Player.ChestEquipped, value => Player.ChestEquipped = value, "nothing");
                 return "You unequip Leather Chestplate";
             }
             if (lowerInput.Contains("iron chestplate") && Player.ChestEquipped == "Iron Chestplate +2")
             {
-                Player.currentHealth -= 50;
-                Player.maxhealth -= 50;
-                Player.ChestEquipped = "nothing";
+                SetEquippedArmor(() => Player.ChestEquipped, value => Player.ChestEquipped = value, "nothing");
                 return "You unequip Iron Chestplate";
             }
             if (lowerInput.Contains("topaz chestplate") && Player.ChestEquipped == "Topaz Chestplate +3")
             {
-                Player.currentHealth -= 75;
-                Player.maxhealth -= 75;
-                Player.ChestEquipped = "nothing";
+                SetEquippedArmor(() => Player.ChestEquipped, value => Player.ChestEquipped = value, "nothing");
                 return "You unequip Topaz Chestplate";
             }
             if (lowerInput.Contains("savior chestplate") && Player.ChestEquipped == "Savior Chestplate +4")
             {
-                Player.currentHealth -= 100;
-                Player.maxhealth -= 100;
-                Player.ChestEquipped = "nothing";
+                SetEquippedArmor(() => Player.ChestEquipped, value => Player.ChestEquipped = value, "nothing");
                 return "You unequip Savior Chestplate";
             }
             if (lowerInput.Contains("leather helmet") && Player.HeadEquipped == "Leather Helmet +1")
             {
-                Player.currentHealth -= 25;
-                Player.maxhealth -= 25;
-                Player.HeadEquipped = "nothing";
+                SetEquippedArmor(() => Player.HeadEquipped, value => Player.HeadEquipped = value, "nothing");
                 return "You unequip Leather Helmet";
             }
             if (lowerInput.Contains("iron helmet") && Player.HeadEquipped == "Iron Helmet +2")
             {
-                Player.currentHealth -= 50;
-                Player.maxhealth -= 50;
-                Player.HeadEquipped = "nothing";
+                SetEquippedArmor(() => Player.HeadEquipped, value => Player.HeadEquipped = value, "nothing");
                 return "You unequip Iron Helmet";
             }
             if (lowerInput.Contains("topaz helmet") && Player.HeadEquipped == "Topaz Helmet +3")
             {
-                Player.currentHealth -= 75;
-                Player.maxhealth -= 75;
-                Player.HeadEquipped = "nothing";
+                SetEquippedArmor(() => Player.HeadEquipped, value => Player.HeadEquipped = value, "nothing");
                 return "You unequip Topaz Helmet";
             }
             if (lowerInput.Contains("savior helmet") && Player.HeadEquipped == "Savior Helmet +4")
             {
-                Player.currentHealth -= 100;
-                Player.maxhealth -= 100;
-                Player.HeadEquipped = "nothing";
+                SetEquippedArmor(() => Player.HeadEquipped, value => Player.HeadEquipped = value, "nothing");
                 return "You unequip Savior Helmet";
             }
             if (lowerInput.Contains("savior set"))
             {
-                Player.HeadEquipped = "nothing";
-                Player.ChestEquipped = "nothing";
-                Player.LegsEquipped = "nothing";
+                SetEquippedArmor(() => Player.HeadEquipped, value => Player.HeadEquipped = value, "nothing");
+                SetEquippedArmor(() => Player.ChestEquipped, value => Player.ChestEquipped = value, "nothing");
+                SetEquippedArmor(() => Player.LegsEquipped, value => Player.LegsEquipped = value, "nothing");
                 Player.WeaponEquipped = "nothing";
-                Player.currentHealth -= 400;
-                Player.maxhealth -= 400;
                 return "You unequip the savior set";
             }
 
@@ -581,10 +644,44 @@ namespace Dawnbarrow
                 return "";
             }
 
+            string statusOutput = ProcessEnemyStatusEffectsAtTurnStart();
+            if (enemy.enemyCHP <= 0)
+            {
+                statusOutput += HandleEnemyDefeat(enemy.currentEnemy);
+                return statusOutput;
+            }
+
+            statusOutput += ProcessPlayerStatusEffectsAtTurnStart();
+            if (Player.currentHealth <= 0)
+            {
+                return statusOutput;
+            }
+
+            if (ConsumeEnemyFrozenTurn(out string frozenOutput))
+            {
+                return statusOutput + frozenOutput;
+            }
+
+            if (TryResolveEnemyUniqueSkill(out string uniqueSkillOutput))
+            {
+                string uniqueOutput = statusOutput + uniqueSkillOutput;
+                uniqueOutput += "The player has" + Player.currentHealth + "/" + Player.maxhealth + "Hit Points Remaining \n";
+
+                if (Player.currentHealth <= 0)
+                {
+                    Player.currentHealth = 0;
+                    Player.isFighting = false;
+                    Player.isGameOver = true;
+                    uniqueOutput += "You have 0 health remaining. Game Over. Type restart to begin again, or load to restore a save.";
+                }
+
+                return uniqueOutput;
+            }
+
             int monsterDamage = enemy.MonsterDmg(Player.armor);
             Player.currentHealth -= monsterDamage;
 
-            string output = $"Enemy {enemy.currentEnemy} hits you for {monsterDamage}\n";
+            string output = statusOutput + $"Enemy {enemy.currentEnemy} hits you for {monsterDamage}\n";
             output += "The player has" + Player.currentHealth + "/" + Player.maxhealth + "Hit Points Remaining \n";
 
             if (Player.currentHealth <= 0)
@@ -614,7 +711,10 @@ namespace Dawnbarrow
 
                 Player.fireBombCount--;
                 int damage = Math.Max(exploreRandom.Next(16, 29) - enemy.enemyArmor, 0);
-                string output = ResolveCombatTechnique("Fire Bomb", damage, 0, "The bomb bursts in a spray of flame and sparks.");
+                string output = ResolveCombatTechnique("Fire Bomb", damage, 0, "The bomb bursts in a spray of flame and sparks.", () =>
+                {
+                    ApplyEnemyBurn(3, 6);
+                });
 
                 if (Player.fireBombCount == 0)
                 {
@@ -622,6 +722,53 @@ namespace Dawnbarrow
                 }
 
                 return output;
+            }
+
+            if (itemName == "Scroll of Freezing")
+            {
+                if (Player.freezingScrollCount <= 0)
+                {
+                    return "You don't have any Scrolls of Freezing left.";
+                }
+
+                if (Player.isFighting == false)
+                {
+                    return "Use the Scroll of Freezing in combat.";
+                }
+
+                Player.freezingScrollCount--;
+                ApplyEnemyFreeze(3);
+                return "You unfurl the Scroll of Freezing. Ice locks your foe in place for 3 turns.";
+            }
+
+            if (itemName == "Scroll of Fire")
+            {
+                if (Player.fireScrollCount <= 0)
+                {
+                    return "You don't have any Scrolls of Fire left.";
+                }
+
+                if (Player.isFighting == false)
+                {
+                    return "Use the Scroll of Fire in combat.";
+                }
+
+                Player.fireScrollCount--;
+                int burstDamage = Math.Max(exploreRandom.Next(10, 17) - enemy.enemyArmor, 0);
+                return ResolveCombatTechnique("Scroll of Fire", burstDamage, 0, "Flame sigils burst across the enemy.", () =>
+                {
+                    ApplyEnemyBurn(4, 7);
+                });
+            }
+
+            if (itemName == "Scroll of Flight")
+            {
+                if (Player.flightScrollCount <= 0)
+                {
+                    return "You don't have any Scrolls of Flight left.";
+                }
+
+                return "To use Scroll of Flight, type: use scroll of flight x y";
             }
 
             return $"You can't use {itemName} right now.";
@@ -633,6 +780,7 @@ namespace Dawnbarrow
             output += Player.experience(enemy.enemyxpgiven);
             Player.gold += enemy.goldDrop;
             output += $"You loot {enemy.goldDrop} gold.\n";
+            ClearEnemyStatusEffects();
             enemy.isdefeated = true;
             Player.isFighting = false;
             defeatedRooms.Add(GetCurrentRoomKey());
@@ -699,7 +847,10 @@ namespace Dawnbarrow
             if (lowerInput == "fireball")
             {
                 int damage = Math.Max(exploreRandom.Next(12, 23) - enemy.enemyArmor, 0);
-                return ResolveCombatTechnique("Fireball", damage, 6, "The fireball explodes against your enemy in a hot burst.");
+                return ResolveCombatTechnique("Fireball", damage, 6, "The fireball explodes against your enemy in a hot burst.", () =>
+                {
+                    ApplyEnemyBurn(2, 5);
+                });
             }
 
             if (lowerInput == "ice ball")
@@ -729,8 +880,10 @@ namespace Dawnbarrow
                 Player.currentMana -= 7;
                 double healAmount = exploreRandom.Next(12, 23);
                 Player.currentHealth = Math.Min(Player.maxhealth, Player.currentHealth + healAmount);
+                ApplyPlayerRegen(2, 4);
 
                 string output = $"You cast Heal and recover {healAmount} health.\n";
+                output += "Regen surrounds you for 2 turns.\n";
                 output += "The player has" + Player.currentHealth + "/" + Player.maxhealth + "Hit Points Remaining \n";
                 output += ResolveEnemyCounterattack();
                 return output;
@@ -746,17 +899,17 @@ namespace Dawnbarrow
                 int damage = Math.Max(exploreRandom.Next(6, 13) - enemy.enemyArmor, 0);
                 return ResolveCombatTechnique("Bash", damage, 0, "The impact rattles your enemy and dents its defenses.", () =>
                 {
-                    if (enemy.enemyArmor > 0)
-                    {
-                        enemy.enemyArmor--;
-                    }
+                    ApplyEnemyArmorBreak(3, 1);
                 });
             }
 
             if (lowerInput == "slice")
             {
                 int damage = Math.Max(Player.playerDmg(enemy.enemyArmor) + 4, 0);
-                return ResolveCombatTechnique("Slice", damage, 0, "You follow through with a cleaner, deeper cut.");
+                return ResolveCombatTechnique("Slice", damage, 0, "You follow through with a cleaner, deeper cut.", () =>
+                {
+                    ApplyEnemyBleed(2, 4);
+                });
             }
 
             if (lowerInput == "ultra instinct")
@@ -790,6 +943,32 @@ namespace Dawnbarrow
                 return output;
             }
 
+            if (lowerInput == "rupture")
+            {
+                int damage = Math.Max(Player.playerDmg(enemy.enemyArmor) + 6, 0);
+                return ResolveCombatTechnique("Rupture", damage, 5, "You carve deep and leave a heavy wound.", () =>
+                {
+                    ApplyEnemyBleed(4, 6);
+                });
+            }
+
+            if (lowerInput == "battle trance")
+            {
+                if (Player.isFighting == false)
+                {
+                    return "There is no battle to enter a trance for.";
+                }
+
+                if (Player.currentMana < 6)
+                {
+                    return "You don't have enough mana for Battle Trance.";
+                }
+
+                Player.currentMana -= 6;
+                ApplyPlayerRegen(3, 6);
+                return "You enter Battle Trance. Regen will restore your health for 3 turns.";
+            }
+
             return "That skill is all confidence and no execution.";
         }
 
@@ -801,10 +980,17 @@ namespace Dawnbarrow
 
         private string GetShopText()
         {
-            return "A traveling merchant has set up in this calm stretch of jungle.\n" +
-                "Type buy fire bomb for 18 gold.\n" +
-                "Type buy heal for 12 gold to recover 20 health instantly.\n" +
-                "Type buy mana for 10 gold to recover 10 mana instantly.";
+            List<string> lines = new List<string>
+            {
+                "A traveling merchant has set up in this calm stretch of jungle."
+            };
+
+            foreach (ShopEntry entry in shopEntries)
+            {
+                lines.Add($"Type {entry.Command} for {entry.Price} gold. {entry.Description}");
+            }
+
+            return string.Join("\n", lines);
         }
 
         private string HandleBuyCommand(string lowerInput)
@@ -819,9 +1005,15 @@ namespace Dawnbarrow
                 return "Now is not the time to browse wares.";
             }
 
+            ShopEntry? selectedEntry = shopEntries.FirstOrDefault(entry => entry.Command == lowerInput);
+            if (selectedEntry == null)
+            {
+                return "The merchant doesn't stock that.";
+            }
+
             if (lowerInput == "buy fire bomb")
             {
-                const int cost = 18;
+                int cost = selectedEntry.Price;
                 if (Player.gold < cost)
                 {
                     return "You don't have enough gold for a Fire Bomb.";
@@ -835,7 +1027,7 @@ namespace Dawnbarrow
 
             if (lowerInput == "buy heal")
             {
-                const int cost = 12;
+                int cost = selectedEntry.Price;
                 if (Player.gold < cost)
                 {
                     return "You don't have enough gold for healing.";
@@ -854,7 +1046,7 @@ namespace Dawnbarrow
 
             if (lowerInput == "buy mana")
             {
-                const int cost = 10;
+                int cost = selectedEntry.Price;
                 if (Player.gold < cost)
                 {
                     return "You don't have enough gold for mana.";
@@ -871,14 +1063,100 @@ namespace Dawnbarrow
                 return "You drink a sharp herbal tonic and your mana returns.";
             }
 
+            if (lowerInput == "buy scroll of freezing")
+            {
+                int cost = selectedEntry.Price;
+                if (Player.gold < cost)
+                {
+                    return "You don't have enough gold for a Scroll of Freezing.";
+                }
+
+                Player.gold -= cost;
+                Player.freezingScrollCount++;
+                updatelabels();
+                return "You buy a Scroll of Freezing.";
+            }
+
+            if (lowerInput == "buy scroll of fire")
+            {
+                int cost = selectedEntry.Price;
+                if (Player.gold < cost)
+                {
+                    return "You don't have enough gold for a Scroll of Fire.";
+                }
+
+                Player.gold -= cost;
+                Player.fireScrollCount++;
+                updatelabels();
+                return "You buy a Scroll of Fire.";
+            }
+
+            if (lowerInput == "buy scroll of flight")
+            {
+                int cost = selectedEntry.Price;
+                if (Player.gold < cost)
+                {
+                    return "You don't have enough gold for a Scroll of Flight.";
+                }
+
+                Player.gold -= cost;
+                Player.flightScrollCount++;
+                updatelabels();
+                return "You buy a Scroll of Flight.";
+            }
+
             return "The merchant doesn't stock that.";
         }
 
-        private string HandleUseCommand(string lowerInput)
+        private string HandleUseCommand(string trimmedInput, string lowerInput)
         {
             if (lowerInput == "use fire bomb" || lowerInput == "throw fire bomb")
             {
                 return UseConsumable("Fire Bomb");
+            }
+
+            if (lowerInput == "use scroll of freezing")
+            {
+                return UseConsumable("Scroll of Freezing");
+            }
+
+            if (lowerInput == "use scroll of fire")
+            {
+                return UseConsumable("Scroll of Fire");
+            }
+
+            if (lowerInput.StartsWith("use scroll of flight"))
+            {
+                if (Player.flightScrollCount <= 0)
+                {
+                    return "You don't have any Scrolls of Flight left.";
+                }
+
+                string coordinatesText = trimmedInput.Substring("use scroll of flight".Length).Trim();
+                if (TryParseCoordinatePair(coordinatesText, out int targetX, out int targetY) == false)
+                {
+                    return "Flight format: use scroll of flight x y";
+                }
+
+                if (targetX < 1 || targetX > 5 || targetY < 1 || targetY > 5)
+                {
+                    return "Those coordinates are out of bounds. Use values 1 through 5.";
+                }
+
+                if (Player.isFighting)
+                {
+                    return "You can't safely read the flight scroll mid-fight.";
+                }
+
+                Player.flightScrollCount--;
+                room.setCurrentRoom(targetX, targetY);
+                game.setCurrentRoom(targetX, targetY);
+                string roomDescription = game.Output();
+                string encounterText = PrepareRoomEncounter();
+                label1.Text = room.Biome(targetX, targetY) + room.getCurrentRoomCoordinates().ToString();
+                updateBackground();
+                updatelabels();
+                return $"Arcane wind tears open the distance and drops you at ({targetX},{targetY}).\n{roomDescription}{encounterText}";
             }
 
             return "You can't use that right now.";
@@ -950,7 +1228,7 @@ namespace Dawnbarrow
                 return CastSpell(lowerInput);
             }
 
-            if (MatchesAny(lowerInput, "bash", "slice", "ultra instinct"))
+            if (MatchesAny(lowerInput, "bash", "slice", "ultra instinct", "rupture", "battle trance"))
             {
                 return UseSkill(lowerInput);
             }
@@ -960,14 +1238,14 @@ namespace Dawnbarrow
                 return IsShopRoom() ? GetShopText() : "There is no shop here.";
             }
 
-            if (MatchesAny(lowerInput, "buy fire bomb", "buy heal", "buy mana"))
+            if (lowerInput.StartsWith("buy "))
             {
                 return HandleBuyCommand(lowerInput);
             }
 
-            if (MatchesAny(lowerInput, "use fire bomb", "throw fire bomb"))
+            if (lowerInput.StartsWith("use ") || lowerInput.StartsWith("throw "))
             {
-                return HandleUseCommand(lowerInput);
+                return HandleUseCommand(trimmedInput, lowerInput);
             }
 
             if (trimmedInput.Contains("Who is the cutest cat on the planet?"))
@@ -1038,9 +1316,9 @@ namespace Dawnbarrow
             if (ContainsAny(lowerInput, "display commands", "show commands"))
             {
                 MessageBox.Show(" Look around ---> gain more information about your surroundings \n Gender (gender) ---> input your gender \n name (name) ---> Input your name \n " +
-                    "Fight ---> Fight the current monster in the room \n Hit ---> Hit the current monster (must first be fighting) \n Fireball / Ice Ball / Heal ---> cast combat spells \n Bash / Slice / Ultra Instinct ---> use combat skills \n check self ---> learn more information about yourself \n" +
+                    "Fight ---> Fight the current monster in the room \n Hit ---> Hit the current monster (must first be fighting) \n Fireball / Ice Ball / Heal ---> cast combat spells \n Bash / Slice / Ultra Instinct / Rupture / Battle Trance ---> use combat skills \n check self ---> learn more information about yourself \n" +
                     " Inventory ---> look at your inventory \n equip (item) ---> toggle current equipment \n " +
-                    "Search Ground ---> Pick up items on the ground \n Explore ---> look for repeatable encounters or loot in cleared rooms \n Shop ---> view merchant stock in the safe jungle room \n Buy Fire Bomb / Buy Heal / Buy Mana ---> spend gold at the shop \n Use Fire Bomb ---> throw a consumable during combat \n North, South, East, West ---> Walk in direction written\n" + "Run ---> If you're in combat, get out of combat \n Suicide ---> reset immediately \n Restart ---> begins a new run \n Save ---> writes the default save file \n Save <filename> ---> writes a named save file \n Load ---> restores your default save \n Load <filename> ---> restores a named save", "Dawnbarrow Commands");
+                    "Search Ground ---> Pick up items on the ground \n Explore ---> look for repeatable encounters or loot in cleared rooms \n Shop ---> view merchant stock in the safe jungle room \n Buy <item> ---> spend gold at the shop \n Use Fire Bomb / Use Scroll of Freezing / Use Scroll of Fire ---> consumables \n Use Scroll of Flight x y ---> fast travel \n North, South, East, West ---> Walk in direction written\n" + "Run ---> If you're in combat, get out of combat \n Suicide ---> reset immediately \n Restart ---> begins a new run \n Save ---> writes the default save file \n Save <filename> ---> writes a named save file \n Load ---> restores your default save \n Load <filename> ---> restores a named save", "Dawnbarrow Commands");
                 return "";
             }
 
@@ -1224,6 +1502,7 @@ namespace Dawnbarrow
             if (defeatedRooms.Contains(GetRoomKey(coords.x, coords.y)))
             {
                 enemy.ClearEncounter();
+                ClearEnemyStatusEffects();
 
                 if (room.IsRepeatableEncounterRoom(coords.x, coords.y))
                 {
@@ -1234,6 +1513,7 @@ namespace Dawnbarrow
             }
 
             enemy.enemySpawn(coords.x, coords.y);
+            ClearEnemyStatusEffects();
             return "";
         }
 
@@ -1244,6 +1524,8 @@ namespace Dawnbarrow
             Player = new Player();
             enemy = new Enemy();
             defeatedRooms.Clear();
+            ClearEnemyStatusEffects();
+            ClearPlayerStatusEffects();
 
             room.setCurrentRoom(1, 1);
             game.setCurrentRoom(1, 1);
@@ -1323,11 +1605,13 @@ namespace Dawnbarrow
             if (room.randomEncounter())
             {
                 enemy.SpawnExploreEncounter(room.Biome(coords.x, coords.y));
+                ClearEnemyStatusEffects();
                 return "You explore the area and stir something up...\n" + enemy.desc + "\n" + enemy.MonsterInfo() + "\nType fight if you want to engage.";
             }
 
             string foundItem = exploreItems[exploreRandom.Next(exploreItems.Count)];
             enemy.ClearEncounter();
+            ClearEnemyStatusEffects();
             enemy.placedObject = foundItem;
             enemy.isdefeated = true;
             return $"You explore the area and find a {foundItem}! Search Ground to pick it up.";
@@ -1369,6 +1653,9 @@ namespace Dawnbarrow
                     HasTalkingCat = Player.hasTalkingCat,
                     HasFriendshipBracelet = Player.hasFriendshipBracelet,
                     FireBombCount = Player.fireBombCount,
+                    FreezingScrollCount = Player.freezingScrollCount,
+                    FireScrollCount = Player.fireScrollCount,
+                    FlightScrollCount = Player.flightScrollCount,
                     HasIronSword = Player.hasIronSword,
                     HasFireSword = Player.hasFireSword,
                     HasTopazSword = Player.hasTopazSword,
@@ -1440,8 +1727,21 @@ namespace Dawnbarrow
                 return $"No save file found at {savePath}";
             }
 
-            string saveJson = File.ReadAllText(savePath);
-            SaveData? saveData = JsonSerializer.Deserialize<SaveData>(saveJson);
+            SaveData? saveData;
+
+            try
+            {
+                string saveJson = File.ReadAllText(savePath);
+                saveData = JsonSerializer.Deserialize<SaveData>(saveJson);
+            }
+            catch (JsonException)
+            {
+                return "The save file is corrupted or invalid JSON.";
+            }
+            catch (IOException exception)
+            {
+                return $"Could not load save: {exception.Message}";
+            }
 
             if (saveData == null)
             {
@@ -1482,6 +1782,9 @@ namespace Dawnbarrow
             Player.hasTalkingCat = saveData.Player.HasTalkingCat;
             Player.hasFriendshipBracelet = saveData.Player.HasFriendshipBracelet;
             Player.fireBombCount = saveData.Player.FireBombCount;
+            Player.freezingScrollCount = saveData.Player.FreezingScrollCount;
+            Player.fireScrollCount = saveData.Player.FireScrollCount;
+            Player.flightScrollCount = saveData.Player.FlightScrollCount;
             Player.hasIronSword = saveData.Player.HasIronSword;
             Player.hasFireSword = saveData.Player.HasFireSword;
             Player.hasTopazSword = saveData.Player.HasTopazSword;
@@ -1514,6 +1817,8 @@ namespace Dawnbarrow
             enemy.needsPickaxe = saveData.Enemy.NeedsPickaxe;
             enemy.needsBossKey = saveData.Enemy.NeedsBossKey;
             enemy.needsFriendshipBracelet = saveData.Enemy.NeedsFriendshipBracelet;
+            ClearEnemyStatusEffects();
+            ClearPlayerStatusEffects();
 
             currentOutput = "";
             currentCharIndex = 0;
@@ -1570,9 +1875,37 @@ namespace Dawnbarrow
 
         }
 
+        private void InputBox_KeyDown(object? sender, KeyEventArgs e)
+        {
+            if (commandHistory.Count == 0)
+            {
+                return;
+            }
+
+            if (e.KeyCode == Keys.Up)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                commandHistoryIndex = Math.Max(0, commandHistoryIndex - 1);
+                SetInputFromHistoryIndex();
+                return;
+            }
+
+            if (e.KeyCode == Keys.Down)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                commandHistoryIndex = Math.Min(commandHistory.Count, commandHistoryIndex + 1);
+                SetInputFromHistoryIndex();
+            }
+        }
+
         private void InputBox_MouseClick(object sender, MouseEventArgs e)
         {
-            { InputBox.Text = ""; }
+            if (InputBox.Text == inputPlaceholderText)
+            {
+                InputBox.Text = "";
+            }
         }
 
         public void updatelabels()
@@ -1584,6 +1917,7 @@ namespace Dawnbarrow
             Equip.Text = $"Currently Equipped:\n {Player.HeadEquipped},\n {Player.ChestEquipped},\n {Player.LegsEquipped},\n {Player.WeaponEquipped}";
             RenderMiniMap();
             RefreshInventoryPanel();
+            RefreshShopPanel();
             //bryant.Text = $"Item: {Item.itemvariable(itemname, 2)}";
         }
 

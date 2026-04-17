@@ -154,23 +154,26 @@ namespace Dawnbarrow
         {
             int x = currRoomCoordinates.x;
             int y = currRoomCoordinates.y;
-            string output = "";
+            StringBuilder output = new StringBuilder();
 
-            for (int col = 0; col < 5; col++)
+            for (int row = 5; row >= 1; row--)
             {
-                for (int row = 0; row < 5; row++)
+                for (int col = 1; col <= 5; col++)
                 {
                     if (row == y && col == x)
                     {
-                        output += "X";
+                        output.Append('X');
                     }
                     else
-                        output += "O";
+                    {
+                        output.Append('O');
+                    }
                 }
-                output = "\n";
-                
+
+                output.AppendLine();
             }
-            return output;
+
+            return output.ToString();
         }
         public string Output()
         {

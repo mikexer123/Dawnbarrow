@@ -51,6 +51,21 @@ namespace Dawnbarrow
                 entries.Add(new InventoryEntry("Fire Bomb", "Consumable", $"Fire Bomb x{Player.fireBombCount}"));
             }
 
+            if (Player.freezingScrollCount > 0)
+            {
+                entries.Add(new InventoryEntry("Scroll of Freezing", "Consumable", $"Scroll of Freezing x{Player.freezingScrollCount}"));
+            }
+
+            if (Player.fireScrollCount > 0)
+            {
+                entries.Add(new InventoryEntry("Scroll of Fire", "Consumable", $"Scroll of Fire x{Player.fireScrollCount}"));
+            }
+
+            if (Player.flightScrollCount > 0)
+            {
+                entries.Add(new InventoryEntry("Scroll of Flight", "Consumable", $"Scroll of Flight x{Player.flightScrollCount}"));
+            }
+
             AddIfOwned(Player.hasLeatherHelmet, "Leather Helmet +1", "Helmet");
             AddIfOwned(Player.hasIronHelmet, "Iron Helmet +2", "Helmet");
             AddIfOwned(Player.hasTopazHelmet, "Topaz Helmet +3", "Helmet");
@@ -80,6 +95,11 @@ namespace Dawnbarrow
                 || Player.ChestEquipped == itemName
                 || Player.LegsEquipped == itemName
                 || Player.WeaponEquipped == itemName;
+        }
+
+        private bool IsConsumableEntry(InventoryEntry? entry)
+        {
+            return entry != null && entry.Category == "Consumable";
         }
 
         private string GetInventoryActionLabel(InventoryEntry? entry)
@@ -172,8 +192,10 @@ namespace Dawnbarrow
             InventoryList.EndUpdate();
             InventoryHeader.Text = $"Inventory ({inventoryEntries.Count})";
             InventoryHint.Text = inventoryEntries.Count == 0 ? "No items yet" : "Double-click item";
-            InventoryActionButton.Text = GetInventoryActionLabel(InventoryList.SelectedItem as InventoryEntry);
+            InventoryEntry? selectedEntry = InventoryList.SelectedItem as InventoryEntry;
+            InventoryActionButton.Text = GetInventoryActionLabel(selectedEntry);
             InventoryActionButton.Enabled = inventoryEntries.Count > 0;
+            InventoryConsumableButton.Enabled = IsConsumableEntry(selectedEntry);
         }
 
         private void InventoryActionButton_Click(object sender, EventArgs e)
@@ -188,7 +210,31 @@ namespace Dawnbarrow
 
         private void InventoryList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            InventoryActionButton.Text = GetInventoryActionLabel(InventoryList.SelectedItem as InventoryEntry);
+            InventoryEntry? selectedEntry = InventoryList.SelectedItem as InventoryEntry;
+            InventoryActionButton.Text = GetInventoryActionLabel(selectedEntry);
+            InventoryConsumableButton.Enabled = IsConsumableEntry(selectedEntry);
+        }
+
+        private void InventoryConsumableButton_Click(object sender, EventArgs e)
+        {
+            InventoryEntry? selectedEntry = InventoryList.SelectedItem as InventoryEntry;
+
+            if (selectedEntry == null)
+            {
+                StartTyping("\nSelect an item from the inventory panel first.", true);
+                return;
+            }
+
+            if (selectedEntry.Category != "Consumable")
+            {
+                StartTyping("\nThat item is not a consumable.", true);
+                return;
+            }
+
+            string output = UseConsumable(selectedEntry.ItemName);
+            Player.calculateArmor();
+            updatelabels();
+            StartTyping($"\n{output}", true);
         }
     }
 }

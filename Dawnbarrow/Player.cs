@@ -38,6 +38,9 @@ namespace Dawnbarrow
        public bool hasTalkingCat = false;
        public bool hasFriendshipBracelet = false;
     public int fireBombCount = 0;
+    public int freezingScrollCount = 0;
+    public int fireScrollCount = 0;
+    public int flightScrollCount = 0;
         //swords
         public bool hasIronSword = false;
         public bool hasFireSword = false;
@@ -243,6 +246,18 @@ namespace Dawnbarrow
             {
                 fireBombCount++;
             }
+            if (item == "Scroll of Freezing")
+            {
+                freezingScrollCount++;
+            }
+            if (item == "Scroll of Fire")
+            {
+                fireScrollCount++;
+            }
+            if (item == "Scroll of Flight")
+            {
+                flightScrollCount++;
+            }
         }
         public string displayInventory()
         {
@@ -277,6 +292,18 @@ namespace Dawnbarrow
             if (fireBombCount > 0)
             {
                 consumables += " Fire Bomb x" + fireBombCount;
+            }
+            if (freezingScrollCount > 0)
+            {
+                consumables += " Scroll of Freezing x" + freezingScrollCount;
+            }
+            if (fireScrollCount > 0)
+            {
+                consumables += " Scroll of Fire x" + fireScrollCount;
+            }
+            if (flightScrollCount > 0)
+            {
+                consumables += " Scroll of Flight x" + flightScrollCount;
             }
             //Helmets
             if (hasLeatherHelmet)
@@ -361,6 +388,9 @@ namespace Dawnbarrow
             hasBossKey = true;
             hasPickaxe = true;
             fireBombCount = 3;
+            freezingScrollCount = 2;
+            fireScrollCount = 2;
+            flightScrollCount = 1;
         }
         public void resetProgress()
         {
@@ -391,6 +421,9 @@ namespace Dawnbarrow
             hasTalkingCat = false;
             hasFriendshipBracelet = false;
             fireBombCount = 0;
+            freezingScrollCount = 0;
+            fireScrollCount = 0;
+            flightScrollCount = 0;
             hasIronSword = false;
             hasFireSword = false;
             hasTopazSword = false;

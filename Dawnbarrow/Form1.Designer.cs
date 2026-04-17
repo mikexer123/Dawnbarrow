@@ -53,9 +53,15 @@ namespace Dawnbarrow
             MiniMap = new Label();
             InventoryPanel = new Panel();
             InventoryHint = new Label();
+            InventoryConsumableButton = new Button();
             InventoryActionButton = new Button();
             InventoryList = new ListBox();
             InventoryHeader = new Label();
+            ShopPanel = new Panel();
+            ShopHint = new Label();
+            ShopBuyButton = new Button();
+            ShopList = new ListBox();
+            ShopHeader = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Background).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
@@ -68,6 +74,7 @@ namespace Dawnbarrow
             ((System.ComponentModel.ISupportInitialize)Chestplate).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Leggings).BeginInit();
             InventoryPanel.SuspendLayout();
+            ShopPanel.SuspendLayout();
             SuspendLayout();
             // 
             // ConsoleOut
@@ -293,6 +300,7 @@ namespace Dawnbarrow
             InventoryPanel.BackColor = Color.BurlyWood;
             InventoryPanel.BorderStyle = BorderStyle.FixedSingle;
             InventoryPanel.Controls.Add(InventoryHint);
+            InventoryPanel.Controls.Add(InventoryConsumableButton);
             InventoryPanel.Controls.Add(InventoryActionButton);
             InventoryPanel.Controls.Add(InventoryList);
             InventoryPanel.Controls.Add(InventoryHeader);
@@ -305,18 +313,29 @@ namespace Dawnbarrow
             // 
             InventoryHint.AutoSize = true;
             InventoryHint.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            InventoryHint.Location = new Point(394, 68);
+            InventoryHint.Location = new Point(336, 72);
             InventoryHint.Name = "InventoryHint";
             InventoryHint.Size = new Size(109, 13);
-            InventoryHint.TabIndex = 3;
+            InventoryHint.TabIndex = 4;
             InventoryHint.Text = "Double-click item";
+            // 
+            // InventoryConsumableButton
+            // 
+            InventoryConsumableButton.Font = new Font("SimSun-ExtB", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            InventoryConsumableButton.Location = new Point(336, 53);
+            InventoryConsumableButton.Name = "InventoryConsumableButton";
+            InventoryConsumableButton.Size = new Size(182, 29);
+            InventoryConsumableButton.TabIndex = 3;
+            InventoryConsumableButton.Text = "Use Consumable";
+            InventoryConsumableButton.UseVisualStyleBackColor = true;
+            InventoryConsumableButton.Click += InventoryConsumableButton_Click;
             // 
             // InventoryActionButton
             // 
             InventoryActionButton.Font = new Font("SimSun-ExtB", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            InventoryActionButton.Location = new Point(397, 31);
+            InventoryActionButton.Location = new Point(336, 22);
             InventoryActionButton.Name = "InventoryActionButton";
-            InventoryActionButton.Size = new Size(121, 29);
+            InventoryActionButton.Size = new Size(182, 29);
             InventoryActionButton.TabIndex = 2;
             InventoryActionButton.Text = "Equip / Use";
             InventoryActionButton.UseVisualStyleBackColor = true;
@@ -329,7 +348,7 @@ namespace Dawnbarrow
             InventoryList.ItemHeight = 15;
             InventoryList.Location = new Point(13, 31);
             InventoryList.Name = "InventoryList";
-            InventoryList.Size = new Size(369, 49);
+            InventoryList.Size = new Size(315, 49);
             InventoryList.TabIndex = 1;
             InventoryList.SelectedIndexChanged += InventoryList_SelectedIndexChanged;
             InventoryList.DoubleClick += InventoryList_DoubleClick;
@@ -344,6 +363,62 @@ namespace Dawnbarrow
             InventoryHeader.TabIndex = 0;
             InventoryHeader.Text = "Inventory";
             // 
+            // ShopPanel
+            // 
+            ShopPanel.BackColor = Color.BlanchedAlmond;
+            ShopPanel.BorderStyle = BorderStyle.FixedSingle;
+            ShopPanel.Controls.Add(ShopHint);
+            ShopPanel.Controls.Add(ShopBuyButton);
+            ShopPanel.Controls.Add(ShopList);
+            ShopPanel.Controls.Add(ShopHeader);
+            ShopPanel.Location = new Point(1061, 303);
+            ShopPanel.Name = "ShopPanel";
+            ShopPanel.Size = new Size(530, 128);
+            ShopPanel.TabIndex = 23;
+            // 
+            // ShopHint
+            // 
+            ShopHint.AutoSize = true;
+            ShopHint.Font = new Font("Consolas", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ShopHint.Location = new Point(346, 102);
+            ShopHint.Name = "ShopHint";
+            ShopHint.Size = new Size(145, 13);
+            ShopHint.TabIndex = 3;
+            ShopHint.Text = "Travel to 3,1 to shop";
+            // 
+            // ShopBuyButton
+            // 
+            ShopBuyButton.Font = new Font("SimSun-ExtB", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ShopBuyButton.Location = new Point(346, 63);
+            ShopBuyButton.Name = "ShopBuyButton";
+            ShopBuyButton.Size = new Size(170, 33);
+            ShopBuyButton.TabIndex = 2;
+            ShopBuyButton.Text = "Buy Selected";
+            ShopBuyButton.UseVisualStyleBackColor = true;
+            ShopBuyButton.Click += ShopBuyButton_Click;
+            // 
+            // ShopList
+            // 
+            ShopList.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ShopList.FormattingEnabled = true;
+            ShopList.ItemHeight = 14;
+            ShopList.Location = new Point(13, 33);
+            ShopList.Name = "ShopList";
+            ShopList.Size = new Size(320, 74);
+            ShopList.TabIndex = 1;
+            ShopList.SelectedIndexChanged += ShopList_SelectedIndexChanged;
+            ShopList.DoubleClick += ShopList_DoubleClick;
+            // 
+            // ShopHeader
+            // 
+            ShopHeader.AutoSize = true;
+            ShopHeader.Font = new Font("SimSun-ExtB", 11.9999981F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ShopHeader.Location = new Point(9, 8);
+            ShopHeader.Name = "ShopHeader";
+            ShopHeader.Size = new Size(43, 16);
+            ShopHeader.TabIndex = 0;
+            ShopHeader.Text = "Shop";
+            // 
             // Dawnbarrow
             // 
             AcceptButton = submit_button;
@@ -351,6 +426,7 @@ namespace Dawnbarrow
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.RosyBrown;
             ClientSize = new Size(1727, 935);
+            Controls.Add(ShopPanel);
             Controls.Add(InventoryPanel);
             Controls.Add(MiniMap);
             Controls.Add(Leggings);
@@ -391,6 +467,8 @@ namespace Dawnbarrow
             ((System.ComponentModel.ISupportInitialize)Leggings).EndInit();
             InventoryPanel.ResumeLayout(false);
             InventoryPanel.PerformLayout();
+            ShopPanel.ResumeLayout(false);
+            ShopPanel.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -421,7 +499,13 @@ namespace Dawnbarrow
         private Label InventoryHeader;
         private ListBox InventoryList;
         private Button InventoryActionButton;
+        private Button InventoryConsumableButton;
         private Label InventoryHint;
+        private Panel ShopPanel;
+        private Label ShopHint;
+        private Button ShopBuyButton;
+        private ListBox ShopList;
+        private Label ShopHeader;
     }
 
 }

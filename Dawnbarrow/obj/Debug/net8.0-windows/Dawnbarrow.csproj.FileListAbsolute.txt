@@ -70,3 +70,4 @@ C:\GitGit\Dawnbarrow\Dawnbarrow\obj\Debug\net8.0-windows\refint\Dawnbarrow.dll
 C:\GitGit\Dawnbarrow\Dawnbarrow\obj\Debug\net8.0-windows\Dawnbarrow.pdb
 C:\GitGit\Dawnbarrow\Dawnbarrow\obj\Debug\net8.0-windows\Dawnbarrow.genruntimeconfig.cache
 C:\GitGit\Dawnbarrow\Dawnbarrow\obj\Debug\net8.0-windows\ref\Dawnbarrow.dll
+C:\GitGit\Dawnbarrow\Dawnbarrow\bin\Debug\net8.0-windows\Data\game-data.json

@@ -1,0 +1,58 @@
+{
+  "ExploreLoot": [
+    "Leather Helmet +1",
+    "Leather Chestplate +1",
+    "Leather Leggings +1",
+    "Iron Sword +1",
+    "Iron Helmet +2",
+    "Iron Chestplate +2",
+    "Iron Leggings +2",
+    "Fire Sword +2",
+    "Topaz Helmet +3",
+    "Topaz Chestplate +3",
+    "Topaz Leggings +3",
+    "Topaz Sword +3",
+    "Fire Bomb",
+    "Scroll of Freezing",
+    "Scroll of Fire",
+    "Scroll of Flight"
+  ],
+  "ShopItems": [
+    {
+      "Command": "buy fire bomb",
+      "DisplayName": "Fire Bomb",
+      "Price": 18,
+      "Description": "Strong consumable damage in combat."
+    },
+    {
+      "Command": "buy heal",
+      "DisplayName": "Heal Service",
+      "Price": 12,
+      "Description": "Restore 20 health instantly."
+    },
+    {
+      "Command": "buy mana",
+      "DisplayName": "Mana Tonic",
+      "Price": 10,
+      "Description": "Restore 10 mana instantly."
+    },
+    {
+      "Command": "buy scroll of freezing",
+      "DisplayName": "Scroll of Freezing",
+      "Price": 20,
+      "Description": "Freeze enemies for 3 turns."
+    },
+    {
+      "Command": "buy scroll of fire",
+      "DisplayName": "Scroll of Fire",
+      "Price": 20,
+      "Description": "Apply strong burn over time."
+    },
+    {
+      "Command": "buy scroll of flight",
+      "DisplayName": "Scroll of Flight",
+      "Price": 28,
+      "Description": "Fast travel to any map coordinate."
+    }
+  ]
+}
