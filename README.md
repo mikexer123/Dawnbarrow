@@ -1,5 +1,7 @@
 # Dawnbarrow
 ![My Image](DawnBarrow.png)
+
+
 A WinForms text-adventure RPG built with C# and .NET 8.
 
 Dawnbarrow mixes command-driven exploration/combat with a visual UI layer (minimap, inventory/shop panels, status readouts, and biome backgrounds). The project is now primarily data-driven for world layout and encounter content.
