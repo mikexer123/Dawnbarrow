@@ -979,6 +979,33 @@ namespace Dawnbarrow
             return coords.x == 3 && coords.y == 1;
         }
 
+        private string HandleSpawnCommand(string trimmedInput)
+        {
+            if (Player.isFighting)
+            {
+                return "You can't force-spawn while already fighting.";
+            }
+
+            string args = trimmedInput.Length > 5 ? trimmedInput.Substring(5).Trim() : "";
+            if (string.IsNullOrWhiteSpace(args) == false && args.Equals("here", StringComparison.OrdinalIgnoreCase) == false)
+            {
+                return "Spawn format: spawn OR spawn here";
+            }
+
+            (int x, int y) coords = room.getCurrentRoomCoordinates();
+            defeatedRooms.Remove(GetRoomKey(coords.x, coords.y));
+            SpawnRoomEncounterWithFallback(coords.x, coords.y);
+            ClearEnemyStatusEffects();
+            updatelabels();
+
+            if (string.IsNullOrWhiteSpace(enemy.currentEnemy))
+            {
+                return "Spawn test ran, but no encounter data exists for this room.";
+            }
+
+            return $"Spawned test encounter at ({coords.x},{coords.y}):\n{enemy.desc}\n{enemy.MonsterInfo()}\nType fight to engage.";
+        }
+
         private string GetShopText()
         {
             List<string> lines = new List<string>
@@ -1245,6 +1272,11 @@ namespace Dawnbarrow
                 return IsShopRoom() ? GetShopText() : "There is no shop here.";
             }
 
+            if (lowerInput == "spawn" || lowerInput.StartsWith("spawn "))
+            {
+                return HandleSpawnCommand(trimmedInput);
+            }
+
             if (lowerInput.StartsWith("buy "))
             {
                 return HandleBuyCommand(lowerInput);
@@ -1325,7 +1357,7 @@ namespace Dawnbarrow
                 MessageBox.Show(" Look around ---> gain more information about your surroundings \n Gender (gender) ---> input your gender \n name (name) ---> Input your name \n " +
                     "Fight ---> Fight the current monster in the room \n Hit ---> Hit the current monster (must first be fighting) \n Fireball / Ice Ball / Heal ---> cast combat spells \n Bash / Slice / Ultra Instinct / Rupture / Battle Trance ---> use combat skills \n check self ---> learn more information about yourself \n" +
                     " Inventory ---> look at your inventory \n equip (item) ---> toggle current equipment \n " +
-                    "Search Ground ---> Pick up items on the ground \n Explore ---> look for repeatable encounters or loot in cleared rooms \n Shop ---> view merchant stock in the safe jungle room \n Buy <item> ---> spend gold at the shop \n Use Fire Bomb / Use Scroll of Freezing / Use Scroll of Fire ---> consumables \n Use Scroll of Flight x y ---> fast travel \n ? <command> ---> usage help for a specific command \n North, South, East, West ---> Walk in direction written\n" + "Run ---> If you're in combat, get out of combat \n Suicide ---> reset immediately \n Restart ---> begins a new run \n Save ---> writes the default save file \n Save <filename> ---> writes a named save file \n Load ---> restores your default save \n Load <filename> ---> restores a named save", "Dawnbarrow Commands");
+                    "Search Ground ---> Pick up items on the ground \n Explore ---> look for repeatable encounters or loot in cleared rooms \n Shop ---> view merchant stock in the safe jungle room \n Buy <item> ---> spend gold at the shop \n Use Fire Bomb / Use Scroll of Freezing / Use Scroll of Fire ---> consumables \n Use Scroll of Flight x y ---> fast travel \n Spawn ---> testing command to force-spawn the current room encounter \n ? <command> ---> usage help for a specific command \n North, South, East, West ---> Walk in direction written\n" + "Run ---> If you're in combat, get out of combat \n Suicide ---> reset immediately \n Restart ---> begins a new run \n Save ---> writes the default save file \n Save <filename> ---> writes a named save file \n Load ---> restores your default save \n Load <filename> ---> restores a named save", "Dawnbarrow Commands");
                 return "";
             }
 

@@ -35,6 +35,7 @@ namespace Dawnbarrow
             ["load"] = "Usage: load OR load <filename>\nExamples: load, load run42",
             ["map"] = "Usage: map\nWhen: Display the simple coordinate map.",
             ["run"] = "Usage: run\nWhen: Attempt to leave combat immediately.",
+            ["spawn"] = "Usage: spawn OR spawn here\nWhen: Testing command to respawn the current room encounter.",
             ["restart"] = "Usage: restart\nWhen: Start a new run.",
             ["suicide"] = "Usage: suicide\nWhen: Immediate reset for fast testing.",
             ["name"] = "Usage: name <your name>\nExample: name Rowan",

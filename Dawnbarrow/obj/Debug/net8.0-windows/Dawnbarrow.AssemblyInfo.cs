@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Dawnbarrow")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd9a8993063189e8c44cd07986136a872fc5c34e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+585f98fc263bcc9462a4a344798489162693db2a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Dawnbarrow")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Dawnbarrow")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
