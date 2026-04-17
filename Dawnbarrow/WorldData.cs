@@ -8,6 +8,8 @@ namespace Dawnbarrow
 {
     internal static class WorldData
     {
+        private const string DefaultRoomText = "You are in a strange, unmapped location, how did you get here?";
+
         internal sealed class RoomNode
         {
             public int X { get; set; }
@@ -28,6 +30,8 @@ namespace Dawnbarrow
         }
 
         private static IReadOnlyDictionary<string, RoomNode>? roomCache;
+        private static (int minX, int maxX, int minY, int maxY)? worldBoundsCache;
+        private static (int x, int y)? startRoomCache;
 
         private static string BuildKey(int x, int y)
         {
@@ -59,7 +63,7 @@ namespace Dawnbarrow
                     {
                         foreach (RoomNode room in data.Rooms)
                         {
-                            if (room.X < 1 || room.X > 5 || room.Y < 1 || room.Y > 5)
+                            if (room.X < 1 || room.Y < 1)
                             {
                                 continue;
                             }
@@ -90,15 +94,46 @@ namespace Dawnbarrow
                             CanGoEast = x < 5,
                             CanGoWest = x > 1,
                             RepeatableEncounter = true,
-                            Description = "You are in a strange, unmapped location, how did you get here?",
-                            Subtext = "You are in a strange, unmapped location, how did you get here?"
+                            Description = DefaultRoomText,
+                            Subtext = DefaultRoomText
                         };
                     }
                 }
             }
 
+            int minX = result.Values.Min(room => room.X);
+            int maxX = result.Values.Max(room => room.X);
+            int minY = result.Values.Min(room => room.Y);
+            int maxY = result.Values.Max(room => room.Y);
+
+            worldBoundsCache = (minX, maxX, minY, maxY);
+            startRoomCache = result.ContainsKey(BuildKey(1, 1))
+                ? (1, 1)
+                : result.Values
+                    .OrderBy(room => room.Y)
+                    .ThenBy(room => room.X)
+                    .Select(room => (room.X, room.Y))
+                    .First();
+
             roomCache = result;
             return roomCache;
+        }
+
+        public static (int minX, int maxX, int minY, int maxY) GetBounds()
+        {
+            GetRooms();
+            return worldBoundsCache ?? (1, 5, 1, 5);
+        }
+
+        public static bool RoomExists(int x, int y)
+        {
+            return GetRooms().ContainsKey(BuildKey(x, y));
+        }
+
+        public static (int x, int y) GetStartCoordinates()
+        {
+            GetRooms();
+            return startRoomCache ?? (1, 1);
         }
     }
 }

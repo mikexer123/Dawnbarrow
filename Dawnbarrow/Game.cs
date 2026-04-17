@@ -5,27 +5,40 @@ namespace Dawnbarrow
 {
     internal class Game
     {
+        private const string DefaultRoomText = "You are in a strange, unmapped location, how did you get here?";
         public int currentRoomIndex;
         public (int x, int y) currRoomCoordinates;
-        public string[] roomDescriptions = new string[25];
-        public string[] roomsubtext = new string[25];
+        public string[] roomDescriptions;
+        public string[] roomsubtext;
+        private readonly int minX;
+        private readonly int maxX;
+        private readonly int minY;
+        private readonly int maxY;
+        private readonly int mapWidth;
 
         public Game()
         {
-            currRoomCoordinates = (1, 1);
+            (minX, maxX, minY, maxY) = WorldData.GetBounds();
+            mapWidth = (maxX - minX) + 1;
+            int mapHeight = (maxY - minY) + 1;
+            int roomCount = Math.Max(1, mapWidth * mapHeight);
+            roomDescriptions = new string[roomCount];
+            roomsubtext = new string[roomCount];
+            currRoomCoordinates = WorldData.GetStartCoordinates();
             RefreshRoomTextCache();
+            currentRoomIndex = IndexFor(currRoomCoordinates.x, currRoomCoordinates.y);
         }
 
-        private static int IndexFor(int x, int y)
+        private int IndexFor(int x, int y)
         {
-            return (x - 1) + (y - 1) * 5;
+            return (x - minX) + (y - minY) * mapWidth;
         }
 
         private void RefreshRoomTextCache()
         {
             for (int index = 0; index < roomDescriptions.Length; index++)
             {
-                roomDescriptions[index] = "You are in a strange, unmapped location, how did you get here?";
+                roomDescriptions[index] = DefaultRoomText;
                 roomsubtext[index] = roomDescriptions[index];
             }
 
@@ -49,7 +62,16 @@ namespace Dawnbarrow
 
         public void setCurrentRoom(int x, int y)
         {
-            currRoomCoordinates = (x, y);
+            if (WorldData.RoomExists(x, y))
+            {
+                currRoomCoordinates = (x, y);
+            }
+            else
+            {
+                currRoomCoordinates = WorldData.GetStartCoordinates();
+            }
+
+            currentRoomIndex = IndexFor(currRoomCoordinates.x, currRoomCoordinates.y);
         }
 
         public (int x, int y) getCurrentRoom()
@@ -73,10 +95,16 @@ namespace Dawnbarrow
             int y = currRoomCoordinates.y;
             StringBuilder output = new StringBuilder();
 
-            for (int row = 5; row >= 1; row--)
+            for (int row = maxY; row >= minY; row--)
             {
-                for (int col = 1; col <= 5; col++)
+                for (int col = minX; col <= maxX; col++)
                 {
+                    if (WorldData.RoomExists(col, row) == false)
+                    {
+                        output.Append(' ');
+                        continue;
+                    }
+
                     output.Append(row == y && col == x ? 'X' : 'O');
                 }
 
@@ -84,6 +112,17 @@ namespace Dawnbarrow
             }
 
             return output.ToString();
+        }
+
+        public string GetCurrentRoomSubtext()
+        {
+            int index = IndexFor(currRoomCoordinates.x, currRoomCoordinates.y);
+            if (index >= 0 && index < roomsubtext.Length)
+            {
+                return roomsubtext[index];
+            }
+
+            return DefaultRoomText;
         }
 
         public string Output()
@@ -132,7 +171,7 @@ namespace Dawnbarrow
             string response = "";
             if ((input == "look around") || (input == "Look around") || (input == "see around") || (input == "search") || (input == "inspect surroundings"))
             {
-                response = roomDescriptions[currentRoomIndex];
+                response = GetCurrentRoomSubtext();
             }
             if ((input == "south") || (input == "South") || (input == "SOUTH") || (input == "s") || (input == "S"))
             {

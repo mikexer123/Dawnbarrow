@@ -334,7 +334,7 @@ namespace Dawnbarrow
                     roomEncounterData.Clear();
                     foreach (RoomEncounterData encounter in data.RoomEncounters)
                     {
-                        if (encounter.X < 1 || encounter.X > 5 || encounter.Y < 1 || encounter.Y > 5)
+                        if (WorldData.RoomExists(encounter.X, encounter.Y) == false)
                         {
                             continue;
                         }

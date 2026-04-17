@@ -127,10 +127,11 @@ namespace Dawnbarrow
 
             }
 
-            room.setCurrentRoom(1, 1);
-            game.setCurrentRoom(1, 1);
-            SpawnRoomEncounterWithFallback(1, 1);
-            label1.Text = room.Biome(1, 1) + room.getCurrentRoomCoordinates().ToString();
+            (int x, int y) startRoom = WorldData.GetStartCoordinates();
+            room.setCurrentRoom(startRoom.x, startRoom.y);
+            game.setCurrentRoom(startRoom.x, startRoom.y);
+            SpawnRoomEncounterWithFallback(startRoom.x, startRoom.y);
+            label1.Text = room.Biome(startRoom.x, startRoom.y) + room.getCurrentRoomCoordinates().ToString();
             updateBackground();
             updatelabels();
 
@@ -1138,9 +1139,10 @@ namespace Dawnbarrow
                     return "Flight format: use scroll of flight x y";
                 }
 
-                if (targetX < 1 || targetX > 5 || targetY < 1 || targetY > 5)
+                if (WorldData.RoomExists(targetX, targetY) == false)
                 {
-                    return "Those coordinates are out of bounds. Use values 1 through 5.";
+                    (int minX, int maxX, int minY, int maxY) = WorldData.GetBounds();
+                    return $"Those coordinates do not exist in this world. Valid bounds are X {minX}-{maxX}, Y {minY}-{maxY} and must point to a defined room.";
                 }
 
                 if (Player.isFighting)
@@ -1183,7 +1185,7 @@ namespace Dawnbarrow
 
             if (MatchesAny(lowerInput, "look around", "see around", "search", "inspect surroundings"))
             {
-                return game.roomsubtext[game.currentRoomIndex];
+                return game.GetCurrentRoomSubtext();
             }
 
             if (TryGetNamedValue(trimmedInput, "gender", out string genderValue))
@@ -1473,11 +1475,19 @@ namespace Dawnbarrow
                 ""
             };
 
-            for (int row = 5; row >= 1; row--)
+            (int minX, int maxX, int minY, int maxY) = WorldData.GetBounds();
+
+            for (int row = maxY; row >= minY; row--)
             {
                 string line = "";
-                for (int column = 1; column <= 5; column++)
+                for (int column = minX; column <= maxX; column++)
                 {
+                    if (WorldData.RoomExists(column, row) == false)
+                    {
+                        line += "   ";
+                        continue;
+                    }
+
                     string symbol = "o";
                     if (currentRoom.x == column && currentRoom.y == row)
                     {
@@ -1532,9 +1542,10 @@ namespace Dawnbarrow
             ClearEnemyStatusEffects();
             ClearPlayerStatusEffects();
 
-            room.setCurrentRoom(1, 1);
-            game.setCurrentRoom(1, 1);
-            SpawnRoomEncounterWithFallback(1, 1);
+            (int x, int y) startRoom = WorldData.GetStartCoordinates();
+            room.setCurrentRoom(startRoom.x, startRoom.y);
+            game.setCurrentRoom(startRoom.x, startRoom.y);
+            SpawnRoomEncounterWithFallback(startRoom.x, startRoom.y);
 
             currentOutput = "";
             currentCharIndex = 0;
@@ -1546,7 +1557,7 @@ namespace Dawnbarrow
                 ConsoleOut.Clear();
             }
 
-            label1.Text = room.Biome(1, 1) + room.getCurrentRoomCoordinates().ToString();
+            label1.Text = room.Biome(startRoom.x, startRoom.y) + room.getCurrentRoomCoordinates().ToString();
             updateBackground();
             updatelabels();
         }
@@ -1765,9 +1776,12 @@ namespace Dawnbarrow
                 return "The save file exists, but it could not be read.";
             }
 
-            room.setCurrentRoom(saveData.RoomX, saveData.RoomY);
-            game.setCurrentRoom(saveData.RoomX, saveData.RoomY);
-            game.currentRoomIndex = saveData.CurrentRoomIndex;
+            (int x, int y) loadedRoom = WorldData.RoomExists(saveData.RoomX, saveData.RoomY)
+                ? (saveData.RoomX, saveData.RoomY)
+                : WorldData.GetStartCoordinates();
+
+            room.setCurrentRoom(loadedRoom.x, loadedRoom.y);
+            game.setCurrentRoom(loadedRoom.x, loadedRoom.y);
             defeatedRooms.Clear();
             foreach (string defeatedRoom in saveData.DefeatedRooms)
             {

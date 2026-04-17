@@ -12,7 +12,7 @@ namespace Dawnbarrow
         public Room()
         {
             rooms = WorldData.GetRooms();
-            currRoomCoordinates = (1, 1);
+            currRoomCoordinates = WorldData.GetStartCoordinates();
         }
 
         private static string Key(int x, int y)
@@ -54,7 +54,13 @@ namespace Dawnbarrow
 
         public void setCurrentRoom(int x, int y)
         {
-            currRoomCoordinates = (x, y);
+            if (rooms.ContainsKey(Key(x, y)))
+            {
+                currRoomCoordinates = (x, y);
+                return;
+            }
+
+            currRoomCoordinates = WorldData.GetStartCoordinates();
         }
 
         public string direction(string dir)
@@ -113,7 +119,7 @@ namespace Dawnbarrow
                     return currRoomCoordinates;
             }
 
-            if ((newX < 1) || (newY < 1) || (newX > 5) || (newY > 5))
+            if (rooms.ContainsKey(Key(newX, newY)) == false)
             {
                 return currRoomCoordinates;
             }
