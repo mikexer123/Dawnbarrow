@@ -61,7 +61,18 @@ namespace Dawnbarrow
         public bool hasIronLeggings = false;
         public bool hasTopazLeggings = false;
         public bool hasSaviorLeggings = false;
-        
+        //hunting / fishing variable init
+        public int fishing_lvl = 0;
+        public int hunting_lvl = 0;
+        public int fishing_xp = 0;
+        public int fishing_xp_to_next = 100;
+        public int hunting_xp = 0;
+        public int hunting_xp_to_next = 100;
+        public int hunting_chance = 10;
+        public int fishing_chance = 10;
+        public bool fishing_unlocked = false;
+        public bool hunting_unlocked = false;
+
 
         public string experience(int enemyxpgiven) //this method is for calculating experience and HOPEFULLY solving leveling completely.
         {
@@ -110,7 +121,7 @@ namespace Dawnbarrow
         }
         public string playerInfo()
         {
-            string output = "PlayerName: " + playerName + "\n" + "Gender: " + Gender + "\n" + "Gold: " + gold + "\n" + "Mana: " + currentMana + "/" + maxMana + "\n" + "Equipped Helmet:" + HeadEquipped + "\n" + "Equipped Chest" + ChestEquipped + "\n" + "Equipped Legs:" + LegsEquipped + "\n" + "Equipped Sword:" + WeaponEquipped + "\n" + "Player Hitpoints:" + currentHealth + "/" + maxhealth + "\n" + "currentDamage:" + playerDmg(2) + "\n";
+            string output = "PlayerName: " + playerName + "\n" + "Gender: " + Gender + "\n" + "Gold: " + gold + "\n" + "Mana: " + currentMana + "/" + maxMana + "\n" + "Equipped Helmet:" + HeadEquipped + "\n" + "Equipped Chest" + ChestEquipped + "\n" + "Equipped Legs:" + LegsEquipped + "\n" + "Equipped Sword:" + WeaponEquipped + "\n" + "Player Hitpoints:" + currentHealth + "/" + maxhealth + "\n" + "currentDamage:" + playerDmg(2) + "\n" + "Fishing LVL:" + fishing_lvl + "\n" + "xp:" + fishing_xp + "/" + fishing_xp_to_next + "\n" + "Success Chance %:" + fishing_chance + "\n" + "Hunting LVL:" + hunting_lvl + "\n" + "xp:" + hunting_xp + "/" + hunting_xp_to_next + "\n" + "Success Chance %:" + hunting_chance;
             return output;
         }
         public int playerDmg(int enemyArmor)
