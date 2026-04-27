@@ -125,6 +125,13 @@ namespace Dawnbarrow
             return DefaultRoomText;
         }
 
+        public string hunt_ui()
+        {
+
+
+            return hunt_ui();
+        }
+
         public string Output()
         {
             int x = currRoomCoordinates.x;
@@ -194,6 +201,16 @@ namespace Dawnbarrow
                 response = "You begin fighting";
             }
 
+            return response;
+        }
+
+        public string hunting_input(string input)
+        {
+            string response = "";
+            if ((input == "hunt woods") || (input == "Hunt Woods") || (input == "HUNT WOODS") || (input == "Hunt in the Woods") || (input == "hunt in the woods"))
+            {
+                response = GetCurrentRoomSubtext();
+            }
             return response;
         }
     }
